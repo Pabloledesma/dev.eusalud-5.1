@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Excel;
 use Psy\Util\String;
 use Vsmoraes\Pdf\Pdf;
 use function view;
+use App\Http\Controllers\Traits\Info;
 
 class InfoController extends Controller {
 
@@ -21,6 +22,12 @@ class InfoController extends Controller {
         $this->pdf = $pdf;
         $this->excel = $excel;
     }
+
+    /**
+    * Traits
+    ***/
+    use Movimiento_Financiero;
+
     /**
     * Muestra una lista con los formularios disponibles
     ***/

@@ -8,6 +8,10 @@
 |
 */
 
+Route::get('phpinfo', function(){
+	return phpinfo();
+});
+
 /*** 	WelcomeController ***/
 
 Route::get('inicio', 'WelcomeController@index');
@@ -31,6 +35,7 @@ Route::post('info/pago_proveedores', 'InfoController@pago_proveedores');
 Route::get('info/form_certificado_ica', 'InfoController@form_certificado_ica');
 Route::post('info/certificado_ica', 'InfoController@certificado_ica');
 Route::get('info/censo', 'InfoController@censo');
+Route::get('info/form_movimiento_financiero', 'InfoController@form_movimiento_financiero');
 
 
 Route::get('auth/register', ['middleware' => 'manager', function(){

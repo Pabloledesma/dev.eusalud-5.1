@@ -50,8 +50,8 @@
                                 @if( \Auth::user()->user_type != 'User' )
                                     <li><a href="{{ url('info/form_pago_proveedores') }}">Informe de pago a proveedores</a></li>
                                 @endif
-                                <!--<li><a href="{{ url('info/censo') }}">Censo</a></li>
-                                <li><a href="#">Facturación bruta</a></li>
+                                <li><a href="{{ url('info/censo') }}">Censo</a></li>
+                                <!--<li><a href="#">Facturación bruta</a></li>
                                 <li><a href="#">Radicación</a></li>
                                 <li><a href="#">Ordenes de Compra</a></li>
                                 <li><a href="#">Consulta y entrega</a></li>

@@ -14,11 +14,11 @@
         <div class="row-fluid">
             <table>
                 <tr>
-                    <th colspan="5">{{ $headerTitle }}</th>
+                    <th colspan="4">{{ $headerTitle }}</th>
                 </tr>
                 <tr id="tr_top">
                     <td colspan="3"><img src="{{ asset('img/logo_colores.png') }}" width="300"></td>
-                    <td colspan="2" style="text-align: center" id="head">
+                    <td colspan="1" style="text-align: center" id="head">
                         <p><b>EUSALUD S.A</b> <br>
                             NIT  800227072-8 <br>
                         CARRERA 9. N0. 66-10</p>
@@ -27,7 +27,7 @@
                 
                 
                 <tr>
-                    <td colspan="2">CONTRIBUYENTE: </td>
+                    <td>CONTRIBUYENTE: </td>
                     <td>{{ $info[0]->TrcRazSoc }}</td>
                     <td>NIT: </td>
                     <td>{{ $info[0]->TrcCod }}</td>
@@ -35,7 +35,6 @@
                 <tr>
                     <th>CONCEPTO</th>
                     <th>NOMBRE CONCEPTO</th>
-                    <th>NATURALEZA</th>
                     <th>VALOR RETENIDO</th>
                     <th>VALOR BASE</th>  
                 </tr>
@@ -44,13 +43,12 @@
                 <tr>
                     <td>{{ $row->CntCod }}</td>             <!-- Concepto -->
                     <td>{{ $row->CntDsc }}</td>             <!-- Nombre del Concepto -->
-                    <td>{{ $row->MvCNat }}</td>
                     <td>{{ '$' . number_format($row->SumaDeMvCVlr) }}</td>             <!-- Valor Retenido -->
                     <td>{{ '$' . number_format($row->SumaDeMvCBse) }}</td>             <!-- Valor Base -->
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3" style="text-align:right; font-weight: bold">TOTALES</td>
+                    <td colspan="2" style="text-align:right; font-weight: bold">TOTALES</td>
                     <td><p class="total">{{ '$' . number_format($valor_base[0]->VALOR) }}</p></td>
                     <td><p class="total">{{ '$' . number_format($valor_base[0]->BASE) }}</p></td>
                 </tr>
@@ -67,6 +65,7 @@
     </div>
 <hr>
     <div class="footer">
+        <p>LOS CERTIFICADOS EXPEDIDOS EN FORMA CONTINUA IMPRESA EN COMPUTADOR, NO NECESITAN FIRMA AUTÓGRAFA. (ART 10 D.R. 836/91)</p>
         <p>Informe generado el día {{ date('Y-m-d h:i:s A') }} para el periodo comprendido entre {{ $input['fecha_inicio'] }} y {{ $input['fecha_final'] }}.</p>
     </div>
     

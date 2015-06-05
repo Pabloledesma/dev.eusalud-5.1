@@ -39,14 +39,13 @@
                     <th>VALOR BASE</th>  
                 </tr>
                 
-                @foreach($info as $row)
                 <tr>
-                    <td>{{ $row->CntCod }}</td>             <!-- Concepto -->
-                    <td>{{ $row->CntDsc }}</td>             <!-- Nombre del Concepto -->
-                    <td>{{ '$' . number_format($row->SumaDeMvCVlr) }}</td>             <!-- Valor Retenido -->
-                    <td>{{ '$' . number_format($row->SumaDeMvCBse) }}</td>             <!-- Valor Base -->
+                    <td>{{ $info[0]->CntCod }}</td>             <!-- Concepto -->
+                    <td>{{ $info[0]->CntDsc }}</td>             <!-- Nombre del Concepto -->
+                    <td></td>             <!-- Valor Retenido -->
+                    <td></td>             <!-- Valor Base -->
                 </tr>
-                @endforeach
+                
                 <tr>
                     <td colspan="2" style="text-align:right; font-weight: bold">TOTALES</td>
                     <td><p class="total">{{ '$' . number_format($valor_base[0]->VALOR) }}</p></td>

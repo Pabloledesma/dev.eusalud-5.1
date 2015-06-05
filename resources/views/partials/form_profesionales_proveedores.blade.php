@@ -103,14 +103,14 @@
             rules: {
                 num_id: {
                     required: true,
-                    minlength: 8,
+                    minlength: 3,
                     number: true
                 }
             },
             messages: {
                 num_id: {
                     required: "Por favor ingrese su número de identificación",
-                    minlength: "El número de identificación debe contener minimo 8 caracteres",
+                    minlength: "El número de identificación debe contener minimo 3 caracteres",
                     number: "Solo se admiten números en este campo."
                 }
             }

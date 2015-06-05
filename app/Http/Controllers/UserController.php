@@ -53,7 +53,7 @@ class UserController extends Controller {
 
             $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, $options);
         } 
-
+        
         $user->update($input);
         flash()->overlay('El usuario se actualizó correctamente', 'Buen trabajo!');
         return redirect('usuarios');

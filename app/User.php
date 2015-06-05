@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'num_id'];
+	protected $fillable = ['name', 'email', 'password', 'num_id', 'user_type'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -31,21 +31,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
         
-        /*
-         * Check if the user is a team manager
-         * @return boolean
-         */
-        public function isATeamManager()
+    /*
+     * Check if the user is a team manager
+     * @return boolean
+     */
+    public function isATeamManager()
+    {
+        $user = \Auth::user();
+        if( $user->user_type == 'Super Admin' )
         {
-            $user = \Auth::user();
-            if( $user->user_type == 'Super Admin' )
-            {
-                
-                return true;
-            } else {
-                
-                return false;
-            }
+            
+            return true;
+        } else {
+            
+            return false;
         }
+    }
 
 }

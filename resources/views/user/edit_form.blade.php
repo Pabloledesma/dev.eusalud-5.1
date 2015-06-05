@@ -42,7 +42,8 @@
                         <label class="col-md-4 control-label">Tipo de usuario</label>
                         <div class="col-md-6">
                             <select name="user_type" id="user_type">
-                                <option value="User" {{ $user->user_type == 'User' ? 'selected' : '' }}>Usuario</option>
+                                <option value="User" {{ $user->user_type == 'User' ? 'selected' : '' }}>Profesional</option>
+                                <option value="Provider" {{ $user->user_type == 'Provider' ? 'selected' : '' }}>Proveedor</option>
                                 <option value="Admin" {{ $user->user_type == 'Admin' ? 'selected' : '' }}>Administrador</option>
                                 @if( \Auth::user()->user_type == 'Super Admin' )
                                 <option value="Super Admin" {{ $user->user_type == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
@@ -106,7 +107,7 @@
                 },
                 num_id: {
                     required: true,
-                    minlength: 8
+                    minlength: 3
                 },
                 password: {                   
                     minlength: 6
@@ -127,7 +128,7 @@
                 },
                 num_id: {
                     required: "Por favor ingrese su número de identificación",
-                    minlength: "El número de identificación debe contener minimo 8 caracteres"
+                    minlength: "El número de identificación debe contener minimo 3 caracteres"
                 },
                 password: {
                     minlength: "Su clave debe contener minimo 6 caracteres"

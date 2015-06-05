@@ -15,7 +15,8 @@ class EditUserRequest extends Request {
         if (\Auth::user()->user_type == "Super Admin") {
             return true;
         } else {
-            return false;
+            flash()->overlay('No tiene permisos suficientes para realizar esta modificación', 'Acceso Denegado!');
+            return redirect('usuarios');
         }
     }
 
@@ -28,7 +29,7 @@ class EditUserRequest extends Request {
         return [
             'name' => 'min:3',
             'email' => 'email',
-            'num_id' => 'numeric|min:8',
+            'num_id' => 'numeric|min:3',
             'password' => 'min:6',
             'password_confirmation' => 'same:password'
         ];
@@ -40,7 +41,7 @@ class EditUserRequest extends Request {
             'name.min'          => 'El nombre debe ser de minimo 3 caracteres.',
             'email'             => 'El correo no es válido',    
             'num_id.numeric'    => 'El número de indentificación debe ser numérico',
-            'num_id.min'        => 'El número de identificación debe ser de mínimo 8 caracteres.',            
+            'num_id.min'        => 'El número de identificación debe ser de mínimo 3 caracteres.',            
             'password.min'      => 'La clave debe ser de mínimo 6 caracteres.',        
             'password_confirmation.same'     => 'Las claves no coinciden.'
         ];

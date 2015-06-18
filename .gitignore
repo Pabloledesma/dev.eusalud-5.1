@@ -1,8 +1,9 @@
 #################
 ## Laravel
 #################
-
-/bootstrap/compiled.php
+/vendor
+/node_modules
 .env.*.php
 .env.php
+.env.production
 .env

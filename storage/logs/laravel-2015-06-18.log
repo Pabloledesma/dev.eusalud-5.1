@@ -110,3 +110,12 @@ Stack trace:
 #8 C:\xampp\htdocs\dev.eusalud\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(135): Illuminate\Foundation\Application->make('Illuminate\\Cook...')
 #9 C:\xampp\htdocs\dev.eusalud\public\index.php(57): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #10 {main}  
+[2015-06-18 08:25:03] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Maatwebsite\Excel\ExcelServiceProvider' not found' in C:\xampp\htdocs\dev.eusalud-5.1\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:146
+Stack trace:
+#0 {main}  
+[2015-06-18 08:25:06] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Maatwebsite\Excel\ExcelServiceProvider' not found' in C:\xampp\htdocs\dev.eusalud-5.1\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:146
+Stack trace:
+#0 {main}  
+[2015-06-18 08:28:29] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Maatwebsite\Excel\ExcelServiceProvider' not found' in C:\xampp\htdocs\dev.eusalud-5.1\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:146
+Stack trace:
+#0 {main}  

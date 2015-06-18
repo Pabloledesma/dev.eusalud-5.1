@@ -2,6 +2,7 @@
 ## Laravel
 #################
 /vendor
+/nbproject
 /node_modules
 .env.*.php
 .env.php

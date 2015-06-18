@@ -10,7 +10,7 @@
 
 /*** 	WelcomeController ***/
 
-Route::get('inicio', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@index');
 Route::get('quienes-somos', 'WelcomeController@about_us');
 Route::get('vacantes', 'WelcomeController@vacantes');
 Route::get('nuestras-clinicas/traumatologia', 'WelcomeController@sede_traumatologia');

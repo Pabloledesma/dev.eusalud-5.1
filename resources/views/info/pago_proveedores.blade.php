@@ -6,7 +6,7 @@
     <hr/>
     <div class="row">
         <form class="form-horizontal" role="form" method="post" id="form_cert_pag" action="{{ url('info/pago_proveedores') }}">
-
+        	{!! csrf_field() !!}
         @include('partials.form_profesionales_proveedores')    
 @stop
 

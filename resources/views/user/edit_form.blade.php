@@ -15,7 +15,7 @@
                     </div>
                     @endif
                     {!! Form::model($user, ['method' => 'POST', 'url' => $url, 'class' => 'form-horizontal', 'id' => 'register_form']) !!}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{ $user->id }}">
 
                     <div class="form-group">

@@ -19,10 +19,7 @@
 					@endif
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
-                                           <!-- No estamos usando el token
-                                            csrf_token: <input type="text" name="_token" value="{{ csrf_token() }}" disabled> <br>
-						token: <input type="text" name="token" value="{{ $token }}" disabled>-->
-
+                        {!! csrf_field() !!}
 						<div class="form-group">
 							<label class="col-md-4 control-label">E-Mail Address</label>
 							<div class="col-md-6">

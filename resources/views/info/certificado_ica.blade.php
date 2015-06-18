@@ -6,6 +6,6 @@
     <hr/>
     <div class="row">
         <form target="_blanck" class="form-horizontal" role="form" method="post" id="form_cert_pag" action="{{ url('info/certificado_ica') }}">
-
+        	{!! csrf_field() !!}
         @include('partials.form_profesionales_proveedores')    
 @stop

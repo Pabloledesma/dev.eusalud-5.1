@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Role;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -47,5 +48,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return false;
         }
     }
+
+    /**
+     * A user belongs to a role
+     *
+     * @return Relationship
+     */
+    public function role()
+    {
+    	return $this->belongsTo(Role::class);
+    } 
 
 }

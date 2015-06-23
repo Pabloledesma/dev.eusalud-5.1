@@ -26,7 +26,8 @@ class UserController extends Controller {
 
     /**
      * Muestra el formulario de edición para el usuario seleccionado
-     * @param type $id
+     * @param integer $id
+     * @return View
      */
     public function edit($id) {
 
@@ -39,7 +40,9 @@ class UserController extends Controller {
 
     /**
      * Actualiza el usuario
-     * @param type $id
+     * @param Requests\EditUserRequest $req
+     * @param integer $id identificación del usuario
+     * @return Redirect
      */
     public function update(Requests\EditUserRequest $req, $id) {
         $user = User::findOrFail($id);
@@ -59,6 +62,12 @@ class UserController extends Controller {
         return redirect('usuarios');
     }
 
+    /**
+     * Procesa la información necesaria para registrar un nuevo usuario
+     *
+     * @param Requests\Registrar_nuevo_usuario $request
+     * @return redirect 
+     */
     public function register(Requests\Registrar_nuevo_usuario $request) {
         $input = $request->all();
         $user = new User();
@@ -81,6 +90,12 @@ class UserController extends Controller {
         return redirect('usuarios');
     }
     
+    /**
+     * Elimina el usuario seleccionado
+     *
+     * @param    integer $id 
+     * @return   redirect
+     */  
     public function delete($id)
     {
         $user = User::findOrFail($id);

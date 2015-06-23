@@ -1,0 +1,5 @@
+source:
+	- c:/xampp/htdocs/dev.eusalud-5.1/app
+
+destination:
+	- c:/xampp/htdocs/dev.eusalud-5.1/public/api

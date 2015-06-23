@@ -42,7 +42,7 @@ class InfoController extends Controller {
     * Muestra una lista con los formularios disponibles
     *
     * @return Responce
-    ***/
+    */
     public function index() {
         return view('info.index');
     }
@@ -75,7 +75,7 @@ class InfoController extends Controller {
     * Muestra el formulario para generar el informe de Pago a proveedores
     * 
     * @return View
-    ***/
+    */
     public function form_pago_proveedores() {
         // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
         $formato_de_salida = true; 
@@ -89,7 +89,7 @@ class InfoController extends Controller {
     * Muestra el formulario para generar el cetificado de Pago a profesionales en excel
     *
     * @return View
-    ***/
+    */
     public function form_certificado_pagos_profesionales_excel()
     {
         return view('info.certificado_pagos_excel');
@@ -154,10 +154,10 @@ class InfoController extends Controller {
 
     
     /**
-    * Genera el certificado de pagos a profesionales de la salud segun los parametros establecidos en el formulario
-    *
-    * @return Mixed xls || pdf
-    ***/
+     * Genera el certificado de pagos a profesionales de la salud segun los parametros establecidos en el formulario
+     *
+     * @return Mixed xls || pdf
+     */
     public function certificado_pagos_profesionales(Requests\Certificado_de_pagos $request) {
         
         $input = $request->all();

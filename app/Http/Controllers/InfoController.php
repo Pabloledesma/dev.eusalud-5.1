@@ -66,7 +66,7 @@ class InfoController extends Controller {
         $formato_de_salida = true; 
         
          // La variable $formato indica si esta disponible esta funcionalidad
-        $formato = array( 'pdf' => true, 'excel' => true );
+        $formato = array( 'pdf' => true, 'excel' => false );
         
         return view('info.certificado_pagos', compact('formato', 'formato_de_salida'));
     }

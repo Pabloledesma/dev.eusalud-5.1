@@ -1,11 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-|
+/**
+*|--------------------------------------------------------------------------
+*| Rutas de la aplicación
+*|--------------------------------------------------------------------------
+*|
+*|
 */
 
 /*** 	WelcomeController ***/
@@ -62,8 +62,3 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-/*** Home Controller (test)***/
-
-Route::get('ajax', 'HomeController@index');
-
-Route::post('terceros_por_letra', 'HomeController@get_terceros_by_letter');

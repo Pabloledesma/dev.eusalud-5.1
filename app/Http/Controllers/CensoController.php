@@ -4,8 +4,18 @@ use App\Http\Controllers\Controller;
 use DB;
 use Carbon\Carbon;
 
+
+/**
+ * Administra las funciones del censo
+ */
 class CensoController extends Controller {
 
+	/**
+	 * Muestra el censo segun pabellón
+	 *
+	 * @param integer \p Pabellón seleccionado
+	 * @return Response
+	 */
 	public function censo($p)
         {
             $p = (int)$p;

@@ -4,16 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-//use Barryvdh\DomPDF\PDF;
 use DB;
 use Maatwebsite\Excel\Excel;
 use Psy\Util\String;
 use Vsmoraes\Pdf\Pdf;
 use function view;
 
+
+/**
+ * Controla todos los informes y reportes
+ *
+ * @author Pablo Ledesma
+ */
 class InfoController extends Controller {
 
+    /**
+     * Convierte las vistas a pdf
+     *
+     * @param    Vsmoraes\Pdf\Pdf $pdf
+     */  
     private $pdf;
+
+    /**
+     * Convierte las vistas a documentos de excel
+     *
+     * @param Maatwebsite\Excel\Excel $excel
+     */
     private $excel; 
 
     public function __construct(Pdf $pdf, Excel $excel) {
@@ -24,50 +40,78 @@ class InfoController extends Controller {
 
     /**
     * Muestra una lista con los formularios disponibles
+    *
+    * @return Responce
     ***/
     public function index() {
         return view('info.index');
     }
 
     /*** TRAITS ***/
+
+    /**
+     * Certificado ICA
+     *
+     */  
     use Traits\Info\CertificadoIca;
 
-    /*
+    /**
      * Muestra el formulario para generar el Certificado de pagos a profesionales de la salud
-     * La variable $formato indica si esta disponible esta funcionalidad
+     * 
+     * @return View 
      */
     public function form_certificado_pagos_profesionales() {
-        $formato_de_salida = true; // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+
+        // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+        $formato_de_salida = true; 
+        
+         // La variable $formato indica si esta disponible esta funcionalidad
         $formato = array( 'pdf' => true, 'excel' => true );
+        
         return view('info.certificado_pagos', compact('formato', 'formato_de_salida'));
     }
 
     /**
     * Muestra el formulario para generar el informe de Pago a proveedores
-    * La variable $formato indica si esta disponible esta funcionalidad
+    * 
+    * @return View
     ***/
     public function form_pago_proveedores() {
-        $formato_de_salida = true; // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+        // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+        $formato_de_salida = true; 
+        
+        //indica si esta disponible esta funcionalidad
         $formato = array( 'pdf' => true, 'excel' => false ); 
         return view('info.pago_proveedores', compact('formato', 'formato_de_salida'));
     }
 
     /**
-    * Muestra el formulario para generar el informe de Pago a proveedores en excel
+    * Muestra el formulario para generar el cetificado de Pago a profesionales en excel
+    *
+    * @return View
     ***/
     public function form_certificado_pagos_profesionales_excel()
     {
         return view('info.certificado_pagos_excel');
     }
 
+    /**
+     * Genera el certificado de pago a proveedores según el rango de fechas ingresadas en el formulario
+     *
+     * @return View
+     */
     public function pago_proveedores(Requests\Certificado_de_pagos $request) {
+        //Definición de entradas
         $input = $request->all();
         if (isset($input['num_id'])) {
             $num_id = $input['num_id'];
         } else {
             $num_id = \Auth::user()->num_id;
         }
+        
+        // Titulo de la vista
         $headerTitle = 'Informe de pago a proveedores';
+        
         $query = "SELECT 
             dbo.MOVCONT3.DOCCOD, 
             dbo.MOVCONT3.MvCNro,            
@@ -99,8 +143,6 @@ class InfoController extends Controller {
 
         $info = DB::connection('sqlsrv_info')->select($query);
 
-
-
         if (isset($info) && count($info) > 0) {
             $html = view('info.informe', compact('info', 'input', 'headerTitle'))->render();
             return $this->pdf->load($html, array(0, 0, 1300, 800))
@@ -110,18 +152,25 @@ class InfoController extends Controller {
         return view('info.sin_resultados', compact('input'));
     }
 
+    
     /**
     * Genera el certificado de pagos a profesionales de la salud segun los parametros establecidos en el formulario
-    * @return xls || pdf
+    *
+    * @return Mixed xls || pdf
     ***/
     public function certificado_pagos_profesionales(Requests\Certificado_de_pagos $request) {
+        
         $input = $request->all();
         if (isset($input['num_id'])) {
             $num_id = $input['num_id'];
         } else {
             $num_id = \Auth::user()->num_id;
         }
+
+        // Titulo de la vista
         $headerTitle = 'Certificado de pagos a profesionales de la salud';
+        
+        //Nombre del archivo
         $fileTitle = 'certificado_de_pagos_profesionales_';
         $query = "SELECT 
             dbo.MOVCONT3.DOCCOD, 
@@ -155,7 +204,6 @@ class InfoController extends Controller {
         $info = DB::connection('sqlsrv_info')->select($query);
 
         //Seleccion de formato
-
         if( $input['formato'] == 'pdf' ){
 
             if (isset($info) && count($info) > 0) {
@@ -276,6 +324,7 @@ class InfoController extends Controller {
     /**
      * Genera el reporte del censo en formato xlsx
      * 
+     * @return View
      */
     public function censo()
     {

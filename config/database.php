@@ -83,14 +83,24 @@ return [
 			'password' => env('SRV_PASSWORD', ''),
 			'prefix'   => '',
 		],
-                'sqlsrv_info' => [
-                            'driver'   => 'sqlsrv',
-                            'host'     => env('SRV_HOST', 'localhost'),
-                            'database' => 'FINANJAVA',
-                            'username' => env('SRV_USERNAME', 'forge'),
-                            'password' => env('SRV_PASSWORD', ''),
-                            'prefix'   => '',
-                    ],
+
+        'sqlsrv_info' => [
+                    'driver'   => 'sqlsrv',
+                    'host'     => env('SRV_HOST'),
+                    'database' => 'FINANJAVA',
+                    'username' => env('SRV_USERNAME', 'forge'),
+                    'password' => env('SRV_PASSWORD', ''),
+                    'prefix'   => '',
+            ],
+
+        'sqlsrv_info_90' => [
+                    'driver'   => 'sqlsrv',
+                    'host'     => env('90_HOST'),
+                    'database' => 'FINANJAVA',
+                    'username' => env('90_USERNAME', 'forge'),
+                    'password' => env('90_PASSWORD', ''),
+                    'prefix'   => '',
+            ],
 
 	],
 

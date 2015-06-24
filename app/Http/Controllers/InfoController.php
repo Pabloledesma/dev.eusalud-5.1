@@ -97,7 +97,7 @@ class InfoController extends Controller {
 
     /**
      * Genera el certificado de pago a proveedores según el rango de fechas ingresadas en el formulario
-     *
+     * 
      * @return View
      */
     public function pago_proveedores(Requests\Certificado_de_pagos $request) {
@@ -112,36 +112,12 @@ class InfoController extends Controller {
         // Titulo de la vista
         $headerTitle = 'Informe de pago a proveedores';
         
-        $query = "SELECT 
-            dbo.MOVCONT3.DOCCOD, 
-            dbo.MOVCONT3.MvCNro,            
-            dbo.MOVCONT3.MvCFch, 
-            dbo.MOVCONT2.MvCNat, 
-            dbo.CUENTAS.CntInt, 
-            dbo.MOVCONT2.CntCod, 
-            dbo.CUENTAS.CntDsc, 
-            dbo.MOVCONT2.TrcCod, 
-            dbo.TERCEROS.TrcRazSoc, 
-            dbo.MOVCONT2.MvCVlr, 
-            dbo.MOVCONT2.MvCDocRf1, 
-            dbo.MOVCONT2.MvCDocRf2, 
-            dbo.MOVCONT2.MvCDet, 
-            dbo.MOVCONT2.MvCBse, 
-            dbo.MOVCONT2.MvCImpCod
-        FROM 
-            ((dbo.MOVCONT3 INNER JOIN dbo.MOVCONT2 ON 
-            (dbo.MOVCONT3.MCDpto = dbo.MOVCONT2.MCDpto) AND 
-            (dbo.MOVCONT3.MvCNro = dbo.MOVCONT2.MvCNro) AND 
-            (dbo.MOVCONT3.DOCCOD = dbo.MOVCONT2.DOCCOD) AND 
-            (dbo.MOVCONT3.EMPCOD = dbo.MOVCONT2.EMPCOD)) 
-            LEFT JOIN dbo.CUENTAS ON (dbo.MOVCONT2.CntCod = dbo.CUENTAS.CntCod) AND 
-            (dbo.MOVCONT2.CntVig = dbo.CUENTAS.CntVig)) 
-            LEFT JOIN dbo.TERCEROS ON dbo.MOVCONT2.TrcCod = dbo.TERCEROS.TrcCod
-        WHERE (((dbo.MOVCONT3.MvCFch) Between convert(datetime, '" . $input['fecha_inicio'] . "' ,101) And 
-        convert(datetime,'" . $input['fecha_final'] . "', 101)) AND ((dbo.MOVCONT3.MvCEst)<>'N') AND 
-        ((dbo.MOVCONT2.TrcCod)= '" . $num_id . "')) ORDER BY dbo.MOVCONT3.MvCFch";
+        $query = "EXECUTE pago_proveedores @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
+       
+        $info = DB::connection('sqlsrv_info_90')->select($query);
 
-        $info = DB::connection('sqlsrv_info')->select($query);
+        return view('info.informe', compact('info', 'headerTitle', 'input'));
+
 
         if (isset($info) && count($info) > 0) {
             $html = view('info.informe', compact('info', 'input', 'headerTitle'))->render();

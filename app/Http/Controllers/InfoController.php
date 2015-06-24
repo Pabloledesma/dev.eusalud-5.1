@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use DB;
 use Maatwebsite\Excel\Excel;
-use Psy\Util\String;
-use Vsmoraes\Pdf\Pdf;
-use function view;
+use Vsmoraes\Pdf\PDF;
+use App\Http\Controllers\Traits\Info\CertificadoIca;
+use App\Http\Controllers\Traits\Info\PagoProveedores;
 
 
 /**
@@ -32,7 +32,7 @@ class InfoController extends Controller {
      */
     private $excel; 
 
-    public function __construct(Pdf $pdf, Excel $excel) {
+    public function __construct(PDF $pdf, Excel $excel) {
         $this->middleware('auth');
         $this->pdf = $pdf;
         $this->excel = $excel;
@@ -49,11 +49,7 @@ class InfoController extends Controller {
 
     /*** TRAITS ***/
 
-    /**
-     * Certificado ICA
-     *
-     */  
-    use Traits\Info\CertificadoIca;
+    use Traits\Info\CertificadoIca, Traits\Info\PagoProveedores;
 
     /**
      * Muestra el formulario para generar el Certificado de pagos a profesionales de la salud
@@ -71,19 +67,6 @@ class InfoController extends Controller {
         return view('info.certificado_pagos', compact('formato', 'formato_de_salida'));
     }
 
-    /**
-    * Muestra el formulario para generar el informe de Pago a proveedores
-    * 
-    * @return View
-    */
-    public function form_pago_proveedores() {
-        // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
-        $formato_de_salida = true; 
-        
-        //indica si esta disponible esta funcionalidad
-        $formato = array( 'pdf' => true, 'excel' => false ); 
-        return view('info.pago_proveedores', compact('formato', 'formato_de_salida'));
-    }
 
     /**
     * Muestra el formulario para generar el cetificado de Pago a profesionales en excel
@@ -95,39 +78,7 @@ class InfoController extends Controller {
         return view('info.certificado_pagos_excel');
     }
 
-    /**
-     * Genera el certificado de pago a proveedores según el rango de fechas ingresadas en el formulario
-     * 
-     * @return View
-     */
-    public function pago_proveedores(Requests\Certificado_de_pagos $request) {
-        //Definición de entradas
-        $input = $request->all();
-        if (isset($input['num_id'])) {
-            $num_id = $input['num_id'];
-        } else {
-            $num_id = \Auth::user()->num_id;
-        }
-        
-        // Titulo de la vista
-        $headerTitle = 'Informe de pago a proveedores';
-        
-        $query = "EXECUTE pago_proveedores @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
-       
-        $info = DB::connection('sqlsrv_info_90')->select($query);
-
-        return view('info.informe', compact('info', 'headerTitle', 'input'));
-
-
-        if (isset($info) && count($info) > 0) {
-            $html = view('info.informe', compact('info', 'input', 'headerTitle'))->render();
-            return $this->pdf->load($html, array(0, 0, 1300, 800))
-                            ->filename('informe_de_pago_a_proveedores_' . date('Y-m-d H:i:s') . '.pdf')
-                            ->download();
-        }
-        return view('info.sin_resultados', compact('input'));
-    }
-
+   
     
     /**
      * Genera el certificado de pagos a profesionales de la salud segun los parametros establecidos en el formulario

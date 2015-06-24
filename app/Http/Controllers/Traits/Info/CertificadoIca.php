@@ -1,9 +1,12 @@
-<?php namespace App\Http\Controllers\Traits\Info;
+<?php 
+
+namespace App\Http\Controllers\Traits\Info;
 
 use App\Http\Requests;
 use DB;
 
-trait CertificadoIca {
+trait CertificadoIca 
+{
    
     /**
     * Muestra el formulario para generar el informe de certificado ica

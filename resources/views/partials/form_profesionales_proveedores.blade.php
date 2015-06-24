@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" name="fecha_final" id="fecha_final" value="{{ date('Y-m-d') }}" />
                 </div>
             </div>
-            @if($formato_de_salida == true)
+            @if($outPut == true)
             <div class="form-group">
                 
                 
@@ -35,7 +35,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <input class="btn btn-green" type="submit" name="submit" id="submit" value="{{ $formato_de_salida == true ? 'Descargar' : 'Generar' }}" />
+                    <input class="btn btn-green" type="submit" name="submit" id="submit" value="{{ $outPut == true ? 'Descargar' : 'Generar' }}" />
                 </div>
             </div>
         </form>

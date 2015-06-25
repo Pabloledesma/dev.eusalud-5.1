@@ -13,14 +13,28 @@
 
 $factory->define(App\User::class, function ($faker) {
     
-    $user_type = ['Super Admin', 'User', 'Admin', 'Provider'];
+	$user_type = ['Super Admin', 'User', 'Administrator', 'Provider'];
 
     return [
-        'name' 		=> $faker->name,
-        'email' 	=> $faker->email,
-        'password' 	=> str_random(10),
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'password' => bcrypt('123456'),
         'num_id'	=> mt_rand(),
-        'user_type' => $user_type[mt_rand(0, 3)],
+        'user_type' => $user_type[rand(0, 3)],
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Role::class, function($faker){
+	return [
+		'role_title' => $faker->sentence,
+		'role_slug' => $faker->word
+	];
+});
+
+$factory->define(App\Permission::class, function($faker){
+    return [
+        'permission_title' => $faker->sentence,
+        'permission_slug' => $faker->word,
     ];
 });

@@ -8,19 +8,25 @@ use DB;
 trait CertificadoIca 
 {
    
-    /**
+  /**
     * Muestra el formulario para generar el informe de certificado ica
+    *
+    * @param  Boolean   $outPut Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+    *         En el valor true, el boton del formulario será Descargar. Si es false, el boton cambia a generar
+    * @param  Array     $formato Indica si esta disponible esta funcionalidad
+    * @return View
     ***/ 
-    public function form_certificado_ica()
+    public function form_certificado_ica($outPut = false, $formato = array( 'pdf' => true, 'excel' => false ))
     {
-        $formato_de_salida = false; // Esta variable sera false mientras no esten disponibles los formatos pdf y excel
-        $formato = array( 'pdf' => false, 'excel' => false );
-        return view('info.certificado_ica', compact('formato', 'formato_de_salida'));
+        return view('info.certificado_ica', compact('formato', 'outPut'));
     }
 
-     /**
+  /**
     * Muestra el informe de certificado ica
-    ***/ 
+    *
+    * @param    Requests\Certificado_de_pagos $request  validación de los datos
+    * @return   View
+    */ 
     public function certificado_ica(Requests\Certificado_de_pagos $request)
     {
         $input = $request->all();
@@ -33,39 +39,14 @@ trait CertificadoIca
         $headerTitle = "CERTIFICADO DE RETENCION INDUSTRIA Y COMERCIO (ICA)";
         $fileTitle = "certificado_de_retencion_industria_y_comercio_ica";
                 
-        $query2 = "SELECT 
-	dbo.MOVCONT2.CntCod, 
-	dbo.CUENTAS.CntDsc, 
-	dbo.MOVCONT2.TrcCod, 
-	dbo.TERCEROS.TrcRazSoc, 
-	dbo.MOVCONT2.MvCNat, 
-	Sum(dbo.MOVCONT2.MvCVlr) AS SumaDeMvCVlr, 
-	Sum(dbo.MOVCONT2.MvCBse) AS SumaDeMvCBse
-	FROM ((dbo.MOVCONT3 INNER JOIN dbo.MOVCONT2 ON (dbo.MOVCONT3.MCDpto = dbo.MOVCONT2.MCDpto) AND 
-		(dbo.MOVCONT3.MvCNro = dbo.MOVCONT2.MvCNro) AND (dbo.MOVCONT3.DOCCOD = dbo.MOVCONT2.DOCCOD) AND 
-		(dbo.MOVCONT3.EMPCOD = dbo.MOVCONT2.EMPCOD)) LEFT JOIN dbo.CUENTAS ON (dbo.MOVCONT2.CntCod = dbo.CUENTAS.CntCod) AND 
-		(dbo.MOVCONT2.CntVig = dbo.CUENTAS.CntVig)) LEFT JOIN dbo.TERCEROS ON dbo.MOVCONT2.TrcCod = dbo.TERCEROS.TrcCod
-	WHERE (((dbo.MOVCONT3.MvCFch) Between convert(datetime, '". $input['fecha_inicio'] ."' ,101) And convert(datetime,'" . $input['fecha_final'] . "', 101)) AND ((dbo.MOVCONT3.MvCEst)<>'N')
-			and ((dbo.MOVCONT2.CntCod) Like '2368%') AND ((dbo.MOVCONT2.TrcCod)='".$num_id."'))
-			GROUP BY dbo.MOVCONT2.CntCod, dbo.MOVCONT2.MvCNat, dbo.CUENTAS.CntDsc, dbo.MOVCONT2.TrcCod, dbo.TERCEROS.TrcRazSoc
-			ORDER BY dbo.MOVCONT2.CntCod DESC";
+        $query2 = "EXECUTE certificado_ICA @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
 
-        $query = "SELECT 
-                Sum( CASE WHEN mvcnat='D' THEN -1*(MvCVlr) ELSE MvCVlr END ) AS VALOR, 
-                Sum( CASE WHEN mvcnat='D' THEN -1*(MvCbse) ELSE MvCbse END ) AS BASE
-            FROM ((dbo.MOVCONT3 INNER JOIN dbo.MOVCONT2 ON (dbo.MOVCONT3.MCDpto = dbo.MOVCONT2.MCDpto) AND 
-                (dbo.MOVCONT3.MvCNro = dbo.MOVCONT2.MvCNro) AND 
-                (dbo.MOVCONT3.DOCCOD = dbo.MOVCONT2.DOCCOD) AND 
-                (dbo.MOVCONT3.EMPCOD = dbo.MOVCONT2.EMPCOD)) LEFT JOIN dbo.CUENTAS ON 
-                (dbo.MOVCONT2.CntCod = dbo.CUENTAS.CntCod) AND 
-                (dbo.MOVCONT2.CntVig = dbo.CUENTAS.CntVig)) 
-                LEFT JOIN dbo.TERCEROS ON dbo.MOVCONT2.TrcCod = dbo.TERCEROS.TrcCod
-            WHERE (((dbo.MOVCONT3.MvCFch) Between convert(datetime, '" . $input['fecha_inicio'] . "' ,101) And 
-                convert(datetime,'" . $input['fecha_final'] . "', 101)) AND ((dbo.MOVCONT3.MvCEst)<>'N') AND 
-                ((dbo.MOVCONT2.CntCod) Like '2368%') AND ((dbo.MOVCONT2.TrcCod)='".$num_id."'))";
+        $query = "EXECUTE certificado_ICA_suma @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
 
-        $info = DB::connection('sqlsrv_info')->select($query2);
-        $valor_base = DB::connection('sqlsrv_info')->select($query);
+
+        $info = DB::connection('sqlsrv_info_90')->select($query2);
+        $valor_base = DB::connection('sqlsrv_info_90')->select($query);
+        
         //return $valor_base;
         if (isset($info, $valor_base) && count($info) > 0 && count($valor_base) > 0) {
             $valor_en_letras = $this->numerotexto( $valor_base[0]->VALOR );

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 use LaravelCaptcha\Integration\BotDetectCaptcha;
-use PHPMailer;
 use Symfony\Component\HttpFoundation\Response;
 use function flash;
 use function redirect;
@@ -24,17 +23,16 @@ class WelcomeController extends Controller {
      */
 
     
-    private $mail;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(PHPMailer $mail) {
+    public function __construct() {
          
         
-        $this->mail = $mail;
+        
     }
 
     /**
@@ -90,7 +88,7 @@ class WelcomeController extends Controller {
         $captcha = $this->getCaptchaInstance();
         return view('welcome.contacto', ['captchaHtml' => $captcha->Html()]);
     }
-
+/** Esta función debe implementarse usando mandrill
     public function sendMsg() {
         if (count($_POST) > 0) {
             $captcha = $this->getCaptchaInstance();
@@ -152,7 +150,8 @@ class WelcomeController extends Controller {
 //            return redirect('inicio');
         } 
         
-    }
+    } 
+    */
 
     public function galeria() {
         return view('welcome.galeria');

@@ -41,7 +41,7 @@ trait UserACL
 
 		$perms = array_map('strtolower', $perms->toArray());
 
-		return count( array_intersect($perms, $permArray) ) 
+		return count( array_intersect($perms, $permArray) ); 
 	}
 
 	/**

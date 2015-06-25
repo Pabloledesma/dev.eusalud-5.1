@@ -25,7 +25,7 @@ Route::get('galeria', 'WelcomeController@galeria');
 Route::get('info', 'InfoController@index');
 Route::get('info/form_certificado_pagos_profesionales', 'InfoController@form_certificado_pagos_profesionales');
 Route::post('info/certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
-Route::get('info/pdf', 'InfoController@generatePdf');
+Route::get('info/pdf', 'InfoController@generatePdf'); //Esta ruta no existe !!!!
 Route::get('info/form_pago_proveedores', 'InfoController@form_pago_proveedores');
 Route::post('info/pago_proveedores', 'InfoController@pago_proveedores');
 Route::get('info/form_certificado_ica', 'InfoController@form_certificado_ica');

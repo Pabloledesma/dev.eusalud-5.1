@@ -18,8 +18,8 @@ $factory->define(App\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'password' => str_random(10),
-        'num_id'	=> rand(),
+        'password' => bcrypt('123456'),
+        'num_id'	=> mt_rand(),
         'user_type' => $user_type[rand(0, 3)],
         'remember_token' => str_random(10),
     ];

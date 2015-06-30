@@ -42,13 +42,15 @@ body {
 }
 
 .btn-green {
+    background: #008B85;
+    color: #ffffff;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     transition: all .5s;  
 }
 
 .btn-green:hover {
-    background: #008B85;
+    background: #E16D3A;
     color: #ffffff;
 }
 

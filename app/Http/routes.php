@@ -8,17 +8,17 @@
 *|
 */
 
-/*** 	WelcomeController ***/
+/*** 	PagesController ***/
 
-Route::get('/', 'WelcomeController@index');
-Route::get('quienes-somos', 'WelcomeController@about_us');
-Route::get('vacantes', 'WelcomeController@vacantes');
-Route::get('nuestras-clinicas/traumatologia', 'WelcomeController@sede_traumatologia');
-Route::get('nuestras-clinicas/materno_infantil', 'WelcomeController@sede_materno_infantil');
-Route::get('nuestras-clinicas/pacientes_cronicos', 'WelcomeController@sede_pacientes_cronicos');
-Route::get('contacto', 'WelcomeController@contacto');
-Route::post('contacto', 'WelcomeController@sendMsg');
-Route::get('galeria', 'WelcomeController@galeria');
+Route::get('/', 'PagesController@index');
+Route::get('quienes-somos', 'PagesController@about_us');
+Route::get('vacantes', 'PagesController@vacantes');
+Route::get('nuestras-clinicas/traumatologia', 'PagesController@sede_traumatologia');
+Route::get('nuestras-clinicas/materno_infantil', 'PagesController@sede_materno_infantil');
+Route::get('nuestras-clinicas/pacientes_cronicos', 'PagesController@sede_pacientes_cronicos');
+Route::get('contacto', 'PagesController@contacto');
+Route::post('contacto', 'PagesController@sendMsg');
+Route::get('galeria', 'PagesController@galeria');
 
 /*** InfoController ***/
 
@@ -50,6 +50,11 @@ Route::get('usuarios', 'UserController@index'); // Temporalmente
 Route::post('usuarios/{id}/update', 'UserController@update');
 Route::get('usuarios/{id}/edit', 'UserController@edit');
 Route::get('usuarios/{id}/delete', 'UserController@delete');
+
+
+/** RoleController **/
+
+Route::resource('roles', 'RoleController');
 
 //Route::resource('usuarios', 'UserController');
 

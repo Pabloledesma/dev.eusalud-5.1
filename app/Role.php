@@ -8,6 +8,9 @@ use App\Permission;
 
 class Role extends Model
 {
+    
+    protected $fillable = ['role_title', 'role_slug'];
+
     /**
      * A Role has many Users
      *

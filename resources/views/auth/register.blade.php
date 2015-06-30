@@ -7,16 +7,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Registro de nuevo usuario</div>
 				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>UPS! </strong> Hay problemas con los datos ingresados por favor verifique.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+                
+					@include('partials.error')
 
 					<form id="register_form" class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
 						{!! csrf_field() !!}
@@ -45,14 +37,14 @@
                                                 <div class="form-group">
 							<label class="col-md-4 control-label">Tipo de usuario</label>
 							<div class="col-md-6">
-                                                            <select name="user_type" id="user_type">
-                                                                <option value="User">Profesional</option>
-                                                                <option value="Provider">Proveedor</option>
-                                                                <option value="Admin">Administrador</option>
-                                                                @if( \Auth::user()->user_type == 'Super Admin' )
-                                                                   <option value="Super Admin">Super Admin</option>
-                                                                @endif    
-                                                            </select>
+                                <select name="user_type" id="user_type">
+                                    <option value="User">Profesional</option>
+                                    <option value="Provider">Proveedor</option>
+                                    <option value="Admin">Administrador</option>
+                                    @if( \Auth::user()->user_type == 'Super Admin' )
+                                       <option value="Super Admin">Super Admin</option>
+                                    @endif    
+                                </select>
 							</div>
 						</div>
 
@@ -72,7 +64,7 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-                                                            <button type="submit" class="btn btn-green" id="submit">Registrar</button>						
+                                <button type="submit" class="btn btn-green" id="submit">Registrar</button>						
 							</div>
 						</div>
 					</form>

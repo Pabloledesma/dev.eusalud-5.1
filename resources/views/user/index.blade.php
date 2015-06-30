@@ -3,7 +3,7 @@
 <div class="container container-fluid">
     <h1>Usuarios</h1>
     <hr/>
-        <a class="btn-green" href="{{ url('/auth/register') }}">Nuevo usuario</a>
+        <a class="btn btn-green" href="{{ url('/auth/register') }}">Nuevo usuario</a>
     <hr/>            
     <div class="row">
         <table class="table-striped green usuarios">

@@ -47,6 +47,7 @@
 
         <!-- Custom Scripts -->
         <scrpit language="Javascript" type="text/javascript" src="{{ asset('/js/calendarios.js') }}"></scrpit>
+       
         
         <!-- Image Gallery -->
         <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
@@ -82,6 +83,7 @@
     @yield('content')
 
     @include('partials.footer')
+    <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/jssor.js') }}"></script>
     <script src="{{ asset('js/jssor.slider.js') }}"></script>
 </body>

@@ -10,6 +10,8 @@ use Vsmoraes\Pdf\PDF;
 use App\Http\Controllers\Traits\Info\CertificadoIca;
 use App\Http\Controllers\Traits\Info\PagoProveedores;
 use App\Http\Controllers\Traits\Info\PagoProfesionales;
+use Illuminate\Http\Request;
+use Illuminate\Filesystem\Filesystem as File;
 
 
 /**
@@ -22,21 +24,30 @@ class InfoController extends Controller {
     /**
      * Convierte las vistas a pdf
      *
-     * @param    Vsmoraes\Pdf\Pdf $pdf
+     * @var    Vsmoraes\Pdf\Pdf $pdf
      */  
     private $pdf;
 
     /**
      * Convierte las vistas a documentos de excel
      *
-     * @param Maatwebsite\Excel\Excel $excel
+     * @var Maatwebsite\Excel\Excel $excel
      */
-    private $excel; 
+    private $excel;
 
-    public function __construct(PDF $pdf, Excel $excel) {
+    /**
+      * Sistema de archivos
+      *
+      * @var Illuminate\Filesystem\Filesystem   $file
+      */ 
+    private $file;
+
+    public function __construct(PDF $pdf, Excel $excel, File $file) 
+    {
         $this->middleware('auth');
         $this->pdf = $pdf;
         $this->excel = $excel;
+        $this->file = $file;
     }
 
     /**
@@ -53,6 +64,28 @@ class InfoController extends Controller {
     use Traits\Info\CertificadoIca, 
         Traits\Info\PagoProveedores,
         Traits\Info\PagoProfesionales;
+
+    public function resolucion_4505()
+    {
+        return view('info.4505');
+    }
+
+    public function post4505(Request $request)
+    {
+       
+        $file_name = time() . "_compensar." . $request->file('file')->getClientOriginalExtension();
+        $file_path = public_path() . '/files\/' . $file_name;
+        if( $request->file('file')->move(public_path() . '/files\/', $file_name) ){
+
+            $myfile = fopen($file_path, "r") or die("Unable to open file!");
+            $content = fread($myfile, filesize($file_path));
+            fclose($myfile);
+            return $content;
+        }
+        
+        
+        return "sin archivo";
+    }  
 
      
     /**

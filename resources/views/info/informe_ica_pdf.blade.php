@@ -19,7 +19,7 @@
                 <tr id="tr_top">
                     <td colspan="3"><img src="{{ asset('img/logo_colores.png') }}" width="300"></td>
                     <td colspan="1" style="text-align: center" id="head">
-                        <p><b>EUSALUD S.A</b> <br>
+                        
                             NIT  800227072-8 <br>
                         CARRERA 9. N0. 66-10</p>
                     </td>

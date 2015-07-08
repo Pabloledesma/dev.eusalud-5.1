@@ -69,3 +69,8 @@ Route::get('ajax', 'HomeController@index');
 Route::post('terceros_por_letra', 'HomeController@get_terceros_by_letter');
 
 get('permisos', 'PermissionController@index');
+
+
+/*** FileController ***/
+
+get('archivo/verificar', 'FileController@verificar');

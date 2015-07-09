@@ -8,9 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 /**
- * Es responsable de administrar los archivos pdf, txt y csv
+ * Es responsable de imprimir y renombrar los archivos txt depositados en la carpeta
+ * seleccionada en la variable $files  
  */
-
 class FileController extends Controller
 {
     
@@ -46,36 +46,52 @@ class FileController extends Controller
     	
     	$nombres = @scandir($this->files);
     	
-    	
-
+    	// Agrupa los archivos que no se han impreso
+    	$filesToPrint = [];
     	foreach($nombres as $nombre){
-    		
-    		if( $nombre == '.' || $nombre == '..' ) continue;
 
-			$new_name = $this->toPrint . '/' . date('Y-m-d-H-m-s') . '_' . $nombre;
+    		if( $nombre == '.' || $nombre == '..') 
+    			continue;
 
-			rename(
-    			$this->files . '/' . $nombre, 
-    			$new_name
-			);
+			//$filesToPrint + $this->files . '/' . date('Y-m-d-H-m-s') . '_' . $nombre;
+			if( stripos($nombre , 'ted_') == false )
+				array_push($filesToPrint, $nombre);
+
     	}
-    	
-    	$mensaje = "";
-		$filesToPrint = []; 
-    	$print = @scandir($this->toPrint);
-    	foreach( $print as $name )
-    	{
-    		if( $name == '.' || $name == '..' ) continue;
-    		if( strpos('printed_', $name) == false ){
-    			array_push($filesToPrint, public_path() . '/' . $name);
+
+    	// si hay archivos para imprimir, los imprime y los renombra
+    	if( count($filesToPrint) > 0 ){
+
+    		foreach( $filesToPrint as $nombre ){
+
+    			$this->imprimir_txt( $this->files .'/'. $nombre );
+
+    			$new_name = $this->files .'/printed_'. date('Y-m-d-H-m-s') . $nombre;
+
+    			rename(
+	     			$this->files . '/' . $nombre, 
+	     			$new_name
+			 	);
     		}
+    		
     	}
-    	
-    	if( count($filesToPrint) == 0 ){
-    		$mensaje = "No hay archivos para imprimir"; 
-    	}
+	
+    	return view('files.verificar', compact( 'filesToPrint'));  
+    }
 
-    	
-    	return view('files.verificar', compact('mensaje', 'filesToPrint'));  
-    } 
+    /**
+     * Imprime un archivo de texto en la impresora seleccionada. Si la impresora no es
+     * suministrada, envia la impresión a la impresora instalada por defecto.
+     *
+     * @param String $archivo 	Ruta del archivo a imprimir
+     * @param String $impresora	Nombre de la impresora
+     */
+    protected function imprimir_txt($archivo, $impresora = null)
+	{
+	 	if( $impresora != null ){
+	 		return shell_exec('NOTEPAD /PT ' . $archivo . ' ' . $impresora);
+	 	}
+
+	 	return shell_exec('NOTEPAD /P ' . $archivo);
+	}  
 }

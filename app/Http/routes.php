@@ -74,3 +74,4 @@ get('permisos', 'PermissionController@index');
 /*** FileController ***/
 
 get('archivo/verificar', 'FileController@verificar');
+get('execute', 'FileController@ejecutar');

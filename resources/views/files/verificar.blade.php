@@ -19,9 +19,7 @@
 			</ul>
 		@endif
 
-		@if( isset($mensaje) )
-			<h2>{{ $mensaje }}</h2>
-		@endif
+		
 		</div>
 	</div>
 </div>

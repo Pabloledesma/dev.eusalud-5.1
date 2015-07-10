@@ -8,7 +8,7 @@
 
 		<div class="col-md-8 col-md-offset-2">
 		@if( count($filesToPrint) > 0 )
-			<h1>Archivos para imprimir</h1>
+			<h2>Archivos para imprimir</h2>
 			<ul>
 				
 			@foreach($filesToPrint as $nombre)
@@ -19,7 +19,9 @@
 			</ul>
 		@endif
 
-		
+		@if( count($filesToPrint) == 0 )
+			<h2>No hay archivos para imprimir</h2>
+		@endif
 		</div>
 	</div>
 </div>

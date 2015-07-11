@@ -8,25 +8,22 @@
 |
 */
 
-/*** 	WelcomeController ***/
+/**
+ * Rutas protegidas por Auth y ACL
+ */
+Route::group(['as' => 'info::', 'middleware' => ['auth', 'acl']], function(){
+	get('/', 'InfoController@index');
+	get('form_certificado_pagos_profesionales', 'InfoController@form_certificado_pagos_profesionales');
+	post('certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
+	get('form_pago_proveedores', 'InfoController@form_pago_proveedores');
+	post('pago_proveedores', 'InfoController@pago_proveedores');
+});
 
-Route::get('/', 'WelcomeController@index');
-Route::get('quienes-somos', 'WelcomeController@about_us');
-Route::get('vacantes', 'WelcomeController@vacantes');
-Route::get('nuestras-clinicas/traumatologia', 'WelcomeController@sede_traumatologia');
-Route::get('nuestras-clinicas/materno_infantil', 'WelcomeController@sede_materno_infantil');
-Route::get('nuestras-clinicas/pacientes_cronicos', 'WelcomeController@sede_pacientes_cronicos');
-Route::get('contacto', 'WelcomeController@contacto');
-Route::post('contacto', 'WelcomeController@sendMsg');
-Route::get('galeria', 'WelcomeController@galeria');
+
 
 /*** InfoController ***/
 
-Route::get('info', 'InfoController@index');
-Route::get('info/form_certificado_pagos_profesionales', 'InfoController@form_certificado_pagos_profesionales');
-Route::post('info/certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
-Route::get('info/pdf', 'InfoController@generatePdf'); //Esta ruta no existe !!!!
-Route::get('info/form_pago_proveedores', 'InfoController@form_pago_proveedores');
+
 Route::post('info/pago_proveedores', 'InfoController@pago_proveedores');
 Route::get('info/form_certificado_ica', 'InfoController@form_certificado_ica');
 Route::post('info/certificado_ica', 'InfoController@certificado_ica');
@@ -62,10 +59,6 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-/*** Home Controller (test)***/
 
-Route::get('ajax', 'HomeController@index');
-
-Route::post('terceros_por_letra', 'HomeController@get_terceros_by_letter');
 
 get('permisos', 'PermissionController@index');

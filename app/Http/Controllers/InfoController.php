@@ -56,7 +56,7 @@ class InfoController extends Controller {
 
      
     /**
-     * Genera el reporte del censo en formato xlsx
+     * Genera el reporte del censo en formato xlsx (pendiente por crear proceso almacenado)
      * 
      * @return View
      */

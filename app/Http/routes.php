@@ -10,25 +10,23 @@
 
 /**
  * Rutas protegidas por Auth y ACL
+ * InfoController
  */
 Route::group(['as' => 'info::', 'middleware' => ['auth', 'acl']], function(){
 	get('/', 'InfoController@index');
-	get('form_certificado_pagos_profesionales', 'InfoController@form_certificado_pagos_profesionales');
+	get('form_certificado_pagos_profesionales', 
+	[
+		'uses' => 'InfoController@form_certificado_pagos_profesionales',
+		'as' =>'form_certificado_pagos_profesionales', 
+		'permission' => 'form_certificado_pagos_profesionales'
+	]);
 	post('certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
 	get('form_pago_proveedores', 'InfoController@form_pago_proveedores');
-	post('pago_proveedores', 'InfoController@pago_proveedores');
+	post('pago_proveedores', 'InfoController@pago_proveedores'); //Incluir la variable headerTitle en el controlador
+	get('form_certificado_ica', 'InfoController@form_certificado_ica');
+	post('certificado_ica', 'InfoController@certificado_ica'); //Se retiró 'info' del atributo action del formulario
+	get('censo', 'InfoController@censo');
 });
-
-
-
-/*** InfoController ***/
-
-
-Route::post('info/pago_proveedores', 'InfoController@pago_proveedores');
-Route::get('info/form_certificado_ica', 'InfoController@form_certificado_ica');
-Route::post('info/certificado_ica', 'InfoController@certificado_ica');
-Route::get('info/censo', 'InfoController@censo');
-
 
 Route::get('auth/register', ['middleware' => 'manager', function(){
     return view('auth.register');

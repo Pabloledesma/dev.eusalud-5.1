@@ -60,7 +60,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <a class="navbar-brand" href="{{ url('inicio') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('img/logo_colores.png') }}" />
                 </a>
             </div>

@@ -38,7 +38,6 @@ trait UserACL
 	protected function checkPermission($permArray = [])
 	{
 		$perms = $this->role->permissions->fetch('permission_slug');
-
 		$perms = array_map('strtolower', $perms->toArray());
 
 		return count( array_intersect($perms, $permArray) ); 

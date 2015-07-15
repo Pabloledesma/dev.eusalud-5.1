@@ -34,7 +34,8 @@ $factory->define(App\Role::class, function($faker){
 
 $factory->define(App\Permission::class, function($faker){
     return [
-        'permission_title' => $faker->sentence,
-        'permission_slug' => $faker->word,
+        'permission_title'      => $faker->sentence,
+        'permission_slug'       => $faker->word,
+        'permission_description'=> $faker->paragraph
     ];
 });

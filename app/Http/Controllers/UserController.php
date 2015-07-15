@@ -12,6 +12,7 @@ class UserController extends Controller {
     
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('role:presidente');
     }
     
     /**
@@ -23,6 +24,15 @@ class UserController extends Controller {
         $usuarios = User::all();
         return view('user.index', compact('usuarios'));
     }
+
+    /**
+     * Muestra formulario para registrar un usuario
+     * @return response
+     */
+    public function form_register()
+    {
+        return view('auth.register');
+    } 
 
     /**
      * Muestra el formulario de edición para el usuario seleccionado

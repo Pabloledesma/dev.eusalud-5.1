@@ -16,17 +16,18 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return Role::all();
+        $roles = Role::all();
+        return view('roles.index', compact('roles'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear un rol
      *
      * @return Response
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**

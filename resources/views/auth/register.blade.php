@@ -35,24 +35,24 @@
 							</div>
 						</div>
                                                 
-                                                <div class="form-group">
+                        <div class="form-group">
 							<label class="col-md-4 control-label">Número de identificación</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="num_id" id="num_id" value="{{ old('num_id') }}" >
 							</div>
 						</div>
                                                
-                                                <div class="form-group">
+                        <div class="form-group">
 							<label class="col-md-4 control-label">Tipo de usuario</label>
 							<div class="col-md-6">
-                                                            <select name="user_type" id="user_type">
-                                                                <option value="User">Profesional</option>
-                                                                <option value="Provider">Proveedor</option>
-                                                                <option value="Admin">Administrador</option>
-                                                                @if( \Auth::user()->user_type == 'Super Admin' )
-                                                                   <option value="Super Admin">Super Admin</option>
-                                                                @endif    
-                                                            </select>
+                                <select name="user_type" id="user_type">
+                                    <option value="User">Profesional</option>
+                                    <option value="Provider">Proveedor</option>
+                                    <option value="Admin">Administrador</option>
+                                    @if( \Auth::user()->user_type == 'Super Admin' )
+                                       <option value="Super Admin">Super Admin</option>
+                                    @endif    
+                                </select>
 							</div>
 						</div>
 
@@ -72,7 +72,7 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-                                                            <button type="submit" class="btn btn-green" id="submit">Registrar</button>						
+                                <button type="submit" class="btn btn-green" id="submit">Registrar</button>						
 							</div>
 						</div>
 					</form>

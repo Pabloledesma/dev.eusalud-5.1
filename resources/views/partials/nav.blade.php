@@ -45,12 +45,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 @if( \Auth::user()->user_type == 'Provider' || \Auth::user()->user_type == 'Super Admin' || \Auth::user()->user_type == 'Admin'  )
-                                    <li><a href="{{ url('form_certificado_pagos_profesionales') }}">Certificado de pagos a profesionales de la salud</a></li>
-                                    <li><a href="{{ url('form_certificado_ica') }}">Certificado de retención industria y comercio (ICA)</a></li>
                                 @endif
                                 @if( \Auth::user()->user_type != 'User' )
-                                    <li><a href="{{ url('form_pago_proveedores') }}">Informe de pago a proveedores</a></li>
                                 @endif
+                                <!-- Los recursos quedan disponibles para todos los usuarios y su uso se administrará con los middlewares -->
+                                <li><a href="{{ url('form_certificado_pagos_profesionales') }}">Certificado de pagos a profesionales de la salud</a></li>
+                                <li><a href="{{ url('form_certificado_ica') }}">Certificado de retención industria y comercio (ICA)</a></li>
+                                <li><a href="{{ url('form_pago_proveedores') }}">Informe de pago a proveedores</a></li>
                                 <li><a href="{{ url('censo') }}">Censo</a></li>
                                 <!--<li><a href="#">Facturación bruta</a></li>
                                 <li><a href="#">Radicación</a></li>

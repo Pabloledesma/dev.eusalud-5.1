@@ -85,25 +85,25 @@ Route::group(['as' => 'usuarios::'], function(){
 	]);
 });
 
-Route::group(['as' => 'permisos::'], function(){
-
-	
-
-	get('crear', 
-	[
-		'uses'			=> 'PermissionController@create',
-		'as'			=> 'crear'
-		
-	]);
-
-});
+/*** PermissionController ***/
 
 get('permisos', 'PermissionController@index');
+get('permisos/create', 'PermissionController@create');
+post('permisos/create', 'PermissionController@save');
+get('permisos/{id}/edit', 'PermissionController@edit');
+post('permisos/{id}/update', 'PermissionController@update');
+get('permisos/{id}/delete', 'PermissionController@delete');
 
-//Route::get('usuarios/{id}/edit', 'UserController@edit');
-//Route::get('usuarios/{id}/delete', 'UserController@delete');
+/*** RoleController ***/
 
-//Route::resource('usuarios', 'UserController');
+get('roles', 'RoleController@index');
+get('roles/create', 'RoleController@create');
+post('roles/create', 'RoleController@save');
+get('roles/{id}/edit', 'RoleController@edit');
+post('roles/{id}/update', 'RoleController@update');
+get('roles/{id}/delete', 'RoleController@delete');
+
+/*** CensoController(podria ser parte del infoController) ***/
 
 Route::get('censo/{p}', 'CensoController@censo');
 

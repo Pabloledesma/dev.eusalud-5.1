@@ -38,6 +38,7 @@
                                 <li>
                                     <a href="{{ url('usuarios') }}">Usuarios</a>             
                                     <a href="{{ url('roles') }}">Roles</a>             
+                                    <a href="{{ url('permisos') }}">Permisos</a>             
                                 </li>
                                 <li><a href="{{ url('/auth/logout') }}">Cerrar Sesión</a></li>
                             </ul>

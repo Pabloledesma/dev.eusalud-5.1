@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use App\Permission;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -27,7 +28,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        $permissions = Permission::all();
+        
+        return view('roles.create', compact('permissions'));
     }
 
     /**
@@ -42,6 +45,12 @@ class RoleController extends Controller
             'role_slug'     => 'required'
         ]);
 
+        $permissions = Permission::all();
+        $permissions_id = [];
+        foreach($permissions as $perm){
+            $permissions_id += [$perm->permission_slug => $perm->id];
+        }
+
         Role::create([
             'role_title'    => $request->input('role_title'),
             'role_slug'     => $request->input('role_slug')
@@ -52,17 +61,6 @@ class RoleController extends Controller
         );
 
         return redirect('roles');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

@@ -5,7 +5,7 @@
 <div class="container container-fluid">
     <h1>Permisos</h1>
     <hr/>
-        <a class="btn btn-green" href="{{ url('permisos/crear') }}">Crear permiso</a>
+        <a class="btn btn-green" href="{{ url('permisos/create') }}">Crear permiso</a>
     <hr/>            
     <div class="row">
         <table class="table-striped green usuarios">

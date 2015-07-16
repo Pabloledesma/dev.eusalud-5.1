@@ -89,19 +89,19 @@ Route::group(['as' => 'usuarios::'], function(){
 
 get('permisos', 'PermissionController@index');
 get('permisos/create', 'PermissionController@create');
-post('permisos/create', 'PermissionController@save');
+post('permisos/create', 'PermissionController@store');
 get('permisos/{id}/edit', 'PermissionController@edit');
 post('permisos/{id}/update', 'PermissionController@update');
-get('permisos/{id}/delete', 'PermissionController@delete');
+get('permisos/{id}/delete', 'PermissionController@destroy');
 
 /*** RoleController ***/
 
 get('roles', 'RoleController@index');
 get('roles/create', 'RoleController@create');
-post('roles/create', 'RoleController@save');
+post('roles/create', 'RoleController@store');
 get('roles/{id}/edit', 'RoleController@edit');
 post('roles/{id}/update', 'RoleController@update');
-get('roles/{id}/delete', 'RoleController@delete');
+get('roles/{id}/delete', 'RoleController@destroy');
 
 /*** CensoController(podria ser parte del infoController) ***/
 

@@ -52,6 +52,19 @@
                         </div>
                     </div>
 
+                     <div class="form-group">
+                        <label class="col-md-4 control-label">Rol</label>
+                        <div class="col-md-6">
+                            <select name="role_id" id="role_id">
+                                @foreach( $roles as $r )
+                                    <option value="{{$r->id}}" {{ $r->id == $role_id ? 'selected' : '' }}>
+                                        {{ $r->role_title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="col-md-4 control-label">Modificar clave</label>
                         <div class="col-md-6">

@@ -18,7 +18,7 @@ class RoleMiddleware
     {
         if(!$request->user()->hasRole($role)){
             flash()->overlay(
-                'Debe tener el rol de ' . $role . ' para usar este recurso', 
+                'Permisos insuficientes para usar este recurso', 
                 'Acceso Denegado'
             );
             return redirect('/');

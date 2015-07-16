@@ -7,14 +7,15 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Crear nuevo Rol</div>
+				<div class="panel-heading">Editar Rol</div>
 					<div class="panel-body">
 					
-					@include('partials.errors')
+						@include('partials.errors')
 					
-					{!! Form::open(['method' => 'POST', 'url' => 'roles/create', 'class' => 'form-horizontal']) !!}
+					{!! Form::model($role, ['method' => 'POST', 'url' => 'roles/' . $role->id . '/update', 'class' => 'form-horizontal']) !!}
 					
 							{!! csrf_field() !!}
+
 						<div class="form-group">
 							{!! Form::label('role_title', 'Titulo', ['class' => 'col-md-4 control-label']) !!}
 							<div class="col-md-6">
@@ -31,7 +32,7 @@
 					
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								{!! Form::submit('Crear', ['class' => 'btn btn-green']) !!}
+								{!! Form::submit('Editar', ['class' => 'btn btn-green']) !!}
 							</div>
 						</div>
 					

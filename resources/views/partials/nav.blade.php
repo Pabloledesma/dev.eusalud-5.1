@@ -76,6 +76,7 @@
                                 @if( \Auth::user()->user_type == "Super Admin" )
                                 <li>
                                     <a href="{{ url('usuarios') }}">Usuarios</a>             
+                                    <a href="{{ url('roles') }}">Roles</a>             
                                 </li>
                                 @endif
 

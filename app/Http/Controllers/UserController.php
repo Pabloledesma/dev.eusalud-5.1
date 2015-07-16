@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use App\Role;
 
 class UserController extends Controller {
 
@@ -22,6 +23,7 @@ class UserController extends Controller {
     public function index() {
 
         $usuarios = User::all();
+           
         return view('user.index', compact('usuarios'));
     }
 
@@ -31,7 +33,8 @@ class UserController extends Controller {
      */
     public function form_register()
     {
-        return view('auth.register');
+        $roles = Role::all(); 
+        return view('auth.register', compact('roles'));
     } 
 
     /**
@@ -41,10 +44,16 @@ class UserController extends Controller {
     public function edit($id) {
 
         $user = User::findOrFail($id);
+        $roles = Role::all();
+        $role_id = "";
+        if( $user->role ){
+            $role_id = $user->role->id;
+        }
+
         $title = "Editando el usuario: ";
         $url = "usuarios/" . $id . "/update";
         $boton = "Editar";
-        return view('user.edit', compact('user', 'title', 'url', 'boton'));
+        return view('user.edit', compact('user', 'title', 'url', 'boton', 'role_id', 'roles'));
     }
 
     /**
@@ -54,6 +63,11 @@ class UserController extends Controller {
     public function update(Requests\EditUserRequest $req, $id) {
         $user = User::findOrFail($id);
         $input = $req->all();
+
+        if( isset( $input['role_id'] ) ){
+            $user->role()->associate($input['role_id']);
+        }
+
         if (isset($input['password'])) {
             //Encriptar password
             $options = [

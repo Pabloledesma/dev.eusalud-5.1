@@ -7,16 +7,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Registro de nuevo usuario</div>
 				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>UPS! </strong> Hay problemas con los datos ingresados por favor verifique.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+                
+					@include('partials.errors')
 
 					<form id="register_form" class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
 						{!! csrf_field() !!}
@@ -55,6 +47,19 @@
                                 </select>
 							</div>
 						</div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Rol</label>
+                            <div class="col-md-6">
+                                <select name="role_id" id="role_id">
+                                    @foreach( $roles as $r )
+                                        <option value="{{$r->id}}">
+                                            {{ $r->role_title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Clave</label>

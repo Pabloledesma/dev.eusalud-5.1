@@ -31,13 +31,27 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena el nuevo role
      *
-     * @return Response
+     * @return response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'role_title'    => 'required|min:3',
+            'role_slug'     => 'required'
+        ]);
+
+        Role::create([
+            'role_title'    => $request->input('role_title'),
+            'role_slug'     => $request->input('role_slug')
+        ]);
+
+        flash()->overlay(
+            'Los datos se guardaron exitosamente', 'Sistema'
+        );
+
+        return redirect('roles');
     }
 
     /**
@@ -59,7 +73,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return view('roles.edit', compact('role'));
     }
 
     /**
@@ -68,9 +83,22 @@ class RoleController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'role_title'    => 'required|min:3',
+            'role_slug'     => 'required'
+        ]);
+
+        $input = $request->all();
+        $role = Role::findOrFail($id);
+        $role->update($input);
+        flash()->overlay(
+            'El Rol se actualizó exitosamente.', 'Sistema'
+        );
+
+        return redirect('roles');
+
     }
 
     /**
@@ -81,6 +109,12 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->delete();
+        flash()->overlay(
+            'El Rol se eliminó exitosamente.', 'Sistema'
+        );
+
+        return redirect('roles');
     }
 }

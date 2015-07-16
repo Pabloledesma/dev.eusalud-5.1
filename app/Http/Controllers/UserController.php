@@ -13,7 +13,7 @@ class UserController extends Controller {
     
     public function __construct() {
         $this->middleware('auth');
-        $this->middleware('role:presidente');
+        //$this->middleware('role:presidente');
     }
     
     /**
@@ -89,7 +89,7 @@ class UserController extends Controller {
         $user->name = $input['name'];
         $user->email = $input['email'];
         $user->num_id = $input['num_id'];
-        $user->user_type = $input['user_type'];
+        $user->role_id = $input['role_id'];
 
         //Encriptar password
         $options = [

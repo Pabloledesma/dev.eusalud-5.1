@@ -38,19 +38,6 @@
                             {!! Form::text('num_id', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Tipo de usuario</label>
-                        <div class="col-md-6">
-                            <select name="user_type" id="user_type">
-                                <option value="User" {{ $user->user_type == 'User' ? 'selected' : '' }}>Profesional</option>
-                                <option value="Provider" {{ $user->user_type == 'Provider' ? 'selected' : '' }}>Proveedor</option>
-                                <option value="Admin" {{ $user->user_type == 'Admin' ? 'selected' : '' }}>Administrador</option>
-                                @if( \Auth::user()->user_type == 'Super Admin' )
-                                <option value="Super Admin" {{ $user->user_type == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
-                                @endif
-                            </select>
-                        </div>
-                    </div>
 
                      <div class="form-group">
                         <label class="col-md-4 control-label">Rol</label>

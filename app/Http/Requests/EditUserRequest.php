@@ -6,20 +6,7 @@ use App\Http\Requests\Request;
 
 class EditUserRequest extends Request {
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize() {
-        if (\Auth::user()->user_type == "Super Admin") {
-            return true;
-        } else {
-            flash()->overlay('No tiene permisos suficientes para realizar esta modificación', 'Acceso Denegado!');
-            return redirect('usuarios');
-        }
-    }
-
+   
     /**
      * Get the validation rules that apply to the request.
      *

@@ -11,7 +11,6 @@
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Cedula</th>
-                <th>Tipo</th>
                 <th>Rol</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -22,7 +21,6 @@
             <td>{{ $u->name }}</td>
             <td>{{ $u->email }}</td>
             <td>{{ $u->num_id }}</td>
-            <td>{{ $u->user_type }}</td>
             <td>{{ $u->role_id }}</td>
             <td><a href="{{ url('usuarios/'.$u->id.'/edit' ) }}">Editar</a></td>
             <td><a href="{{ url('usuarios/'.$u->id.'/delete' ) }}" class="delete">Eliminar</a></td>

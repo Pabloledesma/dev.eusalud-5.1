@@ -13,14 +13,11 @@
 
 $factory->define(App\User::class, function ($faker) {
     
-	$user_type = ['Super Admin', 'User', 'Administrator', 'Provider'];
-
     return [
         'name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('123456'),
         'num_id'	=> mt_rand(),
-        'user_type' => $user_type[rand(0, 3)],
         'remember_token' => str_random(10),
     ];
 });

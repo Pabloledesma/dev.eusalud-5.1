@@ -12,31 +12,31 @@
 					
 						@include('partials.errors')
 					
-					{!! Form::model($role, ['method' => 'POST', 'url' => 'roles/' . $role->id . '/update', 'class' => 'form-horizontal']) !!}
-					
-							{!! csrf_field() !!}
+						{!! Form::model($role, ['method' => 'POST', 'url' => 'roles/' . $role->id . '/update', 'class' => 'form-horizontal']) !!}
+						
+								{!! csrf_field() !!}
 
-						<div class="form-group">
-							{!! Form::label('role_title', 'Titulo', ['class' => 'col-md-4 control-label']) !!}
-							<div class="col-md-6">
-								{!! Form::text('role_title', null, ['class' => 'form-control']) !!}
+							<div class="form-group">
+								{!! Form::label('role_title', 'Titulo', ['class' => 'col-md-4 control-label']) !!}
+								<div class="col-md-6">
+									{!! Form::text('role_title', null, ['class' => 'form-control']) !!}
+								</div>
 							</div>
-						</div>
 
-						<div class="form-group">
-							{!! Form::label('role_slug', 'Alias', ['class' => 'col-md-4 control-label']) !!}
-							<div class="col-md-6">
-								{!! Form::text('role_slug', null, ['class' => 'form-control']) !!}
+							<div class="form-group">
+								{!! Form::label('role_slug', 'Alias', ['class' => 'col-md-4 control-label']) !!}
+								<div class="col-md-6">
+									{!! Form::text('role_slug', null, ['class' => 'form-control']) !!}
+								</div>
 							</div>
-						</div>
-					
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								{!! Form::submit('Editar', ['class' => 'btn btn-green']) !!}
+						
+							<div class="form-group">
+								<div class="col-md-6 col-md-offset-4">
+									{!! Form::submit('Editar', ['class' => 'btn btn-green']) !!}
+								</div>
 							</div>
-						</div>
-					
-					{!! Form::close() !!}
+						
+						{!! Form::close() !!}
 					</div>
 				</div>
 			</div>

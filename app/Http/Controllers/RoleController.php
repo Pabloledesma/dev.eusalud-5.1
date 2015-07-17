@@ -51,10 +51,15 @@ class RoleController extends Controller
             $permissions_id += [$perm->permission_slug => $perm->id];
         }
 
-        Role::create([
+        $role = Role::create([
             'role_title'    => $request->input('role_title'),
             'role_slug'     => $request->input('role_slug')
         ]);
+
+        // Asignación de permisos
+        foreach($permissions_id as $key => $val){
+            if( $request->has() )
+        }
 
         flash()->overlay(
             'Los datos se guardaron exitosamente', 'Sistema'

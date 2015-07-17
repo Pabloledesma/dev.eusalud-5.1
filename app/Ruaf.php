@@ -1,0 +1,68 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Ruaf extends Model
+{
+    protected $fillable = [
+    	'numero_certificado',
+        'departamento',
+        'municipio',
+        'area_nacimiento',
+        'inspeccion_corregimiento_o_caserio_nacimiento',
+        'sitio_nacimiento',
+        'codigo_institucion',
+        'nombre_institucion',
+        'sexo',
+        'peso_gramos',
+        'talla_centimetros',
+        'fecha_nacimiento',
+        'hora_nacimiento',
+        'parto_atendido_por',
+        'tiempo_de_gestacion',
+        'numero_consultas_prenatales',
+        'tipo_parto',
+        'multiplicidad_embarazo',
+        'apgar1',
+        'apgar2',
+        'grupo_sanguineo',
+        'factor_rh',
+        'pertenencia_etnica',
+        'grupo_indigena',
+        'nombres_madre',
+        'apellidos_madre',
+        'apellidos_madre',
+        'tipo_documento_madre',
+        'numero_documento_madre',
+        'edad_madre',
+        'estado_conyugal_madre',
+        'nive_educativo_madre',
+        'ultimo_año_aprovado_madre',
+        'pais_residencia',
+        'departamento_residencia',
+        'municipio_residencia',
+        'area_residencia',
+        'localidad',
+        'barrio',
+        'direccion',
+        'centro_poblado',
+        'rural_disperso',
+        'numero_hijos_nacidos_vivos',
+        'fecha_anterior_hijo_nacido_vivo',
+        'numero_embarazos',
+        'regimen_seguridad',
+        'tipo_administradora',
+        'nombre_administradora',
+        'edad_padre',
+        'nivel_educativo_padre',
+        'ultimo_ano_aprovado_padre',
+        'nombres_y_apellidos_certificador',
+        'numero_documento_certificador',
+        'departamento_expedicion',
+        'municipio_expedicion',
+        'fecha_expedicion',
+        'estado_certificado'
+    ];
+}

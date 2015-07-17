@@ -13,7 +13,7 @@ class CreateRuafTable extends Migration
     public function up()
     {
         Schema::create('ruaf', function (Blueprint $table) {
-            $table->primary('id');
+            $table->integer('id');
             $table->integer('numero_certificado');
             $table->string('departamento');
             $table->string('municipio');
@@ -40,13 +40,12 @@ class CreateRuafTable extends Migration
             $table->string('grupo_indigena')->nullable();
             $table->string('nombres_madre');
             $table->string('apellidos_madre');
-            $table->string('apellidos_madre');
             $table->string('tipo_documento_madre');
             $table->string('numero_documento_madre');
             $table->string('edad_madre');
             $table->string('estado_conyugal_madre');
             $table->string('nive_educativo_madre');
-            $table->integer('ultimo_año_aprovado_madre');
+            $table->integer('ultimo_ano_aprovado_madre');
             $table->string('pais_residencia');
             $table->string('departamento_residencia');
             $table->string('municipio_residencia');

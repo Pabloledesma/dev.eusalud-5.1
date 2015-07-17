@@ -31,8 +31,10 @@ Route::post('info/pago_proveedores', 'InfoController@pago_proveedores');
 Route::get('info/form_certificado_ica', 'InfoController@form_certificado_ica');
 Route::post('info/certificado_ica', 'InfoController@certificado_ica');
 Route::get('info/censo', 'InfoController@censo');
-get('resolucion_4505', 'InfoController@resolucion_4505');
-post('resolucion_4505', 'InfoController@post4505');
+
+/** RuafController **/
+get('import_4505', 'RuafController@import');
+post('resolucion_4505', 'RuafController@store');
 
 
 Route::get('auth/register', ['middleware' => 'manager', function(){

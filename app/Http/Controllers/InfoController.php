@@ -64,53 +64,6 @@ class InfoController extends Controller {
     use Traits\Info\CertificadoIca, 
         Traits\Info\PagoProveedores,
         Traits\Info\PagoProfesionales;
-
-    public function resolucion_4505()
-    {
-        return view('info.4505');
-    }
-
-    /**
-     * Recibe archivos con extensión txt, xls y csv
-     *
-     * @param Request $request
-     * @return response
-     */
-    public function post4505(Request $request)
-    {
-       
-        $extension = $request->file('file')->getClientOriginalExtension();
-
-        if( strtolower( $extension ) == 'txt' ){
-            $file_name = date('Y-m-d_h:m:s') . "_texto." . $extension;
-            $file_path = public_path() . '/files\/' . $file_name;
-            if( $request->file('file')->move(public_path() . '/files\/', $file_name) ){
-
-                $myfile = fopen($file_path, "r") or die("Unable to open file!");
-                $content = fread($myfile, filesize($file_path));
-                fclose($myfile);
-                return $content;
-            }
-        }
-
-        if( strtolower( $extension == 'xls' || $extension == 'xlsx' ) ){
-            $file_name = date('Y-m-d_h_m_s') . "_excel." . $extension;
-            $file_path = public_path() . '/files\/' . $file_name;
-            if( $request->file('file')->move(public_path() . '/files\/', $file_name) ){
-
-                $this->excel->load( $file_path, function($reader){
-                    dd($reader->get());
-                });
-                
-            }
-        }
-
-       
-        
-        
-        return "sin archivo";
-    }  
-
      
     /**
      * Genera el reporte del censo en formato xlsx

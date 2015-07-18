@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\EditUserRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -57,10 +58,13 @@ class UserController extends Controller {
     }
 
     /**
-     * Actualiza el usuario
-     * @param type $id
+     * Valida los datos del formulario y Actualiza el usuario
+     *
+     * @param EditUserRequest $req
+     * @param Integer $id
+     * @return Response
      */
-    public function update(Requests\EditUserRequest $req, $id) {
+    public function update(EditUserRequest $req, $id) {
         $user = User::findOrFail($id);
         $input = $req->all();
 
@@ -77,7 +81,6 @@ class UserController extends Controller {
 
             $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, $options);
         } 
-        
         $user->update($input);
         flash()->overlay('El usuario se actualizó correctamente', 'Buen trabajo!');
         return redirect('usuarios');

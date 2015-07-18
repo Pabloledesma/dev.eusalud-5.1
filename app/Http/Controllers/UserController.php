@@ -73,13 +73,8 @@ class UserController extends Controller {
         }
 
         if (isset($input['password'])) {
-            //Encriptar password
-            $options = [
-                'cost' => 7,
-                'salt' => 'BCryptRequires22Chrcts',
-            ];
 
-            $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, $options);
+            $input['password'] = bcrypt($input['password']);
         } 
         $user->update($input);
         flash()->overlay('El usuario se actualizó correctamente', 'Buen trabajo!');
@@ -93,14 +88,7 @@ class UserController extends Controller {
         $user->email = $input['email'];
         $user->num_id = $input['num_id'];
         $user->role_id = $input['role_id'];
-
-        //Encriptar password
-        $options = [
-            'cost' => 7,
-            'salt' => 'BCryptRequires22Chrcts',
-        ];
-
-        $user->password = password_hash($input['password'], PASSWORD_BCRYPT, $options);
+        $user->password = bcrypt($input['password']);
         $user->save();
 
         flash()->overlay('El usuario '. $user->name .' fue registrado correctamente', 'Registro');

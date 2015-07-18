@@ -29,6 +29,22 @@
 									{!! Form::text('role_slug', null, ['class' => 'form-control']) !!}
 								</div>
 							</div>
+
+							<div class="form-group">
+								{!! Form::label(null, 'Permisos', ['class' => 'col-md-4 control-label']) !!}
+								<div class="col-md-6">
+									@foreach($all_perms as $perm)
+
+									<input type="checkbox" 
+										name="{{$perm['permission_slug']}}" 
+										value="{{$perm['id']}}" 
+										{{ array_key_exists($perm['permission_slug'], $role_perms) ? 'checked' : '' }}>
+
+									{{ $perm['permission_title'] }}<br>
+
+									@endforeach
+								</div>
+							</div>
 						
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-4">

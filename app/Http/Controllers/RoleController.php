@@ -141,7 +141,30 @@ class RoleController extends Controller
         ]);
 
         $input = $request->all();
+              
         $role = Role::findOrFail($id);
+       
+        // Identificar los permisos seleccionados
+        $permisos_seleccionados = $this->get_selected_perms($input);
+
+        // Verificar si esta enlazado el permiso
+        $permisos_anteriores = $this->get_role_perms_id($role);
+
+        //Si se modificaron los permisos
+        if( count($permisos_seleccionados) != count($permisos_anteriores) ){
+            
+            // Si se agregaron permisos
+            if( count($permisos_seleccionados) > count($permisos_anteriores) ){
+                $role->permissions()->attach( array_diff($permisos_seleccionados, $permisos_anteriores) );
+            }
+
+            // Si se quitaron permisos
+            if( count($permisos_seleccionados) < count($permisos_anteriores) ){
+                $role->permissions()->detach(array_diff($permisos_anteriores, $permisos_seleccionados));
+            }
+
+        }
+
         $role->update($input);
         flash()->overlay(
             'El Rol se actualizó exitosamente.', 'Sistema'
@@ -150,6 +173,43 @@ class RoleController extends Controller
         return redirect('roles');
 
     }
+
+    /**
+     * Obtiene un arreglo con los id de los permisos del rol suministrado
+     * Si no tiene permisos asociados retorna un arreglo vacio
+     *
+     * @param Role
+     * @return Array 
+     */
+    public function get_role_perms_id(Role $role)
+    {
+        $role_perms = $role->permissions()->get()->toArray();
+        $role_perms_id = [];
+
+        foreach($role_perms as $perm){
+            array_push($role_perms_id, $perm['id']);
+        }
+
+        return $role_perms_id;
+    } 
+
+    /**
+     * Busca los permisos seleccionados en el formulario y retorna un arreglo con sus identificadores
+     * Si no se seleccionó ningun permiso retorna un arreglo vacio
+     *
+     * @param Array $input
+     * @return Array 
+     */
+    public function get_selected_perms(Array $input)
+    {
+        $permisos_seleccionados = [];
+        foreach($input as $key => $val)
+        {
+            if(strlen($val) == 1) array_push($permisos_seleccionados, $val);  
+        }
+        
+        return $permisos_seleccionados;
+    } 
 
     /**
      * Remove the specified resource from storage.

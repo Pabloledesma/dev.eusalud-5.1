@@ -18,7 +18,8 @@ Route::group(['as' => 'info::'], function(){
 	get('form_certificado_pagos_profesionales', 
 	[
 		'uses' 			=> 'InfoController@form_certificado_pagos_profesionales',
-		'as' 			=> 'form_certificado_pagos_profesionales'
+		'as' 			=> 'form_certificado_pagos_profesionales',
+		'permission'	=> 'pagos_profesionales'
 		
 	]);
 	post('certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
@@ -26,7 +27,8 @@ Route::group(['as' => 'info::'], function(){
 	get('form_pago_proveedores', 
 	[
 		'uses' 			=> 'InfoController@form_pago_proveedores',
-		'as'			=> 'form_pago_proveedores'
+		'as'			=> 'form_pago_proveedores',
+		'permission'	=> 'pago_proveedores'
 		
 	]);
 	post('pago_proveedores', 'InfoController@pago_proveedores'); //Incluir la variable headerTitle en el controlador
@@ -34,7 +36,8 @@ Route::group(['as' => 'info::'], function(){
 	get('form_certificado_ica', 
 	[
 		'uses'			=> 'InfoController@form_certificado_ica',
-		'as'			=> 'form_certificado_ica'
+		'as'			=> 'form_certificado_ica',
+		'permission'	=> 'ica'
 		
 	]);
 	post('certificado_ica', 'InfoController@certificado_ica'); //Se retiró 'info' del atributo action del formulario
@@ -42,7 +45,8 @@ Route::group(['as' => 'info::'], function(){
 	get('censo', 
 	[
 		'uses'			=> 'InfoController@censo',
-		'as'			=> 'censo'
+		'as'			=> 'censo',
+		'permission'	=> 'censo'
 		
 	]);
 

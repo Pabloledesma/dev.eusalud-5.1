@@ -18,7 +18,7 @@ class InfoController extends Controller {
 
     public function __construct(Pdf $pdf, Excel $excel) {
         $this->middleware('auth');
-        $this->middleware('role:admin_sis');
+        $this->middleware('acl');
         $this->pdf = $pdf;
         $this->excel = $excel;
     }

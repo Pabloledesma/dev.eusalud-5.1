@@ -46,7 +46,7 @@ class UserController extends Controller {
 
         $user = User::findOrFail($id);
         $roles = Role::all();
-        $role_id = "";
+
         if( $user->role ){
             $role_id = $user->role->id;
         }
@@ -72,10 +72,15 @@ class UserController extends Controller {
             $user->role()->associate($input['role_id']);
         }
 
-        if (isset($input['password'])) {
-
+        if (strlen($input['password']) > 0) {
             $input['password'] = bcrypt($input['password']);
-        } 
+        }
+
+        // Si no se ingresa el password se remueve del arreglo
+        if(strlen($input['password']) == 0){
+            $input = array_slice($input, 0, 6);
+        }
+
         $user->update($input);
         flash()->overlay('El usuario se actualizó correctamente', 'Buen trabajo!');
         return redirect('usuarios');

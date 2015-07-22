@@ -57,6 +57,18 @@ class PermissionController extends Controller
         );
 
         return redirect('permisos');
-    }  
+    }
+
+    /**
+     * Muestra el formulario de edición de un permiso
+     * 
+     * @param Integer $permission_id
+     * @return Response 
+     */ 
+    public function edit($permission_id)
+    {
+        $permission = Permission::findOrFail( $permission_id );
+        return view('permissions.edit', compact('permission'));
+    } 
 
 }

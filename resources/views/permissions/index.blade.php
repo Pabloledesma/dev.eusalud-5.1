@@ -21,8 +21,8 @@
                 <td>{{ $p->permission_title }}</td>
                 <td>{{ $p->permission_slug }}</td>
                 <td>{{ $p->permission_description }}</td>
-                <td><a href="{{ url('permisos/'.$p->id.'/editar' ) }}">Editar</a></td>
-                <td><a href="{{ url('permisos/'.$p->id.'/eliminar' ) }}" class="delete">Eliminar</a></td>
+                <td><a href="{{ url('permisos/'.$p->id.'/edit' ) }}">Editar</a></td>
+                <td><a href="{{ url('permisos/'.$p->id.'/delete' ) }}" class="delete">Eliminar</a></td>
             </tr>
             @endforeach
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-//use Barryvdh\DomPDF\PDF;
 use DB;
 use Maatwebsite\Excel\Excel;
 use Psy\Util\String;

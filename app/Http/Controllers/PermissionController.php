@@ -13,7 +13,8 @@ class PermissionController extends Controller
     
     public function __construct()
     {
-    	//$this->middleware('role:presidente');
+    	$this->middleware('auth');
+        $this->middleware('acl');
     }
 
     /**
@@ -46,6 +47,11 @@ class PermissionController extends Controller
      */
     public function store(NewPermissionRequest $request)
     {
+        $this->validate($request, [
+                'permission_title'  => 'required|min:3',
+                'permission_slug'   => 'required|min:3'
+            ]);
+
         $permission = Permission::create([
             'permission_title'  => $request->input('permission_title'),
             'permission_slug'   => $request->input('permission_slug'),
@@ -69,6 +75,46 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail( $permission_id );
         return view('permissions.edit', compact('permission'));
-    } 
+    }
 
+    /**
+     * Actualiza el permiso seleccionado
+     *
+     * @param  Request $request
+     * @param  int  $permission_id
+     * @return Response
+     */
+
+    public function update(Request $request, $permission_id)
+    {
+        
+        $this->validate($request, [
+                'permission_title'  => 'required|min:3',
+                'permission_slug'   => 'required|min:3'
+            ]);
+        $permission = Permission::findOrFail( $permission_id );
+        $input = $request->all();
+        $permission->update( $input );
+        flash()->overlay(
+            'El Permiso se actualizó exitosamente.', 'Sistema'
+        );
+        return redirect('permisos');
+    }
+
+    /**
+     * Elimina el permiso seleccionado
+     *
+     * @param   int $permission_id
+     * @return  response
+     */  
+    public function destroy($permission_id)
+    {
+        $permission = Permission::findOrFail( $permission_id );
+        $permission->delete();
+        flash()->overlay(
+            'El Permiso se eliminó exitosamente.', 'Sistema'
+        );
+        return redirect('permisos');
+        
+    } 
 }

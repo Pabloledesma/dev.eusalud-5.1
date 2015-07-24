@@ -31,7 +31,7 @@ class CheckPermission
      */ 
     protected function userHasAccessTo($request)
     {
-       return $this->hasPermission($request);
+      return $this->hasPermission($request);
     } 
 
     /**

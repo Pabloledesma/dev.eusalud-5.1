@@ -19,6 +19,8 @@ class RoleController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->middleware('acl');
         $this->permissions = Permission::all()->toArray();
     }
 
@@ -128,8 +130,9 @@ class RoleController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza el rol seleccionado
      *
+     * @param  Request $request
      * @param  int  $id
      * @return Response
      */
@@ -145,7 +148,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
        
         // Identificar los permisos seleccionados
-        $permisos_seleccionados = $this->get_selected_perms($input);
+        $permisos_seleccionados = $this->get_selected_perms($request);
 
         // Verificar si esta enlazado el permiso
         $permisos_anteriores = $this->get_role_perms_id($role);
@@ -197,15 +200,16 @@ class RoleController extends Controller
      * Busca los permisos seleccionados en el formulario y retorna un arreglo con sus identificadores
      * Si no se seleccionó ningun permiso retorna un arreglo vacio
      *
-     * @param Array $input
+     * @param Request $request
      * @return Array 
      */
-    public function get_selected_perms(Array $input)
+    public function get_selected_perms(Request $request)
     {
+        $input = $request->all();
         $permisos_seleccionados = [];
         foreach($input as $key => $val)
         {
-            if(strlen($val) == 1) array_push($permisos_seleccionados, $val);  
+            if(strlen($val) == 1 || strlen($val) == 2) array_push($permisos_seleccionados, $val);  
         }
         
         return $permisos_seleccionados;

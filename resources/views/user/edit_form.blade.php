@@ -44,9 +44,15 @@
                         <div class="col-md-6">
                             <select name="role_id" id="role_id">
                                 @foreach( $roles as $r )
-                                    <option value="{{$r->id}}" {{ $r->id == $role_id ? 'selected' : '' }}>
-                                        {{ $r->role_title }}
-                                    </option>
+                                    @if(isset($role_id))
+                                        <option value="{{$r->id}}" {{ $r->id == $role_id ? 'selected' : '' }}>
+                                            {{ $r->role_title }}
+                                        </option>
+                                    @else
+                                        <option value="{{$r->id}}">
+                                            {{ $r->role_title }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -76,7 +82,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary" id="submit">{{ $boton }}</button>
+                            <button type="submit" class="btn btn-green" id="submit">{{ $boton }}</button>
                             <a href="{{ url('usuarios') }}" class="btn btn-green">Volver</a>
                         </div>
                     </div>

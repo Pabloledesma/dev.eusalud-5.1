@@ -22,7 +22,13 @@ Route::group(['as' => 'info::'], function(){
 		'permission'	=> 'pagos_profesionales'
 		
 	]);
-	post('certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
+
+	post('certificado_pagos_profesionales', 
+		[
+			'uses'			=> 'InfoController@certificado_pagos_profesionales',
+			'as'			=> 'certificado_pagos_profesionales',
+			'permission'	=> 'pagos_profesionales'
+		]);
 
 	get('form_pago_proveedores', 
 	[
@@ -31,7 +37,13 @@ Route::group(['as' => 'info::'], function(){
 		'permission'	=> 'pago_proveedores'
 		
 	]);
-	post('pago_proveedores', 'InfoController@pago_proveedores'); //Incluir la variable headerTitle en el controlador
+
+	post('pago_proveedores', 
+	[
+		'uses'			=> 'InfoController@pago_proveedores',
+		'as'			=> 'pago_proveedores',
+		'permission'	=> 'pago_proveedores'
+	]); //Incluir la variable headerTitle en el controlador
 
 	get('form_certificado_ica', 
 	[
@@ -40,7 +52,12 @@ Route::group(['as' => 'info::'], function(){
 		'permission'	=> 'ica'
 		
 	]);
-	post('certificado_ica', 'InfoController@certificado_ica'); //Se retiró 'info' del atributo action del formulario
+	post('certificado_ica', 
+	[
+		'uses'			=> 'InfoController@certificado_ica',
+		'as'			=> 'certificado_ica',
+		'permission'	=> 'ica'
+	]); //Se retiró 'info' del atributo action del formulario
 	
 	get('censo', 
 	[
@@ -71,7 +88,12 @@ Route::group(['as' => 'usuarios::'], function(){
 		'as'			=> 'register',
 		'permission' 	=> 'crear_usuarios'
 	]);
-	post('register', 'UserController@register');
+	post('register', 
+	[
+		'uses'			=> 'UserController@register',
+		'as'			=> 'register',
+		'permission'	=> 'crear_usuarios'
+	]);
 
 	get('usuarios/{id}/edit', 
 	[
@@ -79,7 +101,13 @@ Route::group(['as' => 'usuarios::'], function(){
 		'as'			=> 'edit',
 		'permission'	=> 'editar_usuarios'
 	]);
-	post('usuarios/{id}/update', 'UserController@update');
+
+	post('usuarios/{id}/update', 
+	[
+		'uses'			=> 'UserController@update',
+		'as'			=> 'update',
+		'permission'	=> 'editar_usuarios'
+	]);
 
 	get('usuarios/{id}/delete', 
 	[
@@ -91,21 +119,91 @@ Route::group(['as' => 'usuarios::'], function(){
 
 /*** PermissionController ***/
 
-get('permisos', 'PermissionController@index');
-get('permisos/create', 'PermissionController@create');
-post('permisos/create', 'PermissionController@store');
-get('permisos/{id}/edit', 'PermissionController@edit');
-post('permisos/{id}/update', 'PermissionController@update');
-get('permisos/{id}/delete', 'PermissionController@destroy');
+get('permisos', 
+	[
+		'uses' 			=> 'PermissionController@index',
+		'as'			=> 'permisos',
+		'permission'	=> 'ver_permisos'
+	]);
+
+get('permisos/create', 
+	[
+		'uses'			=> 'PermissionController@create',
+		'as'			=> 'create',
+		'permission'	=> 'crear_permisos'
+	]);
+
+post('permisos/create', 
+	[
+		'uses'			=> 'PermissionController@store',
+		'as'			=> 'create',
+		'permission'	=> 'crear_permisos'
+	]);
+
+get('permisos/{id}/edit', 
+	[
+		'uses' 			=> 'PermissionController@edit',
+		'as'			=> 'edit',
+		'permission'	=> 'editar_permisos'
+	]);
+
+post('permisos/{id}/update', 
+	[
+		'uses'			=> 'PermissionController@update',
+		'as'			=> 'update',
+		'permission'	=> 'editar_permisos'
+	]);
+
+get('permisos/{id}/delete', 
+	[
+		'uses'			=> 'PermissionController@destroy',
+		'as'			=> 'delete',
+		'permission'	=> 'eliminar_permisos'
+	]);
 
 /*** RoleController ***/
 
-get('roles', 'RoleController@index');
-get('roles/create', 'RoleController@create');
-post('roles/create', 'RoleController@store');
-get('roles/{id}/edit', 'RoleController@edit');
-post('roles/{id}/update', 'RoleController@update');
-get('roles/{id}/delete', 'RoleController@destroy');
+get('roles', 
+	[
+		'uses' 			=> 'RoleController@index',
+		'as'			=> 'roles',
+		'permission'	=> 'ver_roles'
+	]);
+
+get('roles/create', 
+	[
+		'uses'			=> 'RoleController@create',
+		'as'			=> 'create',
+		'permission'	=> 'crear_roles'
+	]);
+
+post('roles/create', 
+	[
+		'uses'			=> 'RoleController@store',
+		'as'			=> 'create',
+		'permission'	=> 'crear_roles'
+	]);
+
+get('roles/{id}/edit', 
+	[
+		'uses'			=> 'RoleController@edit',
+		'as'			=> 'edit',
+		'permission'	=> 'editar_roles'
+	]);
+
+post('roles/{id}/update', 
+	[
+		'uses'			=> 'RoleController@update',
+		'as'			=> 'update',
+		'permission'	=> 'editar_roles'
+	]);
+
+get('roles/{id}/delete', 
+	[
+		'uses'			=> 'RoleController@destroy',
+		'as'			=> 'delete',
+		'permission'	=> 'eliminar_roles'
+	]);
 
 /*** CensoController(podria ser parte del infoController) ***/
 

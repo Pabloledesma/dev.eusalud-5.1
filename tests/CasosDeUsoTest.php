@@ -90,15 +90,24 @@ class CasosDeUsoTest extends TestCase
 
 
 
-	/**
-	 * Inicio de la aplicación
+	/** @test
 	 *
-	 * @return void
+	 * En este momento el usuario no tiene ningun permiso asignado asi que 
+	 * vamos a probar que la aplicación no permita ver los usuarios.
+	 *
 	 */
-	public function testInicioApp()
+	public function acceso_denegado_ver_usuarios()
 	{
-		$this->visit('/')
-			->see('Iniciar Sesión');
+		// obtener credenciales
+		
+		// login
+		$this->visit('/auth/login')
+			->see('Iniciar Sesión')
+			->type($this->usuario->name, 'name')->dump();
+			// ->type($this->usuario->email, 'email')
+			// ->type($this->usuario->password, '123456')
+			// ->press('Iniciar Sesión')
+			// ->see($this->usuario->name);
 	}
 
 }

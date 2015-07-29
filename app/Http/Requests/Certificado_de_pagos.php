@@ -23,7 +23,8 @@ class Certificado_de_pagos extends Request {
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Reglas de validación para el certificado de pagos
+
      *
      * @return array
      */
@@ -32,9 +33,7 @@ class Certificado_de_pagos extends Request {
             'fecha_inicio' => 'required'
             //'fecha_final' => 'required|after:fecha_inicio'
         );
-        if( \Auth::user()->user_type == 'Super Admin' || \Auth::user()->user_type == 'Admin' ){
-            array_push($rules, ['num_id' => 'required|numeric']);
-        }
+       
         return $rules;
     }
 

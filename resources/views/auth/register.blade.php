@@ -27,26 +27,25 @@
 							</div>
 						</div>
                                                 
-                                                <div class="form-group">
+                        <div class="form-group">
 							<label class="col-md-4 control-label">Número de identificación</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="num_id" id="num_id" value="{{ old('num_id') }}" >
 							</div>
 						</div>
-                                               
-                                                <div class="form-group">
-							<label class="col-md-4 control-label">Tipo de usuario</label>
-							<div class="col-md-6">
-                                <select name="user_type" id="user_type">
-                                    <option value="User">Profesional</option>
-                                    <option value="Provider">Proveedor</option>
-                                    <option value="Admin">Administrador</option>
-                                    @if( \Auth::user()->user_type == 'Super Admin' )
-                                       <option value="Super Admin">Super Admin</option>
-                                    @endif    
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Rol</label>
+                            <div class="col-md-6">
+                                <select name="role_id" id="role_id">
+                                    @foreach( $roles as $r )
+                                        <option value="{{$r->id}}">
+                                            {{ $r->role_title }}
+                                        </option>
+                                    @endforeach
                                 </select>
-							</div>
-						</div>
+                            </div>
+                        </div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Clave</label>

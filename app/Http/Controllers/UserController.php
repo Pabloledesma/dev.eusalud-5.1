@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\EditUserRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use App\Role;
 
 class UserController extends Controller {
 
     
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('acl');
     }
     
     /**
@@ -21,8 +24,19 @@ class UserController extends Controller {
     public function index() {
 
         $usuarios = User::all();
+           
         return view('user.index', compact('usuarios'));
     }
+
+    /**
+     * Muestra formulario para registrar un usuario
+     * @return response
+     */
+    public function form_register()
+    {
+        $roles = Role::all(); 
+        return view('auth.register', compact('roles'));
+    } 
 
     /**
      * Muestra el formulario de edición para el usuario seleccionado
@@ -32,31 +46,42 @@ class UserController extends Controller {
     public function edit($id) {
 
         $user = User::findOrFail($id);
+        $roles = Role::all();
+
+        if( $user->role ){
+            $role_id = $user->role->id;
+        }
+
         $title = "Editando el usuario: ";
         $url = "usuarios/" . $id . "/update";
         $boton = "Editar";
-        return view('user.edit', compact('user', 'title', 'url', 'boton'));
+        return view('user.edit', compact('user', 'title', 'url', 'boton', 'role_id', 'roles'));
     }
 
     /**
-     * Actualiza el usuario
-     * @param Requests\EditUserRequest $req
-     * @param integer $id identificación del usuario
-     * @return Redirect
+     * Valida los datos del formulario y Actualiza el usuario
+     *
+     * @param EditUserRequest $req
+     * @param Integer $id
+     * @return Response
      */
-    public function update(Requests\EditUserRequest $req, $id) {
+    public function update(EditUserRequest $req, $id) {
         $user = User::findOrFail($id);
         $input = $req->all();
-        if (isset($input['password'])) {
-            //Encriptar password
-            $options = [
-                'cost' => 7,
-                'salt' => 'BCryptRequires22Chrcts',
-            ];
 
-            $input['password'] = password_hash($input['password'], PASSWORD_BCRYPT, $options);
-        } 
-        
+        if( isset( $input['role_id'] ) ){
+            $user->role()->associate($input['role_id']);
+        }
+
+        if (strlen($input['password']) > 0) {
+            $input['password'] = bcrypt($input['password']);
+        }
+
+        // Si no se ingresa el password se remueve del arreglo
+        if(strlen($input['password']) == 0){
+            $input = array_slice($input, 0, 6);
+        }
+
         $user->update($input);
         flash()->overlay('El usuario se actualizó correctamente', 'Buen trabajo!');
         return redirect('usuarios');
@@ -74,15 +99,8 @@ class UserController extends Controller {
         $user->name = $input['name'];
         $user->email = $input['email'];
         $user->num_id = $input['num_id'];
-        $user->user_type = $input['user_type'];
-
-        //Encriptar password
-        $options = [
-            'cost' => 7,
-            'salt' => 'BCryptRequires22Chrcts',
-        ];
-
-        $user->password = password_hash($input['password'], PASSWORD_BCRYPT, $options);
+        $user->role_id = $input['role_id'];
+        $user->password = bcrypt($input['password']);
         $user->save();
 
         flash()->overlay('El usuario '. $user->name .' fue registrado correctamente', 'Registro');

@@ -38,7 +38,6 @@ trait UserACL
 	protected function checkPermission($permArray = [])
 	{
 		$perms = $this->role->permissions->fetch('permission_slug');
-
 		$perms = array_map('strtolower', $perms->toArray());
 
 		return count( array_intersect($perms, $permArray) ); 
@@ -64,6 +63,14 @@ trait UserACL
 	public function hasRole($role = null)
 	{
 		if(is_null($role)) return false;
+		
+		if(!isset($this->role->role_slug)){
+			flash()->overlay(
+				'El usuario no tiene rol asignado, por favor pongase en contacto con el administrador',
+				'Error!'
+			);
+			return false;
+		}
 
 		return strtolower($this->role->role_slug) == strtolower($role); 
 	}

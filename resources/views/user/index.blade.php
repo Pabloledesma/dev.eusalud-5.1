@@ -3,7 +3,9 @@
 <div class="container container-fluid">
     <h1>Usuarios</h1>
     <hr/>
-        <a class="btn btn-green" href="{{ url('/auth/register') }}">Nuevo usuario</a>
+
+        <a class="btn btn-green" href="{{ url('registrar') }}">Nuevo usuario</a>
+
     <hr/>            
     <div class="row">
         <table class="table-striped green usuarios">
@@ -11,7 +13,7 @@
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Cedula</th>
-                <th>Tipo</th>
+                <th>Rol</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
@@ -21,7 +23,7 @@
             <td>{{ $u->name }}</td>
             <td>{{ $u->email }}</td>
             <td>{{ $u->num_id }}</td>
-            <td>{{ $u->user_type }}</td>
+            <td>{{ $u->role ? $u->role->role_title : '' }}</td>
             <td><a href="{{ url('usuarios/'.$u->id.'/edit' ) }}">Editar</a></td>
             <td><a href="{{ url('usuarios/'.$u->id.'/delete' ) }}" class="delete">Eliminar</a></td>
         </tr>

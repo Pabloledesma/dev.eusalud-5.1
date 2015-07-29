@@ -15,6 +15,11 @@ class CheckPermission
      */
     public function handle($request, Closure $next)
     {
+        if(!$this->userHasAccessTo($request)){
+          flash()->overlay('Comuniquese con el administrador del sistema', 'Acceso Denegado');
+          return redirect('/');
+        }
+
         return $next($request);
     }
 
@@ -26,7 +31,7 @@ class CheckPermission
      */ 
     protected function userHasAccessTo($request)
     {
-       return $this->hasPermission($request);
+      return $this->hasPermission($request);
     } 
 
     /**

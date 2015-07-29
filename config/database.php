@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => env('DEFAULT_CONNECTION'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -57,7 +57,19 @@ return [
 			'host'      => env('MYSQL_HOST', 'localhost'),
 			'database'  => env('MYSQL_DATABASE', 'eusalud2'),
 			'username'  => env('MYSQL_USERNAME', 'eusalud3'),
-			'password'  => env('MYSQL_PASSWORD', 'Qwerty.1234'),
+			'password'  => env('MYSQL_PASSWORD', ''),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'strict'    => false,
+		],
+
+		'mysql_test' => [
+			'driver'    => 'mysql',
+			'host'      => env('MYSQL_HOST', 'localhost'),
+			'database'  => env('MYSQL_TEST_DATABASE'),
+			'username'  => env('MYSQL_TEST_USERNAME'),
+			'password'  => env('MYSQL_TEST_PASSWORD'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -86,7 +98,7 @@ return [
 
         'sqlsrv_info' => [
                     'driver'   => 'sqlsrv',
-                    'host'     => env('SRV_HOST'),
+                    'host'     => env('SRV_HOST', 'localhost'),
                     'database' => 'FINANJAVA',
                     'username' => env('SRV_USERNAME', 'forge'),
                     'password' => env('SRV_PASSWORD', ''),
@@ -101,6 +113,7 @@ return [
                     'password' => env('90_PASSWORD', ''),
                     'prefix'   => '',
             ],
+
 
 	],
 

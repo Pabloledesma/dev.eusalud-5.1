@@ -1,12 +1,11 @@
-@if( \Auth::user()->user_type == 'Super Admin' || \Auth::user()->user_type == 'Admin' )
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="num_id">Número de identificación</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="num_id" id="num_id" />
                 </div>
             </div>
-            @endif
-
+           
             <div class="form-group">
                 <label class="control-label col-sm-2" for="fecha_inicio">Fecha de inicio: </label>
                 <div class="col-sm-4">
@@ -19,7 +18,7 @@
                     <input type="text" class="form-control" name="fecha_final" id="fecha_final" value="{{ date('Y-m-d') }}" />
                 </div>
             </div>
-            @if($outPut == true)
+            @if($formato_de_salida == true)
             <div class="form-group">
                 
                 
@@ -29,25 +28,18 @@
                     <label class="radio-inline"><input type="radio" name="formato" value="pdf" checked>Pdf</label>
                 </div>
                 
-                
             </div>
             @endif
+
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <input class="btn btn-green" type="submit" name="submit" id="submit" value="{{ $outPut == true ? 'Descargar' : 'Generar' }}" />
+                    <input class="btn btn-green" type="submit" name="submit" id="submit" value="{{ $formato_de_salida == true ? 'Descargar' : 'Generar' }}" />
                 </div>
             </div>
         </form>
-        @if( count($errors) > 0 )
 
-
-        @foreach($errors->all() as $e)
-        <p class="bg-danger">{{ $e }}</li>
-            @endforeach
-
-
-            @endif
+        @include('partials.errors')
 
 
     </div>

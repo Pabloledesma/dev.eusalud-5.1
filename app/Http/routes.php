@@ -8,62 +8,209 @@
 *|
 */
 
-/*** 	PagesController ***/
+get('/', 'WelcomeController@index');
 
-Route::get('/', 'PagesController@index');
-Route::get('quienes-somos', 'PagesController@about_us');
-Route::get('vacantes', 'PagesController@vacantes');
-Route::get('nuestras-clinicas/traumatologia', 'PagesController@sede_traumatologia');
-Route::get('nuestras-clinicas/materno_infantil', 'PagesController@sede_materno_infantil');
-Route::get('nuestras-clinicas/pacientes_cronicos', 'PagesController@sede_pacientes_cronicos');
-Route::get('contacto', 'PagesController@contacto');
-Route::post('contacto', 'PagesController@sendMsg');
-Route::get('galeria', 'PagesController@galeria');
+/**
+ * Rutas protegidas por Auth y Role
+ * InfoController
+ */	
+Route::group(['as' => 'info::'], function(){
+	get('form_certificado_pagos_profesionales', 
+	[
+		'uses' 			=> 'InfoController@form_certificado_pagos_profesionales',
+		'as' 			=> 'form_certificado_pagos_profesionales',
+		'permission'	=> 'pagos_profesionales'
+		
+	]);
 
-/*** InfoController ***/
+	post('certificado_pagos_profesionales', 
+		[
+			'uses'			=> 'InfoController@certificado_pagos_profesionales',
+			'as'			=> 'certificado_pagos_profesionales',
+			'permission'	=> 'pagos_profesionales'
+		]);
 
-Route::get('info', 'InfoController@index');
-Route::get('info/form_certificado_pagos_profesionales', 'InfoController@form_certificado_pagos_profesionales');
-Route::post('info/certificado_pagos_profesionales', 'InfoController@certificado_pagos_profesionales');
-Route::get('info/pdf', 'InfoController@generatePdf'); //Esta ruta no existe !!!!
-Route::get('info/form_pago_proveedores', 'InfoController@form_pago_proveedores');
-Route::post('info/pago_proveedores', 'InfoController@pago_proveedores');
-Route::get('info/form_certificado_ica', 'InfoController@form_certificado_ica');
-Route::post('info/certificado_ica', 'InfoController@certificado_ica');
-Route::get('info/censo', 'InfoController@censo');
+	get('form_pago_proveedores', 
+	[
+		'uses' 			=> 'InfoController@form_pago_proveedores',
+		'as'			=> 'form_pago_proveedores',
+		'permission'	=> 'pago_proveedores'
+		
+	]);
+
+	post('pago_proveedores', 
+	[
+		'uses'			=> 'InfoController@pago_proveedores',
+		'as'			=> 'pago_proveedores',
+		'permission'	=> 'pago_proveedores'
+	]); //Incluir la variable headerTitle en el controlador
+
+	get('form_certificado_ica', 
+	[
+		'uses'			=> 'InfoController@form_certificado_ica',
+		'as'			=> 'form_certificado_ica',
+		'permission'	=> 'ica'
+		
+	]);
+	post('certificado_ica', 
+	[
+		'uses'			=> 'InfoController@certificado_ica',
+		'as'			=> 'certificado_ica',
+		'permission'	=> 'ica'
+	]); //Se retiró 'info' del atributo action del formulario
+	
+	get('censo', 
+	[
+		'uses'			=> 'InfoController@censo',
+		'as'			=> 'censo',
+		'permission'	=> 'censo'
+		
+	]);
 
 
-Route::get('auth/register', ['middleware' => 'manager', function(){
-    return view('auth.register');
-}]);
-Route::post('register', 'UserController@register');
+});
 
 /*** UserController ***/
 
-//Restringir el uso de este recurso!!
+Route::group(['as' => 'usuarios::'], function(){
+	
+	get('usuarios', 
+		[
+			'uses'			=> 'UserController@index',
+			'as'			=> 'usuarios',
+			'permission'	=> 'ver_usuarios'
+		]);
 
-//Route::get('usuarios', ['middleware' => 'manager', function(){
-//    return view('user.index');
-//}]);
-Route::get('usuarios', 'UserController@index'); // Temporalmente
+	get('registrar', 
+	[
+		'uses'			=> 'UserController@form_register',
+		'as'			=> 'register',
+		'permission' 	=> 'crear_usuarios'
+	]);
+	post('register', 
+	[
+		'uses'			=> 'UserController@register',
+		'as'			=> 'register',
+		'permission'	=> 'crear_usuarios'
+	]);
 
-Route::post('usuarios/{id}/update', 'UserController@update');
-Route::get('usuarios/{id}/edit', 'UserController@edit');
-Route::get('usuarios/{id}/delete', 'UserController@delete');
+	get('usuarios/{id}/edit', 
+	[
+		'uses'			=> 'UserController@edit',
+		'as'			=> 'edit',
+		'permission'	=> 'editar_usuarios'
+	]);
 
+	post('usuarios/{id}/update', 
+	[
+		'uses'			=> 'UserController@update',
+		'as'			=> 'update',
+		'permission'	=> 'editar_usuarios'
+	]);
 
-/** RoleController **/
+	get('usuarios/{id}/delete', 
+	[
+		'uses'			=> 'UserController@delete',
+		'as'			=> 'delete',
+		'permission'	=> 'eliminar_usuarios'
+	]);
+});
 
-Route::resource('roles', 'RoleController');
+/*** PermissionController ***/
 
-//Route::resource('usuarios', 'UserController');
+get('permisos', 
+	[
+		'uses' 			=> 'PermissionController@index',
+		'as'			=> 'permisos',
+		'permission'	=> 'ver_permisos'
+	]);
+
+get('permisos/create', 
+	[
+		'uses'			=> 'PermissionController@create',
+		'as'			=> 'create',
+		'permission'	=> 'crear_permisos'
+	]);
+
+post('permisos/create', 
+	[
+		'uses'			=> 'PermissionController@store',
+		'as'			=> 'create',
+		'permission'	=> 'crear_permisos'
+	]);
+
+get('permisos/{id}/edit', 
+	[
+		'uses' 			=> 'PermissionController@edit',
+		'as'			=> 'edit',
+		'permission'	=> 'editar_permisos'
+	]);
+
+post('permisos/{id}/update', 
+	[
+		'uses'			=> 'PermissionController@update',
+		'as'			=> 'update',
+		'permission'	=> 'editar_permisos'
+	]);
+
+get('permisos/{id}/delete', 
+	[
+		'uses'			=> 'PermissionController@destroy',
+		'as'			=> 'delete',
+		'permission'	=> 'eliminar_permisos'
+	]);
+
+/*** RoleController ***/
+
+get('roles', 
+	[
+		'uses' 			=> 'RoleController@index',
+		'as'			=> 'roles',
+		'permission'	=> 'ver_roles'
+	]);
+
+get('roles/create', 
+	[
+		'uses'			=> 'RoleController@create',
+		'as'			=> 'create',
+		'permission'	=> 'crear_roles'
+	]);
+
+post('roles/create', 
+	[
+		'uses'			=> 'RoleController@store',
+		'as'			=> 'create',
+		'permission'	=> 'crear_roles'
+	]);
+
+get('roles/{id}/edit', 
+	[
+		'uses'			=> 'RoleController@edit',
+		'as'			=> 'edit',
+		'permission'	=> 'editar_roles'
+	]);
+
+post('roles/{id}/update', 
+	[
+		'uses'			=> 'RoleController@update',
+		'as'			=> 'update',
+		'permission'	=> 'editar_roles'
+	]);
+
+get('roles/{id}/delete', 
+	[
+		'uses'			=> 'RoleController@destroy',
+		'as'			=> 'delete',
+		'permission'	=> 'eliminar_roles'
+	]);
+
+/*** CensoController(podria ser parte del infoController) ***/
 
 Route::get('censo/{p}', 'CensoController@censo');
-
-Route::get('contactos', 'ContactController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
 

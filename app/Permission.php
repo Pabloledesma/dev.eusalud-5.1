@@ -7,6 +7,13 @@ use App\Role;
 
 class Permission extends Model
 {
+    
+	protected $fillable = [
+		'permission_title',
+		'permission_slug',
+		'permission_description'
+	];
+
     /**
      * Permission can have multiple roles
      *

@@ -35,6 +35,7 @@ class InfoController extends Controller {
 
     public function __construct(PDF $pdf, Excel $excel) {
         $this->middleware('auth');
+        $this->middleware('acl');
         $this->pdf = $pdf;
         $this->excel = $excel;
     }

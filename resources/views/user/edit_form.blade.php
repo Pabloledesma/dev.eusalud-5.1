@@ -38,16 +38,22 @@
                             {!! Form::text('num_id', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Tipo de usuario</label>
+
+                     <div class="form-group">
+                        <label class="col-md-4 control-label">Rol</label>
                         <div class="col-md-6">
-                            <select name="user_type" id="user_type">
-                                <option value="User" {{ $user->user_type == 'User' ? 'selected' : '' }}>Profesional</option>
-                                <option value="Provider" {{ $user->user_type == 'Provider' ? 'selected' : '' }}>Proveedor</option>
-                                <option value="Admin" {{ $user->user_type == 'Admin' ? 'selected' : '' }}>Administrador</option>
-                                @if( \Auth::user()->user_type == 'Super Admin' )
-                                <option value="Super Admin" {{ $user->user_type == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
-                                @endif
+                            <select name="role_id" id="role_id" class="form-control">
+                                @foreach( $roles as $r )
+                                    @if(isset($role_id))
+                                        <option value="{{$r->id}}" {{ $r->id == $role_id ? 'selected' : '' }}>
+                                            {{ $r->role_title }}
+                                        </option>
+                                    @else
+                                        <option value="{{$r->id}}">
+                                            {{ $r->role_title }}
+                                        </option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -76,7 +82,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary" id="submit">{{ $boton }}</button>
+                            <button type="submit" class="btn btn-green" id="submit">{{ $boton }}</button>
                             <a href="{{ url('usuarios') }}" class="btn btn-green">Volver</a>
                         </div>
                     </div>

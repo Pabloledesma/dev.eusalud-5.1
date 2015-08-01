@@ -98,19 +98,19 @@ return [
 
         'sqlsrv_info' => [
                     'driver'   => 'sqlsrv',
-                    'host'     => env('SRV_HOST', 'localhost'),
+                    'host'     => env('SRV_PROD_HOST', 'localhost'),
                     'database' => 'FINANJAVA',
-                    'username' => env('SRV_USERNAME', 'forge'),
-                    'password' => env('SRV_PASSWORD', ''),
+                    'username' => env('SRV_PROD_USERNAME', 'forge'),
+                    'password' => env('SRV_PROD_PASSWORD', ''),
                     'prefix'   => '',
             ],
 
         'sqlsrv_info_90' => [
                     'driver'   => 'sqlsrv',
-                    'host'     => env('90_HOST'),
+                    'host'     => env('SRV_SB_HOST'),
                     'database' => 'FINANJAVA',
-                    'username' => env('90_USERNAME', 'forge'),
-                    'password' => env('90_PASSWORD', ''),
+                    'username' => env('SRV_SB_USERNAME'),
+                    'password' => env('SRV_SB_PASSWORD'),
                     'prefix'   => '',
             ],
 

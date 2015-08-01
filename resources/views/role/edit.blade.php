@@ -26,10 +26,10 @@
 
 								<div class="checkbox">
 					    			<label>
-					    				{{ $perm->permission_slug }}
-					    				<input type="checkbox" value="{{ $perm->id }}" 
-					    						name="{{ $perm->permission_slug }}" 
-					    						{{ array_search( $perm->permission_slug, $perm_role ) ? 'checked' : '' }}>
+					    				{{ $perm['permission_title'] }}
+					    				<input type="checkbox" value="{{ $perm['id'] }}" 
+					    						name="{{ $perm['permission_slug'] }}" 
+					    						{{ array_search( $perm['permission_slug'], $role_perms ) ? 'checked' : '' }}>
 					    			</label>
 					    		</div>
 

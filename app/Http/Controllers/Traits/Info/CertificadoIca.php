@@ -16,9 +16,12 @@ trait CertificadoIca
     * @param  Array     $formato Indica si esta disponible esta funcionalidad
     * @return View
     ***/ 
-    public function form_certificado_ica($outPut = false, $formato = array( 'pdf' => true, 'excel' => false ))
+    public function form_certificado_ica($outPut = false, $formato = array( 'pdf' => false, 'excel' => false ))
     {
-        return view('info.certificado_ica', compact('formato', 'outPut'));
+        if( $formato['pdf'] || $formato['excel'] )
+            return view('info.certificado_ica', compact('formato', 'outPut'));
+        return view('info.certificado_ica', compact('outPut'));
+
     }
 
   /**
@@ -39,14 +42,12 @@ trait CertificadoIca
         $headerTitle = "CERTIFICADO DE RETENCION INDUSTRIA Y COMERCIO (ICA)";
         $fileTitle = "certificado_de_retencion_industria_y_comercio_ica";
                 
-        $query2 = "EXECUTE certificado_ICA @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
+        $query = "EXECUTE certificado_ICA @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_profesional = '" . $num_id . "'";
 
-        $query = "EXECUTE certificado_ICA_suma @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
-
-
-        $info = DB::connection('sqlsrv_info_90')->select($query2);
-        $valor_base = DB::connection('sqlsrv_info_90')->select($query);
+        $info = DB::connection('sqlsrv_info_90')->select($query);
         
+        dd($info);
+
         //return $valor_base;
         if (isset($info, $valor_base) && count($info) > 0 && count($valor_base) > 0) {
             $valor_en_letras = $this->numerotexto( $valor_base[0]->VALOR );

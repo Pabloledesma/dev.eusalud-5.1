@@ -60,7 +60,7 @@ class RoleController extends Controller
             'role_slug'     => 'required'
         ]);
 
-        $permissions_id = $this->get_perm_slug_id();
+        $permissions_id = $this->get_all_perms_slug_id();
         
         $role = Role::create([
             'role_title'    => $request->input('role_title'),
@@ -90,11 +90,11 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
-        $all_perms = $this->permissions;
+        $all_permissions = $this->permissions;
         $role_perms = $this->get_role_perms_slug_id( $role );
         $all_slug_id = $this->get_all_perms_slug_id();
         
-        return view('roles.edit', compact('role', 'role_perms', 'all_perms', 'all_slug_id'));
+        return view('roles.edit', compact('role', 'role_perms', 'all_permissions', 'all_slug_id'));
     }
 
     /**

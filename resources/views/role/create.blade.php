@@ -9,7 +9,7 @@
 				<div class="panel-heading"><h1>Nuevo Rol</h1></div>
 					<div class="panel-body">
 
-						{!! Form::open(['method' => 'post', 'action' => 'RoleController@store', 'data-remote']) !!}
+						{!! Form::open(['method' => 'post', 'action' => 'RoleController@store']) !!}
 						
 							<div class="form-group">
 								{!! Form::label('title', 'Titulo') !!}
@@ -27,9 +27,9 @@
 						    
 					    		<div class="checkbox">
 					    			<label>
-					    				{{ $perm->permission_slug }}
-					    				<input type="checkbox" value="{{ $perm->id }}" 
-					    						name="{{ $perm->permission_slug }}">
+					    				{{ $perm['permission_title'] }}
+					    				<input type="checkbox" value="{{ $perm['id'] }}" 
+					    						name="{{ $perm['permission_slug'] }}">
 					    			</label>
 					    		</div>
 						    	

@@ -8,7 +8,7 @@
 *|
 */
 
-get('/', 'WelcomeController@index');
+get('/', 'PagesController@index');
 
 /**
  * Rutas protegidas por Auth y Role

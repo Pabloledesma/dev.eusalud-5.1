@@ -18,14 +18,18 @@
                     <input type="text" class="form-control" name="fecha_final" id="fecha_final" value="{{ date('Y-m-d') }}" />
                 </div>
             </div>
-            @if($formato_de_salida == true)
+            @if(isset($formato))
             <div class="form-group">
                 
                 
                 <label class="control-label col-sm-2" for="fecha_final">Formato de salida: </label>
                 <div class="col-sm-4">
-                    <label class="radio-inline"><input type="radio" name="formato" value="excel" {{$formato['excel'] ? '' : 'disabled' }}>Excel</label>
-                    <label class="radio-inline"><input type="radio" name="formato" value="pdf" checked>Pdf</label>
+                    @if($formato['excel'])
+                        <label class="radio-inline"><input type="radio" name="formato" value="excel" {{$formato['excel'] ? '' : 'disabled' }}>Excel</label>
+                    @endif
+                    @if($formato['pdf'])
+                        <label class="radio-inline"><input type="radio" name="formato" value="pdf" checked>Pdf</label>
+                    @endif
                 </div>
                 
             </div>
@@ -34,7 +38,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <input class="btn btn-green" type="submit" name="submit" id="submit" value="{{ $formato_de_salida == true ? 'Descargar' : 'Generar' }}" />
+                    <input class="btn btn-green" type="submit" name="submit" id="submit" value="Consultar" />
                 </div>
             </div>
         </form>

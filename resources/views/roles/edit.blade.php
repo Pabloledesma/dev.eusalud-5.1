@@ -33,7 +33,7 @@
 							<div class="form-group">
 								{!! Form::label(null, 'Permisos', ['class' => 'col-md-4 control-label']) !!}
 								<div class="col-md-6">
-									@foreach($all_perms as $perm)
+									@foreach($all_permissions as $perm)
 
 									<input type="checkbox" 
 										name="{{$perm['permission_slug']}}" 

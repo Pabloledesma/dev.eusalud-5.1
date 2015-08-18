@@ -44,47 +44,44 @@ trait CertificadoIca
                 
         $query = "EXECUTE certificado_ICA @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_profesional = '" . $num_id . "'";
 
-        $info = DB::connection('sqlsrv_info_90')->select($query);
+        try 
+        {
+            $info = DB::connection('sqlsrv_info_90')->select($query);
+        }
+
+        catch(Exception $e)
+        {
+            flash()->overlay("Por favor disculpenos, intentelo mas tarde.", "Aplicación de Eusalud");
+            return redirect('info/form_certificado_ica');
+        }
         
-        dd($info);
 
-        //return $valor_base;
-        if (isset($info, $valor_base) && count($info) > 0 && count($valor_base) > 0) {
-            $valor_en_letras = $this->numerotexto( $valor_base[0]->VALOR );
+        //dd($info);
+        if (isset($info) && count($info) > 0) {
+            
+            $valor_en_letras = $this->numerotexto($info[0]->VALOR);
+            $valor_retenido = $info[0]->VALOR;
+            $valor_base = $info[0]->BASE;
 
-//            PDF
-//            $html = view('info.informe_ica_pdf', compact('info', 'input', 'headerTitle', 'valor_base', 'valor_en_letras'))->render();
-//            return $this->pdf->load($html)
-//                            ->filename($fileTitle . date('Y-m-d H:i:s') . '.pdf')
-//                            
-//                            ->download();
+            //dd("valor base: " . $valor_base . " Valor retenido: " . $valor_retenido);
+        
+            return view(
+                'info.informe_ica_pdf', 
+                compact(
+                    'info', 
+                    'input', 
+                    'headerTitle', 
+                    'valor_en_letras',
+                    'valor_retenido',
+                    'valor_base'
+            ));
             
-            //HTML
-            return view('info.informe_ica_pdf', compact('info', 'input', 'headerTitle', 'valor_base', 'valor_en_letras'));
-            
-            
-            //EXCEL
-//            $this->excel->create('informe_ica', function($excel) use($info, $input, $headerTitle, $valor_base, $valor_en_letras) {
-//                $excel->sheet('Sheetname', function($sheet) use($info, $input, $headerTitle, $valor_base, $valor_en_letras) {
-//                    $sheet->mergeCells('A1:K1');
-//                    $sheet->mergeCells('A2:K2');
-//                    $sheet->mergeCells('A3:K3');
-//                    $data = [];
-//
-//                    /*** Cabecera ***/
-//
-//                    array_push($data, array('Clínica EuSalud'));
-//                    array_push($data, array('Certificado de pagos a profesionales de la salud'));
-//                    array_push($data, array('Tercero', 'Nombre del Tercero'));
-//                    array_push($data, array( $info[0]->TrcCod, $info[0]->TrcRazSoc));
-//                });
-//            })->download('xlsx');
         }
  
         return view('info.sin_resultados', compact('headerTitle'));
     }
 
-        /**
+    /**
     * Convierte un valor numérico a letras
     * @param $numero decimal que se quiere convertir
     * @return String

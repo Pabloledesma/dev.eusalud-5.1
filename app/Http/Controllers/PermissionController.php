@@ -15,6 +15,7 @@ class PermissionController extends Controller
     {
     	$this->middleware('auth');
         $this->middleware('acl');
+        $this->middleware('menu');
     }
 
     /**

@@ -22,6 +22,7 @@ class RoleController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('acl');
+        $this->middleware('menu');
         $this->permissions = Permission::all()->toArray();
     }
 

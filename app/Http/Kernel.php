@@ -29,7 +29,7 @@ class Kernel extends HttpKernel {
 		'guest'         => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'acl'			=> \App\Http\Middleware\CheckPermission::class,
         'role'			=> \App\Http\Middleware\RoleMiddleware::class,
-        'menu'			=> \App\Http\Middleware\TestMenuMiddleware::class,
+        'menu'			=> \App\Http\Middleware\MenuMiddleware::class,
 	];
 
 }

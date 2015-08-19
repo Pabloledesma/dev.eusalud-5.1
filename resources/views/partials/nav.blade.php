@@ -14,38 +14,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.eusalud.com">Inicio</a></li>
-                        
-                        @if( Auth::guest() )
-                        <li><a href="{{ url('/auth/login') }}">Iniciar Sesión</a></li>
-
-                        @else
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                              
-                                <!-- Los recursos quedan disponibles para todos los usuarios y su uso se administrará con los middlewares -->
-                                <li><a href="{{ url('form_certificado_pagos_profesionales') }}">Certificado de pagos a profesionales de la salud</a></li>
-                                <li><a href="{{ url('form_certificado_ica') }}">Certificado de retención industria y comercio (ICA)</a></li>
-                                <li><a href="{{ url('form_pago_proveedores') }}">Informe de pago a proveedores</a></li>
-                                <li><a href="{{ url('censo') }}">Censo</a></li>
-                            </ul>
-                        </li>
-
-                        <li class='user-menu'>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ \Auth::user()->name }}</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('usuarios') }}">Usuarios</a>             
-                                    <a href="{{ url('roles') }}">Roles</a>             
-                                    <a href="{{ url('permisos') }}">Permisos</a>             
-                                </li>
-                                <li><a href="{{ url('/auth/logout') }}">Cerrar Sesión</a></li>
-                            </ul>
-                        </li>    
-
-                        @endif
-
+                       @include('partials.items', ['items'=> $menu_start->roots()])
                     </ul>
                 </div>
             </nav>

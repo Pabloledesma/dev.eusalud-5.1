@@ -6,7 +6,7 @@ use Closure;
 use Menu;
 use Illuminate\Contracts\Auth\Guard;
 
-class TestMenuMiddleware
+class MenuMiddleware
 {
     
     /**
@@ -39,9 +39,13 @@ class TestMenuMiddleware
             $menu->add('Inicio', 'http://www.eusalud.com');
             if ($this->auth->check()) {
                 $user = $menu->add($this->auth->user()->name);
-                    $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
+                $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout'])
+                ->prepend('<span class="glyphicon glyphicon-user"></span>')
+                ->append('<b class="caret"></b>');
             } else {
-                $menu->add('Iniciar Sesión', ['action' => 'Auth\AuthController@getLogin']);
+                $menu->add('Iniciar Sesión', ['action' => 'Auth\AuthController@getLogin'])
+                ->prepend('<span class="glyphicon glyphicon-user"></span>')
+                ->append('<b class="caret"></b>');
             }
         });
 

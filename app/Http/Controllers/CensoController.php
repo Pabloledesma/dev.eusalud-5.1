@@ -10,6 +10,11 @@ use Carbon\Carbon;
  */
 class CensoController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('menu');	
+	}
+
 	/**
 	 * Muestra el censo segun pabellón
 	 *

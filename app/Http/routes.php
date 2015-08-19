@@ -16,6 +16,9 @@ get('/inicio', 'PagesController@index');
  * InfoController
  */	
 Route::group(['as' => 'info::'], function(){
+
+	get('info', 'InfoController@index');
+
 	get('form_certificado_pagos_profesionales', 
 	[
 		'uses' 			=> 'InfoController@form_certificado_pagos_profesionales',

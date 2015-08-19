@@ -3,11 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Menu;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\RedirectResponse;
 
-class RedirectIfAuthenticated {
-
+class TestMenuMiddleware
+{
+    
     /**
      * The Guard implementation.
      *
@@ -32,12 +33,18 @@ class RedirectIfAuthenticated {
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-        if ($this->auth->check()) {
-            return new RedirectResponse(url('/'));
-        }
+    public function handle($request, Closure $next)
+    {
+        Menu::make('start', function($menu) {
+            $menu->add('Inicio', 'http://www.eusalud.com');
+            if ($this->auth->check()) {
+                $user = $menu->add($this->auth->user()->name);
+                    $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
+            } else {
+                $menu->add('Iniciar Sesión', ['action' => 'Auth\AuthController@getLogin']);
+            }
+        });
 
         return $next($request);
     }
-
 }

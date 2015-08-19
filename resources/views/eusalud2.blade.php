@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-         @include('partials.nav')  
+         {!! $menu_start->asUl() !!}
     </div>
 
 

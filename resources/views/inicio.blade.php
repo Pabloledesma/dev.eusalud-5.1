@@ -33,7 +33,7 @@
     <div class="navbar-wrapper">
       <div class="container">
 
-        @include('welcome.nav')
+        {!! $menu_example->asUl() !!}
 
       </div>
     </div>

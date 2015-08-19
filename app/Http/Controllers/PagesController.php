@@ -12,14 +12,20 @@ use function view;
 
 class PagesController extends Controller 
 {
+    public function __construct()
+    {
+        $this->middleware('menu');
+    }
+
     /**
      * Show the application welcome screen to the user.
      *  
      * @return Response
      */
     public function index() {
+        $user = auth()->user();
         $imagenes = scandir( public_path() . '\img\clientes' ); 
-        return view('welcome.inicio', compact('imagenes'));
+        return view('welcome.inicio', compact('imagenes', 'user'));
     }
 
     public function about_us() {

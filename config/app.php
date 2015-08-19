@@ -149,6 +149,8 @@ return [
         Vsmoraes\Pdf\PdfServiceProvider::class,
         LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
+        Caffeinated\Menus\MenusServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
 	],
 
@@ -198,10 +200,11 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View'      => Illuminate\Support\Facades\View::class,
         'PDF'       => Vsmoraes\Pdf\PdfFacade::class,
-        'Form'      => Illuminate\Html\FormFacade::class,
-        'Html'      => Illuminate\Html\HtmlFacade::class,
+        'Form' 		=> Collective\Html\FormFacade::class,
+      	'Html' 		=> Collective\Html\HtmlFacade::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-        'Flash'     => Laracast\Flash\Flash::class,            
+        'Flash'     => Laracast\Flash\Flash::class,  
+        'Menu' 		=> Caffeinated\Menus\Facades\Menu::class,          
           
 	],
 

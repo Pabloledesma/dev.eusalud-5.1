@@ -7,11 +7,14 @@ use App\Role;
 use App\Permission;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Role\PermissionFunctions;
 
 
 class RoleController extends Controller
 {
     
+    use PermissionFunctions;
+
     /**
      * Todos los permisos creados
      * @var Array $permissions
@@ -98,39 +101,7 @@ class RoleController extends Controller
         return view('roles.edit', compact('role', 'role_perms', 'all_permissions', 'all_slug_id'));
     }
 
-    /**
-     * Obtiene un arreglo asociativo con el slug y el id de todos los permisos existentes
-     *
-     * @return Array $slug_id
-     */
-    public function get_all_perms_slug_id()
-    {
-        $slug_id = [];
-        foreach($this->permissions as $perm){
-            $slug_id += [$perm['permission_slug'] => $perm['id']];
-        }
-        return $slug_id;
-    }
-
-    /**
-     * Obtiene un arreglo asociativo con el slug y el id de los permisos del rol suministrado
-     *
-     * @param Role $role
-     * @return Array $slug_id
-     */
-    public function get_role_perms_slug_id(Role $role)
-    {
-        $role_perms = $role->permissions()->get()->toArray();
-        $slug_id = [];
-
-        foreach($role_perms as $perm){
-            $slug_id += [$perm['permission_slug'] => $perm['id']];
-        }
-
-        return $slug_id;
-    } 
-
-
+    
     /**
      * Actualiza el rol seleccionado
      *
@@ -179,25 +150,7 @@ class RoleController extends Controller
 
     }
 
-    /**
-     * Obtiene un arreglo con los id de los permisos del rol suministrado
-     * Si no tiene permisos asociados retorna un arreglo vacio
-     *
-     * @param Role
-     * @return Array 
-     */
-    public function get_role_perms_id(Role $role)
-    {
-        $role_perms = $role->permissions()->get()->toArray();
-        $role_perms_id = [];
-
-        foreach($role_perms as $perm){
-            array_push($role_perms_id, $perm['id']);
-        }
-
-        return $role_perms_id;
-    } 
-
+   
     /**
      * Busca los permisos seleccionados en el formulario y retorna un arreglo con sus identificadores
      * Si no se seleccionó ningun permiso retorna un arreglo vacio

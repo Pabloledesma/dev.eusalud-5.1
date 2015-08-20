@@ -1,6 +1,5 @@
 @extends('eusalud2')
 @section('content')
-
 	
     @include('partials.carrousel')
    

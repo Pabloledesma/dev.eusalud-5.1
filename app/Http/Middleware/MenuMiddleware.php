@@ -56,7 +56,7 @@ class MenuMiddleware
         $title_slug_url = $this->get_role_perms_title_slug_url( $role );
         // Se requiere consultar los permisos del rol que tienen el la palabra 
         //info en el slug para generar el menu de reportes
-        dd($title_slug_url);
+        //dd($title_slug_url);
 
         Menu::make('start', function($menu) {
             $menu->add('Inicio', 'http://www.eusalud.com');

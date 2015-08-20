@@ -43,7 +43,16 @@ trait PagoProfesionales
 
         $query = "EXECUTE pago_profesionales @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_profesional = '" . $num_id . "'";
 
-        $info = DB::connection('sqlsrv_info_90')->select($query);
+        try {
+            $info = DB::connection('sqlsrv_info_90')->select($query);
+        }
+        catch( \Exception $e ){
+            flash()->overlay(
+                'Ups! Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
+                'Aplicación de EuSalud' 
+            );
+            return redirect('/');
+        }
 
         //Seleccion de formato
         if( $input['formato'] == 'pdf' ){

@@ -89,10 +89,10 @@ return [
 
 		'sqlsrv_censo' => [
 			'driver'   => 'sqlsrv',
-			'host'     => env('SRV_HOST', 'localhost'),
+			'host'     => env('SRV_PROD_HOST', 'localhost'),
 			'database' => 'CLINIJAVA',
-			'username' => env('SRV_USERNAME', 'forge'),
-			'password' => env('SRV_PASSWORD', ''),
+			'username' => env('SRV_PROD_USERNAME', 'forge'),
+			'password' => env('SRV_PROD_PASSWORD', ''),
 			'prefix'   => '',
 		],
 

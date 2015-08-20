@@ -43,7 +43,16 @@ trait PagoProveedores
         
         $query = "EXECUTE pago_proveedores @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_proveedor = '" . $num_id . "'";
        
-        $info = DB::connection('sqlsrv_info_90')->select($query);
+        try {
+            $info = DB::connection('sqlsrv_info_90')->select($query);
+        }
+        catch( \Exception $e ){
+            flash()->overlay(
+                'Ups! Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
+                'Aplicación de EuSalud' 
+            );
+            return redirect('/');
+        }
 
         if( isset($info) ){
             // si hay menos de 100 resultados le genera un pdf

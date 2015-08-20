@@ -49,7 +49,7 @@ trait CertificadoIca
             $info = DB::connection('sqlsrv_info_90')->select($query);
         }
 
-        catch(Exception $e)
+        catch( \Exception $e )
         {
             flash()->overlay("Por favor disculpenos, intentelo mas tarde.", "Aplicación de Eusalud");
             return redirect('info/form_certificado_ica');

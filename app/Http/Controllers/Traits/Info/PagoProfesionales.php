@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Traits\Info;
 
 use App\Http\Requests;
-use Vsmoraes\Pdf\PDF;
 use DB;
 
 trait PagoProfesionales 
@@ -59,9 +58,10 @@ trait PagoProfesionales
 
             if (isset($info) && count($info) > 0) {
             $html = view('info.informe', compact('info', 'input', 'headerTitle'))->render();
-            return $this->pdf->load($html, array(0, 0, 1300, 800))
-                            ->filename($fileTitle . date('Y-m-d H:i:s') . '.pdf')
-                            ->download();
+            $filename = $fileTitle . date('Ymd_H:i:s') . '.pdf';
+            $pdf = \PDF::loadHtml( $html )->setPaper('a4')->setOrientation('landscape');
+            return $pdf->download( $filename );
+                            
             }
         } else {
 

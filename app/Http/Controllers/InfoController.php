@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use DB;
 use Maatwebsite\Excel\Excel;
-use Vsmoraes\Pdf\PDF;
 use App\Http\Controllers\Traits\Info\CertificadoIca;
 use App\Http\Controllers\Traits\Info\PagoProveedores;
 use App\Http\Controllers\Traits\Info\PagoProfesionales;
@@ -19,12 +18,7 @@ use App\Http\Controllers\Traits\Info\PagoProfesionales;
  */
 class InfoController extends Controller {
 
-    /**
-     * Convierte las vistas a pdf
-     *
-     * @param    Vsmoraes\Pdf\Pdf $pdf
-     */  
-    private $pdf;
+   
 
     /**
      * Convierte las vistas a documentos de excel
@@ -33,11 +27,11 @@ class InfoController extends Controller {
      */
     private $excel; 
 
-    public function __construct(PDF $pdf, Excel $excel) {
+    public function __construct( Excel $excel) {
         $this->middleware('auth');
         $this->middleware('acl');
         $this->middleware('menu');
-        $this->pdf = $pdf;
+
         $this->excel = $excel;
     }
 
@@ -50,7 +44,7 @@ class InfoController extends Controller {
         return view('info.index');
     }
 
-    /*** TRAITS ***/
+    /*** TRAITS ***/ 
 
     use Traits\Info\CertificadoIca, 
         Traits\Info\PagoProveedores,

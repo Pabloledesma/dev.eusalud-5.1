@@ -122,21 +122,23 @@ class RoleController extends Controller
        
         // Identificar los permisos seleccionados
         $permisos_seleccionados = $this->get_selected_perms($request);
-
+        
         // Verificar si esta enlazado el permiso
         $permisos_anteriores = $this->get_role_perms_id($role);
-
-        //Si se modificaron los permisos
-        if( count($permisos_seleccionados) != count($permisos_anteriores) ){
-            
-            // Si se agregaron permisos
-            if( count($permisos_seleccionados) > count($permisos_anteriores) ){
-                $role->permissions()->attach( array_diff($permisos_seleccionados, $permisos_anteriores) );
+        
+        //Elimina los permisos solicitados
+        foreach($permisos_anteriores as $val){
+            if( in_array($val, $permisos_seleccionados, true) === false ){
+                $role->permissions()->detach($val);
             }
+        }
 
-            // Si se quitaron permisos
-            if( count($permisos_seleccionados) < count($permisos_anteriores) ){
-                $role->permissions()->detach(array_diff($permisos_anteriores, $permisos_seleccionados));
+        // Agrega los permisos solicitados
+        foreach($permisos_seleccionados as $val){
+            // Verifica si el permiso seleccionado se ecnuentra en los permisos anteriores
+            if(in_array($val, $permisos_anteriores, true) === false){
+                // Si no está, lo agrega 
+                $role->permissions()->attach($val);
             }
 
         }

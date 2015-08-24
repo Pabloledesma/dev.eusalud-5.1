@@ -30,6 +30,14 @@
 						</div>
 
 						<div class="form-group">
+							{!! Form::label('permission_url', 'Url', ['class' => 'col-md-4 control-label']) !!}
+							<div class="col-md-6">
+								{!! Form::text('permission_url', null, ['class' => 'form-control']) !!}
+							</div>
+						</div>
+
+
+						<div class="form-group">
 							{!! Form::label('permission_description', 'Descripción', ['class' => 'col-md-4 control-label']) !!}
 							<div class="col-md-6">
 								{!! Form::textarea('permission_description', null, ['class' => 'form-control']) !!}

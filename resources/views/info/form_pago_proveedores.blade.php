@@ -5,8 +5,8 @@
     <h1>Informe de pago a proveedores</h1>
     <hr/>
     <div class="row">
-        <form class="form-horizontal" role="form" method="post" id="form_cert_pag" action="{{ url('info/pago_proveedores') }}">
+        <form class="form-horizontal" role="form" method="post" id="form_cert_pag" action="{{ url('pago_proveedores') }}">
         	{!! csrf_field() !!}
-        @include('partials.form_profesionales_proveedores')    
+        @include('partials.form_pagos_profesionales')    
 @stop
 

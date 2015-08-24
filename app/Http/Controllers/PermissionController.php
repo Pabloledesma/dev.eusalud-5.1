@@ -56,6 +56,7 @@ class PermissionController extends Controller
         $permission = Permission::create([
             'permission_title'  => $request->input('permission_title'),
             'permission_slug'   => $request->input('permission_slug'),
+            'permission_url'    => $request->input('permission_url'),
             'permission_description'   => $request->input('permission_description')
         ]);
 

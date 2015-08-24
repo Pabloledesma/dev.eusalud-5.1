@@ -13,12 +13,7 @@ class Certificado_de_pagos extends Request {
      * @return bool
      */
     public function authorize() {
-        /*
-          if(Auth::user()){
-          return true;
-          } else {
-          return false;
-          } */
+       
         return true;
     }
 
@@ -30,8 +25,8 @@ class Certificado_de_pagos extends Request {
      */
     public function rules() {
         $rules = array(
-            'fecha_inicio' => 'required'
-            //'fecha_final' => 'required|after:fecha_inicio'
+            'fecha_inicio' => 'required|date_format:Y-m-d',
+            'fecha_final' => 'required|after:fecha_inicio|date_format:Y-m-d'
         );
        
         return $rules;
@@ -46,9 +41,11 @@ class Certificado_de_pagos extends Request {
 
         return [
 
-            'fehca_inicial.required' => 'Debe diligenciar la fecha inicial',
-            'fecha_final.required' => 'Debe diligenciar la fecha final',
-            'fecha_final.after' => 'La fecha final debe ser mayor que la fecha inicial.'
+            'fehca_inicio.required'     => 'Debe ingresar la fecha inicial',
+            'fecha_inicio.date_format'  => 'El formato de la fecha debe ser yyyy-mm-dd. Verifique.',
+            'fecha_final.required'      => 'Debe diligenciar la fecha final',
+            'fecha_final.date_format'   => 'El formato de la fecha debe ser yyyy-mm-dd. Verifique.',
+            'fecha_final.after'         => 'La fecha final debe ser mayor que la fecha inicial.'
         ];
     }
 

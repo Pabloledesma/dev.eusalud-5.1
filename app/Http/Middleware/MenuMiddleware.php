@@ -61,6 +61,10 @@ class MenuMiddleware
                 }
                 
                 if( count($menu_info) > 0 ){
+
+                    // Si tiene permisos de administrador y de medico se elimina el item del medico
+                    
+                    
                     $informes = $menu->add( 'Informes' );
                     foreach( $menu_info as $title => $url ){
                         $informes->add( $title, $url );

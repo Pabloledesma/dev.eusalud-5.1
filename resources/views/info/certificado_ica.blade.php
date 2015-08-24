@@ -2,10 +2,10 @@
 @section('content')
 
 <div class="container container-fluid">
-    <h1>CERTIFICADO DE RETENCION INDUSTRIA Y COMERCIO (ICA)</h1>
+    <h1>Certificado de Retención, Industria y Comercio (ICA)</h1>
     <hr/>
     <div class="row">
-        <form target="_blanck" class="form-horizontal" role="form" method="post" id="form_cert_pag" action="{{ url('certificado_ica') }}">
+        <form class="form-horizontal" role="form" method="post" id="form_cert_pag" action="{{ url('certificado_ica') }}">
         	{!! csrf_field() !!}
-        @include('partials.form_profesionales_proveedores')    
+        @include('partials.form_pagos_profesionales')    
 @stop

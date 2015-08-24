@@ -1,4 +1,8 @@
-body { font-family: 'PT Serif Caption', serif; }
+body { 
+	font-family: 'PT Serif Caption', serif;
+	width: 900px;
+	margin: 0 auto; 
+}
 p {font-size:0.6em;}
 table {
 	font-size:0.6em;
@@ -7,6 +11,8 @@ table {
     border-spacing: 0;
     width: 100%;
 }
+
+.centrado {text-align: center;}
 
 .principal th{
 	color: #fff;

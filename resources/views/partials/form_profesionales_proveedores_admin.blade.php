@@ -101,6 +101,15 @@
                     required: true,
                     minlength: 3,
                     number: true
+                },
+                fecha_inicio: {
+                    required: true,
+                    dateISO: true
+                }, 
+
+                fecha_final: {
+                    required: true,
+                    dateISO: true
                 }
             },
             messages: {
@@ -108,6 +117,14 @@
                     required: "Por favor ingrese su número de identificación",
                     minlength: "El número de identificación debe contener minimo 3 caracteres",
                     number: "Solo se admiten números en este campo."
+                },
+                fecha_inicio: {
+                    required: "Por favor ingrese la fecha de inicio",
+                    dateISO: "Por favor ingrese una fecha válida con formato yyyy-mm-dd"
+                },
+                fecha_final: {
+                    required: "Por favor ingrese la fecha final",
+                    dateISO: "Por favor ingrese una fecha válida con formato yyyy-mm-dd"
                 }
             }
             

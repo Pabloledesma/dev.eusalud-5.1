@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers\Traits\Info;
 
-use App\Http\Requests;
+use App\Http\Requests\Certificado_de_pagos;
 use DB;
 
 trait CertificadoIca 
 {
    
   /**
-    * Muestra el formulario para generar el informe de certificado ica
+    * Muestra el formulario para generar el informe de certificado ica para administradores
+    *
+    * @param  Boolean   $outPut Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+    *         En el valor true, el boton del formulario será Descargar. Si es false, el boton cambia a generar
+    * @param  Array     $formato Indica si esta disponible esta funcionalidad
+    * @return View
+    ***/ 
+    public function form_certificado_ica_admin($outPut = false, $formato = array( 'pdf' => false, 'excel' => false ))
+    {
+        if( $formato['pdf'] || $formato['excel'] )
+            return view('info.certificado_ica', compact('formato', 'outPut'));
+        return view('info.certificado_ica_admin', compact('outPut'));
+
+    }
+
+   /**
+    * Muestra el formulario para generar el informe de certificado ica para profesionales
     *
     * @param  Boolean   $outPut Esta variable sera false mientras no esten disponibles los formatos pdf y excel
     *         En el valor true, el boton del formulario será Descargar. Si es false, el boton cambia a generar
@@ -30,7 +46,7 @@ trait CertificadoIca
     * @param    Requests\Certificado_de_pagos $request  validación de los datos
     * @return   View
     */ 
-    public function certificado_ica(Requests\Certificado_de_pagos $request)
+    public function certificado_ica(Certificado_de_pagos $request)
     {
         $input = $request->all();
         if (isset($input['num_id'])) {
@@ -39,8 +55,8 @@ trait CertificadoIca
             $num_id = \Auth::user()->num_id;
         }
 
-        $headerTitle = "CERTIFICADO DE RETENCION INDUSTRIA Y COMERCIO (ICA)";
-        $fileTitle = "certificado_de_retencion_industria_y_comercio_ica";
+        $headerTitle = "Certificado de Retención Industria y Comercio (ICA)";
+        $fileTitle = "certificado_ica";
                 
         $query = "EXECUTE certificado_ICA @fecha_inicial = '" . $input['fecha_inicio'] . "', @fecha_final = '" .$input['fecha_final']. "', @id_profesional = '" . $num_id . "'";
 
@@ -56,7 +72,6 @@ trait CertificadoIca
         }
         
 
-        //dd($info);
         if (isset($info) && count($info) > 0) {
             
             $valor_en_letras = $this->numerotexto($info[0]->VALOR);
@@ -65,7 +80,7 @@ trait CertificadoIca
 
             //dd("valor base: " . $valor_base . " Valor retenido: " . $valor_retenido);
         
-            return view(
+            $html = view(
                 'info.informe_ica_pdf', 
                 compact(
                     'info', 
@@ -74,11 +89,19 @@ trait CertificadoIca
                     'valor_en_letras',
                     'valor_retenido',
                     'valor_base'
-            ));
+            ))->render();
+
+            $filename = 'ICA_' . date('Ymd_H:i:s') . '.pdf';
+            $pdf = \PDF::loadHtml( $html )->setPaper('a4')->setOrientation('landscape');
+            return $pdf->download( $filename ); 
             
         }
- 
-        return view('info.sin_resultados', compact('headerTitle'));
+
+        flash()->overlay(
+            'No se encontraron resultados para los datos ingresados',
+            'Aplicación de EuSalud' 
+        );
+        return redirect()->back();
     }
 
     /**

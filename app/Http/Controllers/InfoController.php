@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Excel;
 use App\Http\Controllers\Traits\Info\CertificadoIca;
 use App\Http\Controllers\Traits\Info\PagoProveedores;
 use App\Http\Controllers\Traits\Info\PagoProfesionales;
+use Illuminate\Contracts\Auth\Guard;
 
 
 /**
@@ -18,7 +19,13 @@ use App\Http\Controllers\Traits\Info\PagoProfesionales;
  */
 class InfoController extends Controller {
 
-   
+     /**
+     * The Guard implementation.
+     *
+     * @var Guard
+     */
+    protected $auth;
+
 
     /**
      * Convierte las vistas a documentos de excel
@@ -27,12 +34,13 @@ class InfoController extends Controller {
      */
     private $excel; 
 
-    public function __construct( Excel $excel) {
+    public function __construct( Excel $excel, Guard $auth ) {
         $this->middleware('auth');
         $this->middleware('acl');
         $this->middleware('menu');
 
-        $this->excel = $excel;
+        $this->excel    = $excel;
+        $this->auth     = $auth;
     }
 
     /**

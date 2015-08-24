@@ -19,6 +19,16 @@ Route::group(['as' => 'info::'], function(){
 
 	get('info', 'InfoController@index');
 
+	/**** PROFESIONALES ****/
+
+	get('form_certificado_pagos_profesionales_admin', 
+	[
+		'uses' 			=> 'InfoController@form_certificado_pagos_profesionales_admin',
+		'as' 			=> 'form_certificado_pagos_profesionales_admin',
+		'permission'	=> 'info_pagos_profesionales_administrador'
+		
+	]);
+
 	get('form_certificado_pagos_profesionales', 
 	[
 		'uses' 			=> 'InfoController@form_certificado_pagos_profesionales',
@@ -27,6 +37,7 @@ Route::group(['as' => 'info::'], function(){
 		
 	]);
 
+
 	post('certificado_pagos_profesionales', 
 		[
 			'uses'			=> 'InfoController@certificado_pagos_profesionales',
@@ -34,11 +45,21 @@ Route::group(['as' => 'info::'], function(){
 			'permission'	=> 'info_pagos_profesionales'
 		]);
 
+	/**** PROVEEDORES ****/
+
 	get('form_pago_proveedores', 
 	[
 		'uses' 			=> 'InfoController@form_pago_proveedores',
 		'as'			=> 'form_pago_proveedores',
 		'permission'	=> 'info_pago_proveedores'
+		
+	]);
+
+	get('form_pago_proveedores_admin', 
+	[
+		'uses' 			=> 'InfoController@form_pago_proveedores_admin',
+		'as'			=> 'form_pago_proveedores_admin',
+		'permission'	=> 'info_pago_proveedores_admin'
 		
 	]);
 
@@ -56,6 +77,15 @@ Route::group(['as' => 'info::'], function(){
 		'permission'	=> 'info_ica'
 		
 	]);
+
+	get('form_certificado_ica_admin', 
+	[
+		'uses'			=> 'InfoController@form_certificado_ica_admin',
+		'as'			=> 'form_certificado_ica_admin',
+		'permission'	=> 'info_ica_admin'
+		
+	]);
+
 	post('certificado_ica', 
 	[
 		'uses'			=> 'InfoController@certificado_ica',

@@ -2,14 +2,26 @@
 
 namespace App\Http\Controllers\Traits\Info;
 
-use App\Http\Requests;
-use Vsmoraes\Pdf\PDF;
+use App\Http\Requests\Certificado_de_pagos;
 use DB;
 
 trait PagoProveedores 
 {
   /**
-    * Muestra el formulario para generar el informe de Pago a proveedores
+    * Muestra el formulario para generar el informe de Pago a proveedores para administradores
+    *
+    * @param  Boolean   $outPut Esta variable sera false mientras no esten disponibles los formatos pdf y excel
+    *         En el valor true, el boton del formulario será Descargar. Si es false, el boton cambia a generar
+    * @param  Array     $formato Indica si esta disponible esta funcionalidad
+    * @return View
+    */
+    public function form_pago_proveedores_admin($outPut = false, $formato = array( 'pdf' => true, 'excel' => false )) {
+       
+        return view('info.form_pago_proveedores_admin', compact('formato', 'outPut'));
+    }
+
+    /**
+    * Muestra el formulario para generar el informe de Pago a proveedores para Proveedores
     *
     * @param  Boolean   $outPut Esta variable sera false mientras no esten disponibles los formatos pdf y excel
     *         En el valor true, el boton del formulario será Descargar. Si es false, el boton cambia a generar
@@ -18,7 +30,7 @@ trait PagoProveedores
     */
     public function form_pago_proveedores($outPut = false, $formato = array( 'pdf' => true, 'excel' => false )) {
        
-        return view('info.pago_proveedores', compact('formato', 'outPut'));
+        return view('info.form_pago_proveedores', compact('formato', 'outPut'));
     }
 
    /**
@@ -28,7 +40,7 @@ trait PagoProveedores
      * @param   PDF $pdf  
      * @return 	View
      */
-    public function pago_proveedores(Requests\Certificado_de_pagos $request, PDF $pdf) {
+    public function pago_proveedores(Certificado_de_pagos $request) {
         
         //Definición de entradas
         $input = $request->all();
@@ -54,24 +66,18 @@ trait PagoProveedores
             return redirect('/');
         }
 
-        if( isset($info) ){
-            // si hay menos de 100 resultados le genera un pdf
-            if( count($info) < 100 ){
-
-                $html = view('info.informe', compact('info', 'input', 'headerTitle'))->render();
-                return $pdf->load($html, array(0, 0, 1300, 800))
-                            ->filename('informe_de_pago_a_proveedores_' . date('Y-m-d H:i:s') . '.pdf')
-                            ->download();
-
-            }
-
-            // si hay mas de 100 resultados genera una vista html
-            if ( count($info) > 100) {
-                return view('info.informe', compact('info', 'headerTitle', 'input'));
-            }
+        if( isset($info) && count($info) > 0 ){
+            $filename = 'informe_de_pago_a_proveedores_' . date('Y-m-d H:i:s') . '.pdf';
+            $html = view('info.informe_pagos_profesionales', compact('info', 'input', 'headerTitle'))->render();
+            $pdf = \PDF::loadHtml( $html )->setPaper('a4')->setOrientation('landscape');
+            return $pdf->download( $filename );            
         }
         
-        return view('info.sin_resultados', compact('input'));
+        flash()->overlay(
+            'No se encontraron resultados para los datos ingresados',
+            'Aplicación de EuSalud' 
+        );
+        return redirect()->back();
     }
 
 }

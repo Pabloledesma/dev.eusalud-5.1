@@ -24,6 +24,8 @@ class PagesController extends Controller
      */
     public function index() {
         $user = auth()->user();
+
+        //return view('new_template');
         $imagenes = scandir( public_path() . '\img\clientes' ); 
         return view('welcome.inicio', compact('imagenes', 'user'));
     }

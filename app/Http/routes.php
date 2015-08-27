@@ -10,6 +10,7 @@
 
 get('/', 'PagesController@index');
 get('/inicio', 'PagesController@index');
+get('new_home', 'PagesController@index');
 
 /**
  * Rutas protegidas por Auth y Role

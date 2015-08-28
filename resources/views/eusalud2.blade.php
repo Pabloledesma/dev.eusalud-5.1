@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-         @include('partials.nav')
+         @include('partials.nav2')
     </div>
 
 

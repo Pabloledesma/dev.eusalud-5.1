@@ -10,7 +10,7 @@
 
 get('/', 'PagesController@index');
 get('/inicio', 'PagesController@index');
-get('new_home', 'PagesController@index');
+
 
 /**
  * Rutas protegidas por Auth y Role
@@ -18,7 +18,7 @@ get('new_home', 'PagesController@index');
  */	
 Route::group(['as' => 'info::'], function(){
 
-	get('info', 'InfoController@index');
+	//get('info', 'InfoController@index');
 
 	/**** PROFESIONALES ****/
 

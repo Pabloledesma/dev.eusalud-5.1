@@ -19,13 +19,35 @@ class MenuMiddleware
     protected $auth;
 
     /**
-     * Create a new filter instance.
+     * Items del menú informativo
      *
-     * @param  Guard  $auth
-     * @return void
+     * @var array
      */
+    protected $menu_info = [];
+
+    /**
+     * Items del menú de configuración
+     *
+     * @var array
+     */
+    protected $menu_ver = [];
+
+ 
     public function __construct(Guard $auth) {
         $this->auth = $auth;
+
+        // Obtiene los permisos del rol
+        $role = Role::findOrFail($this->auth->user()->role_id);
+       
+        foreach($role->permissions as $permission){
+            if( stripos($permission->permission_slug, 'info_') === 0 ){
+                $this->menu_info += [ $permission->permission_title => $permission->permission_url];
+            }
+                
+            if( stripos($permission->permission_slug, "ver_") === 0 ){
+                $this->menu_ver += [ucfirst( str_replace("ver_", "", $permission->permission_slug) ) => $permission->permission_url];
+            }
+        }
     }
 
     /**
@@ -39,52 +61,41 @@ class MenuMiddleware
     {
         
 
-        Menu::make('start', function($menu) {
+        Menu::make('left', function($menu) {
             
-            $menu->add('Inicio', 'http://www.eusalud.com');
-            if ($this->auth->check()) {
+            // El link del inicio estará en el logo
+            //$menu->add('Inicio', 'http://www.eusalud.com');
+            if ($this->auth->check()) { 
                 
-                // Obtiene los permisos del rol
-                $role = Role::findOrFail($this->auth->user()->role_id);
-                $menu_info = [];    // Items del menú información
-                $menu_ver = [];     // Items del menú ver
-                
-                // En el futuro se puede crear un objeto menu con categorias para evitar este bucle
-                foreach($role->permissions as $permission){
-                    if( stripos($permission->permission_slug, 'info_') === 0 ){
-                        $menu_info += [ $permission->permission_title => $permission->permission_url];
-                    }
-                        
-                    if( stripos($permission->permission_slug, "ver_") === 0 ){
-                        $menu_ver += [ucfirst( str_replace("ver_", "", $permission->permission_slug) ) => $permission->permission_url];
-                    }
-                }
-                
-                if( count($menu_info) > 0 ){
+                if( count($this->menu_info) > 0 ){
 
-                    // Si tiene permisos de administrador y de medico se elimina el item del medico
-                    
-                    
                     $informes = $menu->add( 'Informes' );
-                    foreach( $menu_info as $title => $url ){
+                    foreach( $this->menu_info as $title => $url ){
                         $informes->add( $title, $url );
                     }
                 }
+                
+            }
+
+            // Si no ha iniciado sesión, se carga automáticamente el formulario de inicio de sesión 
+            // $menu->add('Iniciar Sesión', ['action' => 'Auth\AuthController@getLogin']);                
+            
+        });
+
+        Menu::make('top', function($menu){
+
+            if( $this->auth->check() ){
 
                 $user = $menu->add($this->auth->user()->name);
 
-                if( count($menu_ver) > 0 ){
+                if( count($this->menu_ver) > 0 ){
                     
-                    foreach( $menu_ver as $title => $url ){
+                    foreach( $this->menu_ver as $title => $url ){
                         $user->add( $title, $url );
                     }
                 }
 
                 $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
-                
-            } else {
-                $menu->add('Iniciar Sesión', ['action' => 'Auth\AuthController@getLogin']);
-                
             }
         });
 

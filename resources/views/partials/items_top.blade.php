@@ -1,9 +1,8 @@
 @foreach($items as $item)
     <li @if($item->hasChildren()) class="dropdown" @endif>
         <a @if($item->hasChildren()) class="dropdown-toggle" data-toggle="dropdown" @endif href="{{ $item->url() }}">
-        @if( isset( $item->icon ) )
-            <i class="fa fa-{{ $item->icon }}"></i>
-        @endif
+        
+        {!! $item->prependIcon()->title !!}
         @if($item->hasChildren()) 
             <i class="fa fa-caret-down"></i> 
         @endif

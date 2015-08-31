@@ -85,17 +85,29 @@ class MenuMiddleware
         Menu::make('top', function($menu){
 
             if( $this->auth->check() ){
-
-                $user = $menu->add($this->auth->user()->name);
+                
 
                 if( count($this->menu_ver) > 0 ){
                     
                     foreach( $this->menu_ver as $title => $url ){
-                        $user->add( $title, $url );
+
+                        if( $title == "Roles" ){
+                            $menu->add($title, $url)->icon('users');
+                        }
+
+                        if( $title == "Permisos" ){
+                            $menu->add( $title, $url )->icon('unlock');
+                        }
+
+                        if( $title == "Usuarios" ){
+                            $user = $menu->add($this->auth->user()->name)->icon('user');
+                            $user->add( $title, $url );
+                            $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
+                        }
                     }
                 }
 
-                $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
+                
             }
         });
 

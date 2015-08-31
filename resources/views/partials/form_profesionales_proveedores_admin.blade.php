@@ -46,10 +46,10 @@
         @include('partials.errors')
 
 
-    </div>
-</div>
+    </div><!-- .col-lg-12 -->
+</div><!-- .row -->
 <script>
-    $().ready(function () {
+    $(document).ready(function ($) {
         
         //Calendarios
         $(function (factory) {

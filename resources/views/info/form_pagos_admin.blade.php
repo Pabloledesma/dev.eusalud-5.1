@@ -1,10 +1,14 @@
-@extends('eusalud2')
+@extends('eusalud3')
 @section('content')
 
-<div class="container container-fluid">
-    <h1>Certificado de pagos a profesionales de la salud</h1>
-    <hr/>
     <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Certificado de pagos a profesionales de la salud</h1>
+        </div>
+        <hr/>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
         <form 
         	class="form-horizontal" 
         	role="form" 

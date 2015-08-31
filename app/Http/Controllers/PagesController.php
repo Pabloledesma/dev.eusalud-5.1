@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 use LaravelCaptcha\Integration\BotDetectCaptcha;
 use Symfony\Component\HttpFoundation\Response;
+use App\Role;
 use function flash;
 use function redirect;
 use function view;
@@ -24,8 +25,20 @@ class PagesController extends Controller
      */
     public function index() {
         $user = auth()->user();
+        $role = Role::findOrFail(auth()->user()->role_id);
+        $menu_info = [];
         
-        return view('info.index');
+
+        foreach($role->permissions as $permission){
+            if( stripos($permission->permission_slug, 'info_') === 0 ){
+                $menu_info += [ $permission->permission_title => $permission->permission_url];
+            }
+ 
+        }
+
+
+
+        return view('info.index', compact('menu_info'));
         //$imagenes = scandir( public_path() . '\img\clientes' ); 
         //return view('welcome.inicio', compact('imagenes', 'user'));
     }

@@ -12,39 +12,20 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-file-text-o fa-3"></i> Informes
-                    <div class="panel-body">
-                         @foreach( Menu::get('left')->all() as $menu )
-                            <pre>{{ $menu }}</pre>
-                         @endforeach
+                    <div class="panel-body">    
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>Nombre</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach( $menu_info as $key => $val )
                                     <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>{{ $key }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                @endforeach 
                                 </tbody>
                             </table>
                         </div>

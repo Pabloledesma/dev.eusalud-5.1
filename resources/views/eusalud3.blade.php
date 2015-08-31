@@ -35,6 +35,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
 
 </head>
 
@@ -54,16 +55,21 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="{{ public_path() }}/js/jquery-1.8.3.js"></script>
+    
+    <script src="{{ public_path('js/calendarios.js') }}"></script>
+    <script src="{{ public_path('js/datepicker.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="{{ public_path('js/bootstrap.min.js') }}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="/js/metisMenu.min.js"></script>
+    <script src="{{ public_path('js/metisMenu.min.js') }}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="/js/sb-admin-2.js"></script>
+    <script src="{{ public_path('js/sb-admin-2.js') }}"></script>
+
+
 
 </body>
 

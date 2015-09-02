@@ -28,6 +28,9 @@
 
     <!-- Custom Fonts -->
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- JqueryUi -->
+    <link href="/css/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,6 +39,25 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="/js/holder.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- JqueryUI Core Javascript -->
+    <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <script src="/js/calendarios.js"></script>
+    <script src="/js/datepicker-es.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/js/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/sb-admin-2.js"></script>
 
 </head>
 
@@ -53,22 +75,6 @@
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="{{ public_path() }}/js/jquery-1.8.3.js"></script>
-    
-    <script src="{{ public_path('js/calendarios.js') }}"></script>
-    <script src="{{ public_path('js/datepicker.js') }}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ public_path('js/bootstrap.min.js') }}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ public_path('js/metisMenu.min.js') }}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ public_path('js/sb-admin-2.js') }}"></script>
-
 
 
 </body>

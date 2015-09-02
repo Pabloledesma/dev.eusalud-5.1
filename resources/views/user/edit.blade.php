@@ -1,4 +1,4 @@
-@extends('eusalud2')
+@extends('eusalud3')
 
 @section('content')
 

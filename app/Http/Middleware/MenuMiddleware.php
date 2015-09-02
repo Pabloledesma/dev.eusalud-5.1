@@ -69,7 +69,7 @@ class MenuMiddleware
                 
                 if( count($this->menu_info) > 0 ){
 
-                    $informes = $menu->add( 'Informes' );
+                    $informes = $menu->add( 'Informes' )->icon('user-md');
                     foreach( $this->menu_info as $title => $url ){
                         $informes->add( $title, $url );
                     }

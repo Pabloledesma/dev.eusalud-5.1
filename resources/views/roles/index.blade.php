@@ -1,32 +1,38 @@
-@extends('eusalud2')
+@extends('eusalud3')
 
 @section('content')
 
-<div class="container container-fluid">
-    <h1>Roles</h1>
-    <hr/>
-        <a class="btn btn-green" href="{{ url('roles/create') }}">Crear Rol</a>
-    <hr/>            
-    <div class="row">
-        <table class="table-striped green usuarios">
-        	<tr>
-        		<th>Titulo</th>
-        		<th>Slug</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-        	</tr>
-            @foreach( $roles as $r )
-            <tr>
-                <td>{{ $r->role_title }}</td>
-                <td>{{ $r->role_slug }}</td>
-                <td><a href="{{ url('roles/'.$r->id.'/edit' ) }}">Editar</a></td>
-                <td><a href="{{ url('roles/'.$r->id.'/delete' ) }}" class="delete">Eliminar</a></td>
-            </tr>
-            @endforeach
-
-    	</table>
-   	</div>
+<div class="row">
+    <h1 class="page-header">Roles</h1>
+    
 </div>
+          
+    <div class="row">
+
+        <div class="col-lg-12">
+            <a class="btn btn-green" href="{{ url('roles/create') }}">Crear Rol</a>
+            <hr/>     
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Slug</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                @foreach( $roles as $r )
+                <tr>
+                    <td>{{ $r->role_title }}</td>
+                    <td>{{ $r->role_slug }}</td>
+                    <td><a href="{{ url('roles/'.$r->id.'/edit' ) }}"><i class="fa fa-pencil-square-o fa-2"></i></a></td>
+                    <td><a href="{{ url('roles/'.$r->id.'/delete' ) }}" class="delete"><i class="fa fa-trash fa-2"></i></a></td>
+                </tr>
+                @endforeach
+
+        </table> 
+        </div>
+        
+   	</div>
+
 <script>
     $().ready(function(){
         $("a.delete").on('click', function(e){     

@@ -1,6 +1,6 @@
-<div class="container-fluid">
+
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">{{ $title }}</div>
                 <div class="panel-body">
@@ -19,29 +19,29 @@
                     <input type="hidden" name="id" value="{{ $user->id }}">
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Nombre</label>
-                        <div class="col-md-6">
+                        <label class="col-lg-4 control-label">Nombre</label>
+                        <div class="col-lg-6">
                             {!! Form::text('name', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Correo</label>
-                        <div class="col-md-6">
+                        <label class="col-lg-4 control-label">Correo</label>
+                        <div class="col-lg-6">
                             {!! Form::email('email', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Número de identificación</label>
-                        <div class="col-md-6">
+                        <label class="col-lg-4 control-label">Número de identificación</label>
+                        <div class="col-lg-6">
                             {!! Form::text('num_id', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
 
                      <div class="form-group">
-                        <label class="col-md-4 control-label">Rol</label>
-                        <div class="col-md-6">
+                        <label class="col-lg-4 control-label">Rol</label>
+                        <div class="col-lg-6">
                             <select name="role_id" id="role_id" class="form-control">
                                 @foreach( $roles as $r )
                                     @if(isset($role_id))
@@ -59,29 +59,29 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Modificar clave</label>
-                        <div class="col-md-6">
+                        <label class="col-lg-4 control-label">Modificar clave</label>
+                        <div class="col-lg-6">
                             <input type="checkbox" name="edit_password" id="edit_password">
                         </div>
                     </div>
                     <div id='div_edit_password'>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Clave</label>
-                            <div class="col-md-6">
+                            <label class="col-lg-4 control-label">Clave</label>
+                            <div class="col-lg-6">
                                 <input type="password" class="form-control" name="password" id="password">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Confirme su clave</label>
-                            <div class="col-md-6">
+                            <label class="col-lg-4 control-label">Confirme su clave</label>
+                            <div class="col-lg-6">
                                 <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
+                        <div class="col-lg-6 col-lg-offset-4">
                             <button type="submit" class="btn btn-green" id="submit">{{ $boton }}</button>
                             <a href="{{ url('usuarios') }}" class="btn btn-green">Volver</a>
                         </div>
@@ -91,10 +91,10 @@
             </div>
         </div>
     </div>
-</div>
+
 <script>
     //Validación de formularios
-    $().ready(function () {
+    $(document).ready(function () {
         var check = $("#edit_password"), fields = $("#div_edit_password");
         fields.hide();
         check.on('change', function(){

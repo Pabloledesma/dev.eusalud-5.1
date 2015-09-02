@@ -1,10 +1,8 @@
 @foreach($items as $item)
     <li>
         <a href="{{ $item->url() }}">
-        @if( isset( $item->icon ) )
-            <i class="fa fa-{{ $item->icon }}"></i>
-        @endif
-        {!! $item->title !!} 
+       
+        {!! $item->prependIcon()->title !!}
             @if($item->hasChildren()) 
                 <span class="fa arrow"></span> 
             @endif

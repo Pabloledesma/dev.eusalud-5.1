@@ -24,8 +24,9 @@ elixir(function(mix) {
     	'jquery-ui-1.9.2.custom.min.js',
     	'jquery.validate.min.js',
     	'datepicker-es.js',
-    	'calendarios.js'
-    ]);
+    	'calendarios.js',
+        'sweetalert-dev.js'
+    ], './public/js/all.js');
 
     mix.scripts([
         'jquery-1.8.3.js',

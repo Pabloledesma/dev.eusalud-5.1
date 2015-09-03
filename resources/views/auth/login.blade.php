@@ -23,6 +23,9 @@
                 Olvidó su clave?
             </a>
         </div><!-- /card-container -->
+        <div class="logo">
+            <img src="/img/logo_colores.png">
+        </div>
     </div><!-- /container -->
 
 @endsection

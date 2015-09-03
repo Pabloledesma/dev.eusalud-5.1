@@ -17,7 +17,7 @@ trait PagoProfesionales
      * @return View 
      */
     public function form_certificado_pagos_profesionales_admin($outPut = true, $formato = array( 'pdf' => true, 'excel' => false )) {
-        
+        flash('Este es el formulario');
         return view('info.form_pagos_admin', compact('formato', 'outPut'));
     }
 

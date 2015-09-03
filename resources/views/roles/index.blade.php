@@ -11,24 +11,26 @@
 
         <div class="col-lg-12">
             <a class="btn btn-green" href="{{ url('roles/create') }}"><i class="fa fa-plus"></i> Crear Rol</a>
-            <hr/>     
-            <table class="table table-striped table-bordered table-hover green">
-                <tr>
-                    <th>Titulo</th>
-                    <th>Slug</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                @foreach( $roles as $r )
-                <tr>
-                    <td>{{ $r->role_title }}</td>
-                    <td>{{ $r->role_slug }}</td>
-                    <td><a href="{{ url('roles/'.$r->id.'/edit' ) }}"><i class="fa fa-pencil-square-o fa-2"></i></a></td>
-                    <td><a href="{{ url('roles/'.$r->id.'/delete' ) }}" class="delete"><i class="fa fa-trash fa-2"></i></a></td>
-                </tr>
-                @endforeach
+            <hr/>  
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Slug</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    @foreach( $roles as $r )
+                    <tr>
+                        <td>{{ $r->role_title }}</td>
+                        <td>{{ $r->role_slug }}</td>
+                        <td><a href="{{ url('roles/'.$r->id.'/edit' ) }}"><i class="fa fa-pencil-square-o fa-2"></i></a></td>
+                        <td><a href="{{ url('roles/'.$r->id.'/delete' ) }}" class="delete"><i class="fa fa-trash fa-2"></i></a></td>
+                    </tr>
+                    @endforeach
 
-        </table> 
+                </table> 
+            </div>   
         </div>
         
    	</div>

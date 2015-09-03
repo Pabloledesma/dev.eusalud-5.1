@@ -1,5 +1,9 @@
+@import "bootstrap/bootstrap";
+@greenBrand     : #008B85;
+@orangeBrand    : #E16D3A;
+
 .btn-green {
-    background: #008B85;
+    background: @greenBrand;
     color: #ffffff;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
@@ -7,9 +11,11 @@
 }
 
 .btn-green:hover {
-    background: #E16D3A;
+    background: @orangeBrand;
     color: #ffffff;
 }
+
+.btn-primary { background-color: @orangeBrand !important; }
 
 .green {
     font-size:1.2em;
@@ -43,3 +49,7 @@
 .logo-eusalud {
     margin-left: 20px;
 }
+
+.panel { margin-top: 30px; }
+
+a { color: @greenBrand; }

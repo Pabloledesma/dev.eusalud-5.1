@@ -1,13 +1,11 @@
-@extends('eusalud2')
+@extends('eusalud3')
 
 @section('content')
 
-
-<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-lg-8 col-lg-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Editar Permiso</div>
+				<div class="panel-heading"><i class="fa fa-pencil-square-o fa-2"></i> Editar Permiso</div>
 					<div class="panel-body">
 					
 					@include('partials.errors')
@@ -16,36 +14,37 @@
 					
 							{!! csrf_field() !!}
 						<div class="form-group">
-							{!! Form::label('permission_title', 'Titulo', ['class' => 'col-md-4 control-label']) !!}
-							<div class="col-md-6">
+							{!! Form::label('permission_title', 'Titulo', ['class' => 'col-lg-4 control-label']) !!}
+							<div class="col-lg-6">
 								{!! Form::text('permission_title', null, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{!! Form::label('permission_slug', 'Alias', ['class' => 'col-md-4 control-label']) !!}
-							<div class="col-md-6">
+							{!! Form::label('permission_slug', 'Alias', ['class' => 'col-lg-4 control-label']) !!}
+							<div class="col-lg-6">
 								{!! Form::text('permission_slug', null, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{!! Form::label('permission_url', 'Url', ['class' => 'col-md-4 control-label']) !!}
-							<div class="col-md-6">
+							{!! Form::label('permission_url', 'Url', ['class' => 'col-lg-4 control-label']) !!}
+							<div class="col-lg-6">
 								{!! Form::text('permission_url', null, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{!! Form::label('permission_description', 'Descripción', ['class' => 'col-md-4 control-label']) !!}
-							<div class="col-md-6">
+							{!! Form::label('permission_description', 'Descripción', ['class' => 'col-lg-4 control-label']) !!}
+							<div class="col-lg-6">
 								{!! Form::textarea('permission_description', null, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 					
 						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
+							<div class="col-lg-6 col-lg-offset-4">
 								{!! Form::submit('Editar', ['class' => 'btn btn-green']) !!}
+								<a class="btn btn-primary" href="{{ url('permisos') }}">Cancelar</a>
 							</div>
 						</div>
 					
@@ -55,6 +54,6 @@
 			</div>
 		</div>
 	</div>
-</div>
+
 <script src="/js/main.js"></script>
 @stop

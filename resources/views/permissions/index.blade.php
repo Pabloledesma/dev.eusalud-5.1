@@ -1,34 +1,38 @@
-@extends('eusalud2')
+@extends('eusalud3')
 
 @section('content')
-
-<div class="container container-fluid">
-    <h1>Permisos</h1>
-    <hr/>
-        <a class="btn btn-green" href="{{ url('permisos/create') }}">Crear permiso</a>
-    <hr/>            
     <div class="row">
-        <table class="table-striped green usuarios">
-        	<tr>
-        		<th>Titulo</th>
-        		<th>Slug</th>
-        		<th>Descripción</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-        	</tr>
-            @foreach( $permisos as $p )
-            <tr>
-                <td>{{ $p->permission_title }}</td>
-                <td>{{ $p->permission_slug }}</td>
-                <td>{{ $p->permission_description }}</td>
-                <td><a href="{{ url('permisos/'.$p->id.'/edit' ) }}">Editar</a></td>
-                <td><a href="{{ url('permisos/'.$p->id.'/delete' ) }}" class="delete">Eliminar</a></td>
-            </tr>
-            @endforeach
+        <h1 class="page-header"><i class="fa fa-unlock fa-4"></i> Permisos</h1>
+          
+    </div>
+          
+    <div class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-green" href="{{ url('permisos/create') }}"><i class="fa fa-plus"></i> Crear permiso</a>
+            <hr/>     
+            <table class="table table-striped table-bordered table-hover green">
+            	<tr>
+            		<th>Titulo</th>
+            		<th>Slug</th>
+            		<th>Descripción</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+            	</tr>
+                @foreach( $permisos as $p )
+                <tr>
+                    <td>{{ $p->permission_title }}</td>
+                    <td>{{ $p->permission_slug }}</td>
+                    <td>{{ $p->permission_description }}</td>
+                    <td><a href="{{ url('permisos/'.$p->id.'/edit' ) }}"><i class="fa fa-pencil-square-o fa-2"></i></a></td>
+                    <td><a href="{{ url('permisos/'.$p->id.'/delete' ) }}" class="delete"><i class="fa fa-trash fa-2"></i></a></td>
+                </tr>
+                @endforeach
 
-    	</table>
+        	</table>
+            
+        </div>
    	</div>
-</div>
+
 <script>
     $().ready(function(){
         $("a.delete").on('click', function(e){     

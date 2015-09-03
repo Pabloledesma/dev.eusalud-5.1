@@ -25,18 +25,17 @@ class PagesController extends Controller
      */
     public function index() {
         $user = auth()->user();
-        $role = Role::findOrFail(auth()->user()->role_id);
         $menu_info = [];
-        
 
-        foreach($role->permissions as $permission){
-            if( stripos($permission->permission_slug, 'info_') === 0 ){
-                $menu_info += [ $permission->permission_title => $permission->permission_url];
-            }
- 
+        if( auth()->check() ){ 
+          $role = Role::findOrFail(auth()->user()->role_id);
+
+          foreach($role->permissions as $permission){
+              if( stripos($permission->permission_slug, 'info_') === 0 ){
+                  $menu_info += [ $permission->permission_title => $permission->permission_url];
+              }
+          }
         }
-
-
 
         return view('info.index', compact('menu_info'));
         //$imagenes = scandir( public_path() . '\img\clientes' ); 

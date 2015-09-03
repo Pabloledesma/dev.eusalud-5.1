@@ -38,7 +38,7 @@
                             {!! Form::text('num_id', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
-
+                    @if( \Auth::user()->role_id == 1 )
                      <div class="form-group">
                         <label class="col-lg-4 control-label">Rol</label>
                         <div class="col-lg-6">
@@ -57,6 +57,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
 
                     <div class="form-group">
                         <label class="col-lg-4 control-label">Modificar clave</label>

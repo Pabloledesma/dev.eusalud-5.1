@@ -37,15 +37,17 @@ class MenuMiddleware
         $this->auth = $auth;
 
         // Obtiene los permisos del rol
-        $role = Role::findOrFail($this->auth->user()->role_id);
-       
-        foreach($role->permissions as $permission){
-            if( stripos($permission->permission_slug, 'info_') === 0 ){
-                $this->menu_info += [ $permission->permission_title => $permission->permission_url];
-            }
-                
-            if( stripos($permission->permission_slug, "ver_") === 0 ){
-                $this->menu_ver += [ucfirst( str_replace("ver_", "", $permission->permission_slug) ) => $permission->permission_url];
+        if( $this->auth->check() ){
+            $role = Role::findOrFail($this->auth->user()->role_id);
+           
+            foreach($role->permissions as $permission){
+                if( stripos($permission->permission_slug, 'info_') === 0 ){
+                    $this->menu_info += [ $permission->permission_title => $permission->permission_url];
+                }
+                    
+                if( stripos($permission->permission_slug, "ver_") === 0 ){
+                    $this->menu_ver += [ucfirst( str_replace("ver_", "", $permission->permission_slug) ) => $permission->permission_url];
+                }
             }
         }
     }
@@ -86,7 +88,9 @@ class MenuMiddleware
 
             if( $this->auth->check() ){
                 
-
+                $user = $menu->add($this->auth->user()->name)->icon('user');
+                $user->add( 'Mi cuenta', url( 'usuarios/' .$this->auth->user()->id . '/edit' ) );
+               
                 if( count($this->menu_ver) > 0 ){
                     
                     foreach( $this->menu_ver as $title => $url ){
@@ -100,12 +104,14 @@ class MenuMiddleware
                         }
 
                         if( $title == "Usuarios" ){
-                            $user = $menu->add($this->auth->user()->name)->icon('user');
+                            
                             $user->add( $title, $url );
-                            $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
+                           
                         }
                     }
                 }
+
+                $user->add('Cerrar Sesión', ['action' => 'Auth\AuthController@getLogout']);
 
                 
             }

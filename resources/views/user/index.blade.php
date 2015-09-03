@@ -2,16 +2,16 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Usuarios</h1>
+            <h1 class="page-header"><i class="fa fa-user fa-4"></i> Usuarios</h1>
         </div>
         <hr/>
 
-        <a class="btn btn-green" href="{{ url('registrar') }}">Nuevo usuario</a>
+        <a class="btn btn-green" href="{{ url('registrar') }}"><i class="fa fa-plus"></i> Nuevo Usuario</a>
     </div>
     <hr/>            
     <div class="row">
         <div class="col-lg-12">
-        <table class="table table-striped table-bordered table-hover">
+        <table class="table table-striped table-bordered table-hover green">
             <tr>               
                 <th>Nombre</th>
                 <th>Correo</th>

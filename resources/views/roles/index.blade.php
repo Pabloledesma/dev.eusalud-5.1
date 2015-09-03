@@ -3,16 +3,16 @@
 @section('content')
 
 <div class="row">
-    <h1 class="page-header">Roles</h1>
+    <h1 class="page-header"><i class="fa fa-users fa-4"></i> Roles</h1>
     
 </div>
           
     <div class="row">
 
         <div class="col-lg-12">
-            <a class="btn btn-green" href="{{ url('roles/create') }}">Crear Rol</a>
+            <a class="btn btn-green" href="{{ url('roles/create') }}"><i class="fa fa-plus"></i> Crear Rol</a>
             <hr/>     
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover green">
                 <tr>
                     <th>Titulo</th>
                     <th>Slug</th>

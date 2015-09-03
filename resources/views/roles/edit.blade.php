@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Editar Rol</div>
+				<div class="panel-heading"><i class="fa fa-pencil-square-o"></i> Editar Rol</div>
 					<div class="panel-body">
 					
 						@include('partials.errors')
@@ -49,6 +49,7 @@
 							<div class="form-group">
 								<div class="col-lg-6 col-lg-offset-4">
 									{!! Form::submit('Editar', ['class' => 'btn btn-green']) !!}
+									<a class="btn btn-primary" href="{{ url('roles') }}">Cancelar</a>
 								</div>
 							</div>
 						

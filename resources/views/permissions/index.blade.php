@@ -37,14 +37,31 @@
    	</div>
 
 <script>
-    $().ready(function(){
+    $(document).ready(function(){
         $("a.delete").on('click', function(e){     
         
             e.preventDefault();
-            var c = confirm("Esta seguro de que quiere eliminar el permiso?");
-            if( c ){
-                location.replace($(this).attr('href'));
-            }
+
+            swal({   
+                title: "Esta seguro/a?",   
+                text: "El permiso será eliminado de la base de datos",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Si, eliminelo!",   
+                cancelButtonText: "No, cancelar por favor!",   
+                closeOnConfirm: false,   
+                closeOnCancel: false 
+                }, 
+                function(isConfirm){   
+                    if (isConfirm) {     
+                        location.replace($(this).attr('href'));   
+                    } else {     
+                        swal("Cancelado", "El permiso está a salvo :)", "error");   
+                    } 
+                }
+            );
+
         });
         
     });

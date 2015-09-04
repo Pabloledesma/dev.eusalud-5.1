@@ -43,7 +43,7 @@
     </div>
     <!-- /#wrapper -->
 
-    @import('flash')
+    @include('flash')
 
 </body>
 

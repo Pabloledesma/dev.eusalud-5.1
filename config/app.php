@@ -144,7 +144,6 @@ return [
 		App\Providers\ConfigServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
@@ -203,7 +202,6 @@ return [
         'Form' 		=> Collective\Html\FormFacade::class,
       	'Html' 		=> Collective\Html\HtmlFacade::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-        'Flash'     => Laracast\Flash\Flash::class,  
         'Menu' 		=> Caffeinated\Menus\Facades\Menu::class,          
           
 	],

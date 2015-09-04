@@ -24,20 +24,26 @@ class PagesController extends Controller
      * @return Response
      */
     public function index() {
-        $user = auth()->user();
-        $menu_info = [];
 
-        if( auth()->check() ){ 
-          $role = Role::findOrFail(auth()->user()->role_id);
+        if( auth()->check() ){
+         
+          $user = auth()->user();
+          $menu_info = [];
 
-          foreach($role->permissions as $permission){
-              if( stripos($permission->permission_slug, 'info_') === 0 ){
-                  $menu_info += [ $permission->permission_title => $permission->permission_url];
-              }
+          if( auth()->check() ){ 
+            $role = Role::findOrFail(auth()->user()->role_id);
+
+            foreach($role->permissions as $permission){
+                if( stripos($permission->permission_slug, 'info_') === 0 ){
+                    $menu_info += [ $permission->permission_title => $permission->permission_url];
+                }
+            }
           }
+          flash()->overlay('Bienvenido ' . auth()->user()->name, 'Cordial Saludo!');
+          return view('info.index', compact('menu_info'));
         }
 
-        return view('info.index', compact('menu_info'));
+        return view('auth.login');
         //$imagenes = scandir( public_path() . '\img\clientes' ); 
         //return view('welcome.inicio', compact('imagenes', 'user'));
     }

@@ -68,7 +68,7 @@ trait CertificadoIca
         catch( \Exception $e )
         {
             flash()->overlay("Por favor disculpenos, intentelo mas tarde.", "Aplicación de Eusalud");
-            return redirect('info/form_certificado_ica');
+            return redirect('/');
         }
         
 
@@ -98,8 +98,9 @@ trait CertificadoIca
         }
 
         flash()->overlay(
+            'Ups!',
             'No se encontraron resultados para los datos ingresados',
-            'Aplicación de EuSalud' 
+            'warning' 
         );
         return redirect()->back();
     }

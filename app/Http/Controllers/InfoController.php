@@ -75,30 +75,27 @@ class InfoController extends Controller {
             $info = DB::connection('sqlsrv_censo')->select($query);      
         }                    
         catch( \Exception $e ){
-            flash()->overlay(
+            flash()->error(
                 'Ups! Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
                 'Aplicación de EuSalud' 
             );
-            return redirect('/');
+            return redirect()->route('/');
         }
 
         if( isset($info) && count($info) > 0 ){
+
             $this->excel->create('censo' . date('Y-m-d_h:i:s_A'), function($excel) use($info) {
                 $excel->sheet('Sheetname', function($sheet) use($info) {
                     $sheet->loadview('info.censo', compact('info'));
-                    $sheet->setFontFamily('Comic Sans MS');
-                    $sheet->setStyle(array(
-                        'font' => array(
-                            'name'      =>  'Calibri',
-                            'size'      =>  12,
-                            'bold'      =>  true
-                        )
-                    ));
+                    
                 });
             })->download('xlsx');
-
+           
         } else {
-            return "no se encontraron resultados";
+
+            flash()->error("Ups!", "No se encontraron resultados. Intentelo más atrde");
+            return redirect()->route('/');
         }
+        
     }
 }

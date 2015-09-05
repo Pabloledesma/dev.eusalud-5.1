@@ -39,7 +39,7 @@ class PagesController extends Controller
                 }
             }
           }
-          flash()->overlay('Bienvenido ' . auth()->user()->name, 'Cordial Saludo!');
+          
           return view('info.index', compact('menu_info'));
         }
 

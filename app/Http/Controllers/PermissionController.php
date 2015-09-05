@@ -60,8 +60,8 @@ class PermissionController extends Controller
             'permission_description'   => $request->input('permission_description')
         ]);
 
-        flash()->overlay(
-            'Los datos se guardaron exitosamente', 'Sistema'
+        flash()->success(
+            'Los datos se guardaron exitosamente', ''
         );
 
         return redirect('permisos');
@@ -97,8 +97,8 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail( $permission_id );
         $input = $request->all();
         $permission->update( $input );
-        flash()->overlay(
-            'El Permiso se actualizó exitosamente.', 'Sistema'
+        flash()->success(
+            'El Permiso se actualiz\n00F3 exitosamente.', ''
         );
         return redirect('permisos');
     }
@@ -113,8 +113,8 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail( $permission_id );
         $permission->delete();
-        flash()->overlay(
-            'El Permiso se eliminó exitosamente.', 'Sistema'
+        flash()->success(
+            'El Permiso se elimin\n00F3 exitosamente.', ''
         );
         return redirect('permisos');
         

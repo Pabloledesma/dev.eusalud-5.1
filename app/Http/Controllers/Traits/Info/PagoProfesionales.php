@@ -17,7 +17,6 @@ trait PagoProfesionales
      * @return View 
      */
     public function form_certificado_pagos_profesionales_admin($outPut = true, $formato = array( 'pdf' => true, 'excel' => false )) {
-        flash('Este es el formulario');
         return view('info.form_pagos_admin', compact('formato', 'outPut'));
     }
 
@@ -62,8 +61,9 @@ trait PagoProfesionales
         }
         catch( \Exception $e ){
             flash()->overlay(
-                'Ups! Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
-                'Aplicación de EuSalud' 
+                'Ups!',
+                'Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
+                'error' 
             );
             return redirect('/');
         }
@@ -76,8 +76,9 @@ trait PagoProfesionales
         }
         
         flash()->overlay(
+            'Ups!',
             'No se encontraron resultados para los datos ingresados',
-            'Aplicación de EuSalud' 
+            'warning' 
         );
         return redirect()->back();
 

@@ -60,8 +60,9 @@ trait PagoProveedores
         }
         catch( \Exception $e ){
             flash()->overlay(
-                'Ups! Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
-                'Aplicación de EuSalud' 
+                'Ups!',
+                'Disculpenos. Tenemos inconvenientes con el sistema. Por favor intentelo mas tarde',
+                'error' 
             );
             return redirect('/');
         }
@@ -74,8 +75,9 @@ trait PagoProveedores
         }
         
         flash()->overlay(
+            'Ups!',
             'No se encontraron resultados para los datos ingresados',
-            'Aplicación de EuSalud' 
+            'warning' 
         );
         return redirect()->back();
     }

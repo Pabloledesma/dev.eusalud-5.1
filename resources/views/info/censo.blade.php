@@ -1,4 +1,4 @@
-@extends('eusalud_pdf')
+@extends('eusalud_pdf2')
 @section('content')
 
 <table>

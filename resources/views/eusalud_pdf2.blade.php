@@ -15,15 +15,15 @@
         
 
 	<!-- Bootstrap core CSS -->
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('/css/carousel.css') }}" rel="stylesheet">
+    
+    <link href="css/pdf_styles.css" rel="stylesheet">
 </head>
 <body>
     
         @yield('content')
     
-
+        @include('flash')
 </body>
 </html>

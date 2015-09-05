@@ -41,7 +41,7 @@
         $("a.delete").on('click', function(e){     
         
             e.preventDefault();
-
+            var href = $(this).attr('href');
             swal({   
                 title: "Esta seguro/a?",   
                 text: "El permiso será eliminado de la base de datos",   
@@ -55,7 +55,7 @@
                 }, 
                 function(isConfirm){   
                     if (isConfirm) {     
-                        location.replace($(this).attr('href'));   
+                        location.replace(href);   
                     } else {     
                         swal("Cancelado", "El permiso está a salvo :)", "error");   
                     } 

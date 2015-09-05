@@ -1,4 +1,4 @@
-@extends('eusalud2')
+@extends('eusalud_pdf2')
 @section('content')
 <div class="content no_border">
     <h1 style="text-align: center">CENSO MATERNO INFANTIL HOSPITALIZACIÓN PISO {{ $piso }}</h1>

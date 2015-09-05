@@ -15,6 +15,6 @@
     <div class="no_border">
         @yield('content')
     </div>
-    
+    @include('flash')
 </body>
 </html>

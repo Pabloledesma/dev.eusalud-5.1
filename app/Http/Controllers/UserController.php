@@ -123,4 +123,12 @@ class UserController extends Controller {
         return redirect('usuarios');
     }
 
+    /**
+     * Obtiene todos los roles
+     */
+    public function get_all_roles()
+    {
+        return App\Role::all();
+    } 
+
 }

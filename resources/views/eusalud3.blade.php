@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Pablo Ledesma">
+    <meta id="token" name="token" value="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('/img/favicon.ico') }}">
     <title>EuSalud - Aplicativo de Reportes</title>
 

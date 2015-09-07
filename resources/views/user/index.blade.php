@@ -1,5 +1,6 @@
 @extends('eusalud3')
 @section('content')
+   
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><i class="fa fa-user fa-4"></i> Usuarios</h1>
@@ -44,34 +45,9 @@
     </div>
 </div>
 <script>
-    new Vue({
-        el: '#users',
 
-        data: {
-            sortkey: '',
-            reverse: false,
-            search: ''
-        },
 
-        ready: function(){
-            this.fetchUsers();
-        },
-
-        methods: {
-            fetchUsers: function(){
-                this.$http.get('all_users', function( usuarios ){
-                    this.$set('usuarios', usuarios);
-                });
-            }, 
-
-            sortBy: function(key){
-                this.reverse = (this.sortkey == key) ? !this.reverse : false;
-                this.sortkey = key;
-            }
-        }
-    });
-
-    $().ready(function(){
+    $(document).ready(function(){
         $("a.delete").on('click', function(e){     
         
             e.preventDefault();
@@ -103,6 +79,34 @@
             );
         });
     });
+
+    new Vue({
+        el: '#users',
+
+        data: {
+            sortkey: '',
+            reverse: false,
+            search: ''
+        },
+
+        ready: function(){
+            this.fetchUsers();
+        },
+
+        methods: {
+            fetchUsers: function(){
+                this.$http.get('all_users', function( usuarios ){
+                    this.$set('usuarios', usuarios);
+                });
+            }, 
+
+            sortBy: function(key){
+                this.reverse = (this.sortkey == key) ? !this.reverse : false;
+                this.sortkey = key;
+            }
+        }
+    });
+
     
 </script>
 @stop

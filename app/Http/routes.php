@@ -153,6 +153,8 @@ Route::group(['as' => 'usuarios::'], function(){
 		'as'			=> 'delete',
 		'permission'	=> 'eliminar_usuarios'
 	]);
+
+	get('get_all_roles', 'UserController@get_all_roles');
 });
 
 /*** PermissionController ***/

@@ -19,12 +19,13 @@ elixir(function(mix) {
     	'jquery-1.8.3.js',
     	'bootstrap.min.js',
     	'vue.min.js',
-    	'sb-admin-2.js',
-    	'metisMenu.min.js',
-    	'jquery-ui-1.9.2.custom.min.js',
-    	'jquery.validate.min.js',
-    	'datepicker-es.js',
-    	'calendarios.js',
+        'vue-resource.min.js',
+        'sb-admin-2.js',
+        'metisMenu.min.js',
+        'jquery-ui-1.9.2.custom.min.js',
+        'jquery.validate.min.js',
+        'datepicker-es.js',
+        'calendarios.js',
         'sweetalert-dev.js'
     ], './public/js/all.js');
 

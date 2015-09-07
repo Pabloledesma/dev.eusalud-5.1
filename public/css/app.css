@@ -9787,6 +9787,10 @@ body .ui-tooltip {
 a {
   color: #008b85;
 }
+a.active {
+  font-weight: bold;
+  color: #e16d3a;
+}
 .error {
   color: red;
 }

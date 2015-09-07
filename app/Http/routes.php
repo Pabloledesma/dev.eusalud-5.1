@@ -116,6 +116,10 @@ Route::group(['as' => 'usuarios::'], function(){
 			'permission'	=> 'ver_usuarios'
 		]);
 
+	get('all_users', function(){
+		return App\User::all();
+	});
+
 	get('registrar', 
 	[
 		'uses'			=> 'UserController@form_register',

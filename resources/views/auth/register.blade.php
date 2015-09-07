@@ -88,7 +88,7 @@
                  },
                  num_id: {
                      required: true,
-                     minlength: 8
+                     minlength: 3
                  },
                  password: {
                      required: true,

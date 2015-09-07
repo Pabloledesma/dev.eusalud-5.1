@@ -44,20 +44,26 @@
             var href = $(this).attr('href');
             swal({   
                 title: "Esta seguro/a?",   
-                text: "El permiso será eliminado de la base de datos",   
+                text: "El permiso ser&aacute; eliminado de la base de datos",   
                 type: "warning",   
                 showCancelButton: true,   
                 confirmButtonColor: "#DD6B55",   
                 confirmButtonText: "Si, eliminelo!",   
                 cancelButtonText: "No, cancelar por favor!",   
                 closeOnConfirm: false,   
-                closeOnCancel: false 
+                closeOnCancel: false,
+                html: true 
                 }, 
                 function(isConfirm){   
                     if (isConfirm) {     
                         location.replace(href);   
                     } else {     
-                        swal("Cancelado", "El permiso está a salvo :)", "error");   
+                        swal({
+                            title: "Cancelado", 
+                            text: "El permiso est&aacute; a salvo <i class='fa fa-smile-o'></i>",
+                            type: "error",
+                            html: true 
+                        });     
                     } 
                 }
             );

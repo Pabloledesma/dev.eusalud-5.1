@@ -78,8 +78,8 @@ class RoleController extends Controller
             }
         }
 
-        flash()->overlay(
-            'Los datos se guardaron exitosamente', 'Sistema'
+        flash()->success(
+            'Los datos se guardaron exitosamente', ''
         );
 
         return redirect('roles');
@@ -144,8 +144,8 @@ class RoleController extends Controller
         }
 
         $role->update($input);
-        flash()->overlay(
-            'El Rol se actualizó exitosamente.', 'Sistema'
+        flash()->success(
+            'El Rol se actualiz&oacute; exitosamente.', ''
         );
 
         return redirect('roles');
@@ -182,8 +182,8 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->delete();
-        flash()->overlay(
-            'El Rol se eliminó exitosamente.', 'Sistema'
+        flash()->success(
+            'El Rol se elimin&oacute; exitosamente.', ''
         );
 
         return redirect('roles');

@@ -9787,6 +9787,9 @@ body .ui-tooltip {
 a {
   color: #008b85;
 }
+.error {
+  color: red;
+}
 body.stop-scrolling {
   height: 100%;
   overflow: hidden;

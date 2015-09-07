@@ -84,7 +84,7 @@ class UserController extends Controller {
         }
 
         $user->update($input);
-        flash()->overlay('El usuario se actualizó correctamente', 'Buen trabajo!');
+        flash()->success('El usuario se actualiz&oacute; correctamente', '');
         return redirect('usuarios');
     }
 
@@ -104,7 +104,7 @@ class UserController extends Controller {
         $user->password = bcrypt($input['password']);
         $user->save();
 
-        flash()->overlay('El usuario '. $user->name .' fue registrado correctamente', 'Registro');
+        flash()->success('El usuario '. $user->name , 'fue registrado correctamente');
         
         return redirect('usuarios');
     }
@@ -119,7 +119,7 @@ class UserController extends Controller {
     {
         $user = User::findOrFail($id);
         $user->delete();
-        flash()->overlay('El usuario se elimino correctamente', 'Uno menos.');
+        flash()->success('El usuario se elimin&oacute; correctamente', '');
         return redirect('usuarios');
     }
 

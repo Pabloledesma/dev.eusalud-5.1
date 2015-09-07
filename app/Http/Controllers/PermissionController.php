@@ -98,7 +98,7 @@ class PermissionController extends Controller
         $input = $request->all();
         $permission->update( $input );
         flash()->success(
-            'El Permiso se actualiz\n00F3 exitosamente.', ''
+            'El Permiso se actualiz&oacute; exitosamente.', ''
         );
         return redirect('permisos');
     }
@@ -114,7 +114,7 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail( $permission_id );
         $permission->delete();
         flash()->success(
-            'El Permiso se elimin\n00F3 exitosamente.', ''
+            'El Permiso se elimin&oacute; exitosamente.', ''
         );
         return redirect('permisos');
         

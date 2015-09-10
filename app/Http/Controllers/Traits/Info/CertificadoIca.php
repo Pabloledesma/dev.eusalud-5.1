@@ -67,7 +67,8 @@ trait CertificadoIca
 
         catch( \Exception $e )
         {
-            flash()->overlay("Por favor disculpenos, intentelo mas tarde.", "Aplicación de Eusalud");
+            //dd($e);
+            flash()->error("Por favor disculpenos, intentelo mas tarde.", "Aplicación de Eusalud");
             return redirect('/');
         }
         

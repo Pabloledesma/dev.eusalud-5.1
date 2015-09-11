@@ -74,6 +74,29 @@ class UserController extends Controller {
             $user->role()->associate($input['role_id']);
         }
 
+        // Verificar si modifica el correo electrónico
+        // si es así, verifica que el nuevo correo no exista
+        if( $user->email <> $input['email'] ){
+
+            if( User::where('email', $input['email'])->exists() ){
+                flash()->error('El correo electrónico ' . $input['email'] . ' ya está en uso.', 'Por favor verifique.');
+                return redirect()->back()->withInput($req->except('password'));
+            }
+
+        }
+
+        // Verifica si el numero de identificación fué modificado
+        // si es así, verifica que no exista
+         if( $user->num_id <> $input['num_id'] ){
+
+            if( User::where('num_id', $input['num_id'])->exists() ){
+                flash()->error('El numero de identificación ' . $input['num_id'] . ' ya está en uso.', 'Por favor verifique.');
+                return redirect()->back()->withInput($req->except('password'));
+            }
+
+        }
+        
+
         if (strlen($input['password']) > 0) {
             $input['password'] = bcrypt($input['password']);
         }
@@ -102,10 +125,20 @@ class UserController extends Controller {
         $user->num_id = $input['num_id'];
         $user->role_id = $input['role_id'];
         $user->password = bcrypt($input['password']);
+
+        if( User::where('email', $input['email'])->exists() ){
+            flash()->error('El correo electrónico ' . $input['email'] . ' ya está en uso.', 'Por favor verifique.');
+            return redirect()->back()->withInput($request->except('password'));
+        }
+        
+        if( User::where('num_id', $input['num_id'])->exists() ){
+            flash()->error('El numero de identificación ' . $input['num_id'] . ' ya está en uso.', 'Por favor verifique.');
+            return redirect()->back()->withInput($request->except('password'));
+        }
+
         $user->save();
 
         flash()->success('El usuario '. $user->name , 'fue registrado correctamente');
-        
         return redirect('usuarios');
     }
     

@@ -166,14 +166,9 @@ $(document).ready(function(){
                  minlength: "La clave debe contener minimo 6 caracteres",
                  equalTo: "La clave no coincide"
              }
-         }
-     });
-
-    jQuery.validator.setDefaults({
-        debug: true,
-        success: function(){
-/*
-            $.post(
+         }, 
+         submitHandler: function( form ){
+           /* $.post(
                 form.attr('action'),
                 form.serialize(),
                 function( result ){
@@ -181,8 +176,16 @@ $(document).ready(function(){
                     validator.resetForm();
                 }    
             );
-*/
+            */
+            console.log('Formulario enviado submitHandler');
+            form.submit();
+         }
+     });
 
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: function(){
+            console.log('Formulario enviado success');
         }
     });
 

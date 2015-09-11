@@ -96,13 +96,14 @@
 <script>
     //Validación de formularios
     $(document).ready(function () {
-        var check = $("#edit_password"), fields = $("#div_edit_password");
+        var check = $("#edit_password"), fields = $("#div_edit_password")
+            form = $("#register_form");
         fields.hide();
         check.on('change', function(){
             fields.toggle("slow");
         });
          
-        $("#register_form").validate({
+        form.validate({
             rules: {
                 name: {
                     required: true,

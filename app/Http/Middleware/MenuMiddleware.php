@@ -67,6 +67,7 @@ class MenuMiddleware
             
             // El link del inicio estará en el logo
             //$menu->add('Inicio', 'http://www.eusalud.com');
+            asort($this->menu_info);
             if ($this->auth->check()) { 
                 
                 if( count($this->menu_info) > 0 ){

@@ -188,4 +188,5 @@ class RoleController extends Controller
 
         return redirect('roles');
     }
+
 }

@@ -116,10 +116,6 @@ Route::group(['as' => 'usuarios::'], function(){
 			'permission'	=> 'ver_usuarios'
 		]);
 
-	get('all_users', function(){
-		return App\User::all();
-	});
-
 	get('registrar', 
 	[
 		'uses'			=> 'UserController@form_register',
@@ -253,6 +249,16 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+/** AJAX REQUEST **/
+
+get('all_users', function(){
+		return App\User::all();
+	});
+
+get('all_roles', function(){
+	return App\Role::all();
+});
 
 
 

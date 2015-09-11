@@ -32,10 +32,20 @@
                     <td>@{{ email }}</td>
                     <td>@{{ num_id }}</td>
                     <td>
-                        <a href="{{ url('usuarios') }}@{{ '/' + id + '/edit'}}"><i class="fa fa-pencil-square-o fa-2"></i></a>
+                        <a  
+                            href="{{ url('usuarios') }}@{{ '/' + id + '/edit'}}" 
+                        >
+                            <i class="fa fa-pencil-square-o fa-2"></i>
+                        </a>
                     </td>
                     <td>
-                        <a href="{{ url('usuarios') }}@{{ '/'+ id + '/delete'}}" class="delete"><i class="fa fa-trash fa-2"></i></a>
+                        <a 
+                            href="{{ url('usuarios') }}@{{ '/'+ id + '/delete'}}" 
+                            class="delete"
+                            v-on="click: confirmation( $event )" 
+                        >
+                            <i class="fa fa-trash fa-2" href="{{ url('usuarios') }}@{{ '/'+ id + '/delete'}}"></i>
+                        </a>
                     </td>
                 </tr>
                 
@@ -47,40 +57,7 @@
 <script>
 
 
-    $(document).ready(function(){
-        $("a.delete").on('click', function(e){     
-        
-            e.preventDefault();
-           var href = $(this).attr('href');
-            swal({   
-                title: "Esta seguro/a?",   
-                text: "El usuario ser&aacute; eliminado de la base de datos",   
-                type: "warning",   
-                showCancelButton: true,   
-                confirmButtonColor: "#DD6B55",   
-                confirmButtonText: "Si, eliminelo!",   
-                cancelButtonText: "No, cancelar por favor!",   
-                closeOnConfirm: false,   
-                closeOnCancel: false,
-                html: true 
-                }, 
-                function(isConfirm){   
-                    if (isConfirm) {     
-                        location.replace(href);   
-                    } else {     
-                        swal({
-                            title: "Cancelado", 
-                            text: "El usuario est&aacute; a salvo <i class='fa fa-smile-o'></i>",
-                            type: "error",
-                            html: true 
-                        });   
-                    } 
-                }
-            );
-        });
-    });
-
-    new Vue({
+   new Vue({
         el: '#users',
 
         data: {
@@ -103,7 +80,39 @@
             sortBy: function(key){
                 this.reverse = (this.sortkey == key) ? !this.reverse : false;
                 this.sortkey = key;
-            }
+            },
+
+            confirmation: function( e ){
+                e.preventDefault();
+                var href = e.srcElement.attributes.href.textContent;
+                
+                swal({   
+                    title: "Esta seguro/a?",   
+                    text: "El usuario será eliminado de la base de datos",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#DD6B55",   
+                    confirmButtonText: "Si, eliminelo!",   
+                    cancelButtonText: "No, cancelar por favor!",   
+                    closeOnConfirm: false,   
+                    closeOnCancel: false,
+                    html: true 
+                    }, 
+                    function(isConfirm){   
+                        if (isConfirm) {     
+                            console.log(isConfirm);
+                                location.replace(href);
+                        } else {     
+                            swal({
+                                title: "Cancelado", 
+                                text: "El usuario est&aacute; a salvo <i class='fa fa-smile-o'></i>",
+                                type: "error",
+                                html: true 
+                            });   
+                        } 
+                    }
+                );
+            }//confirmation            
         }
     });
 

@@ -28,21 +28,21 @@
                         <td>@{{ role_title }}</td>
                         <td>@{{ role_slug }}</td>
                         <td>
-                        <a  
-                            href="{{ url('roles') }}@{{ '/' + id + '/edit'}}" 
-                        >
-                            <i class="fa fa-pencil-square-o fa-2"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a 
-                            href="{{ url('roles') }}@{{ '/'+ id + '/delete'}}" 
-                            class="delete"
-                            v-on="click: confirmation( $event )" 
-                        >
-                            <i class="fa fa-trash fa-2" href="{{ url('roles') }}@{{ '/'+ id + '/delete'}}"></i>
-                        </a>
-                    </td>
+                            <a  
+                                href="{{ url('roles') }}@{{ '/' + id + '/edit'}}" 
+                            >
+                                <i class="fa fa-pencil-square-o fa-2"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a 
+                                href="{{ url('roles') }}@{{ '/'+ id + '/delete'}}" 
+                                class="delete"
+                                v-on="click: confirmation( $event )" 
+                            >
+                                <i class="fa fa-trash fa-2" href="{{ url('roles') }}@{{ '/'+ id + '/delete'}}"></i>
+                            </a>
+                        </td>
                     </tr>
                    
 

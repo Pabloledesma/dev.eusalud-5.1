@@ -260,5 +260,9 @@ get('all_roles', function(){
 	return App\Role::all();
 });
 
+get('get_all_permissions', function(){
+	return App\Permission::all();
+});
+
 
 

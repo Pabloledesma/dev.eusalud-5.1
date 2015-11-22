@@ -108,7 +108,7 @@ return [
         'sqlsrv_info_90' => [
                     'driver'   => 'sqlsrv',
                     'host'     => env('SRV_SB_HOST'),
-                    'database' => 'FINANJAVA',
+                    'database' => 'HOSVITAL',
                     'username' => env('SRV_SB_USERNAME'),
                     'password' => env('SRV_SB_PASSWORD'),
                     'prefix'   => '',

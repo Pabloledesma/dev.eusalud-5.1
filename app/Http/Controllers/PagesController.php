@@ -23,22 +23,26 @@ class PagesController extends Controller
      *  
      * @return Response
      */
-    public function index() {
+    public function index() 
+    {
 
-        if( auth()->check() ){
+        if( auth()->check() )
+        {
          
           $user = auth()->user();
           $menu_info = [];
 
-          if( auth()->check() ){ 
-            $role = Role::findOrFail(auth()->user()->role_id);
+          // Check permissions for the user
 
-            foreach($role->permissions as $permission){
-                if( stripos($permission->permission_slug, 'info_') === 0 ){
-                    $menu_info += [ $permission->permission_title => $permission->permission_url];
-                }
-            }
-          }
+          // if( auth()->check() ){ 
+          //   $role = Role::findOrFail(auth()->user()->role_id);
+
+          //   foreach($role->permissions as $permission){
+          //       if( stripos($permission->permission_slug, 'info_') === 0 ){
+          //           $menu_info += [ $permission->permission_title => $permission->permission_url];
+          //       }
+          //   }
+          // }
           
           return view('info.index', compact('menu_info'));
         }

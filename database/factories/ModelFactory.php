@@ -24,15 +24,14 @@ $factory->define(App\User::class, function ($faker) {
 
 $factory->define(App\Role::class, function($faker){
 	return [
-		'role_title' => $faker->sentence,
-		'role_slug' => $faker->word
+		'name'    => $faker->sentence,
+		'label'   => $faker->sentence
 	];
 });
 
 $factory->define(App\Permission::class, function($faker){
     return [
-        'permission_title'      => $faker->sentence,
-        'permission_slug'       => $faker->word,
-        'permission_description'=> $faker->paragraph
+        'name'     => $faker->sentence,
+        'label'    => $faker->word
     ];
 });

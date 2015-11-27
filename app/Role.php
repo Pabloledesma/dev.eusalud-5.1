@@ -9,7 +9,7 @@ use App\Permission;
 class Role extends Model
 {
     
-    protected $fillable = ['role_title', 'role_slug'];
+    protected $fillable = ['name', 'lable'];
 
     /**
      * A Role has many Users
@@ -28,9 +28,12 @@ class Role extends Model
       */  
     public function permissions()
     {
-    	return $this->belongsToMany(Permission::class)->withTimeStamps();
+    	return $this->belongsToMany(Permission::class);
+    }
+
+    public function givePermissionTo(Permission $permission)
+    {
+      return $this->permissions()->save($permission);
     } 
-     
-      
     
 }

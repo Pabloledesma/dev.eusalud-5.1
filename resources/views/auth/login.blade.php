@@ -10,7 +10,7 @@
             <form id="login_form" class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
                         {!! csrf_field() !!}
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus><br>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
                 <div id="remember" class="checkbox">
                     <label>

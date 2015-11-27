@@ -9,10 +9,8 @@ class Permission extends Model
 {
     
 	protected $fillable = [
-		'permission_title',
-        'permission_slug',
-		'permission_url',
-		'permission_description'
+		'name',
+        'label'
 	];
 
     /**
@@ -22,6 +20,6 @@ class Permission extends Model
      */  
     public function roles()
     {
-    	return $this->belongsToMany(Role::class)->withTimeStamps();
+    	return $this->belongsToMany(Role::class);
     } 
 }
